@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -77,19 +77,21 @@ model Report {
   year             Int
   title            String
   executiveSummary String?
-  workCompleted    String?
-  upcomingWork     String?
-  issues           String?
-  budget           String?
-  clientActions    String?
+  
+  // UPDATED: Convert these to JSON structured data
+  workCompleted    Json?    // Array of work items with impact levels
+  upcomingWork     Json?    // Array of upcoming items with impact levels
+  issues           Json?    // Array of issues with risk levels
+  budget           Json?    // Array of budget items/change orders
+  clientActions    Json?    // Array of action items with priorities
+  
   isPublished      Boolean  @default(false)
   publishedAt      DateTime?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-// ADD THESE TWO NEW FIELDS
-  weatherData      Json?    // Stores 7-day forecast
-  weatherFetchedAt DateTime? // When weather was last updated
+  weatherData      Json?    
+  weatherFetchedAt DateTime? 
 
   // Relations
   projectId String
@@ -108,7 +110,7 @@ model Photo {
   size        Int
   url         String
   caption     String?
-  tags        String? // Comma-separated tags for room types, etc.
+  tags        String? 
   uploadedAt  DateTime @default(now())
 
   // Relations

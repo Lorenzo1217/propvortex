@@ -28,9 +28,9 @@ import { ProjectSettingsDialog } from "@/components/project-settings-dialog";
 import { formatProjectAddress, getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function getProject(projectId: string, userId: string) {

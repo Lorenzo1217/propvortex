@@ -30,10 +30,10 @@ import { BudgetChangeOrders } from '@/components/report-sections/budget-change-o
 import { ClientActions } from '@/components/report-sections/client-actions'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
     reportId: string;
-  };
+  }>;
 }
 
 async function getReportWithProject(reportId: string, userId: string) {

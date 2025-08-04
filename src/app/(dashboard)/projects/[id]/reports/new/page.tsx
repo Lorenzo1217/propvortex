@@ -30,9 +30,9 @@ import { BudgetChangeOrders } from '@/components/report-sections/budget-change-o
 import { ClientActions } from '@/components/report-sections/client-actions'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function getProject(projectId: string, userId: string) {

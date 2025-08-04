@@ -32,10 +32,10 @@ import {
 } from '@/components/report-sections/display/report-display'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
     reportId: string;
-  };
+  }>;
 }
 
 async function getReportWithProject(reportId: string, userId: string) {

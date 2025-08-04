@@ -103,11 +103,11 @@ export async function createReport(formData: FormData, projectId: string) {
       data: {
         title,
         executiveSummary: executiveSummary || null,
-        workCompleted: workCompleted ? JSON.stringify(workCompleted) : null,
-        upcomingWork: upcomingWork ? JSON.stringify(upcomingWork) : null,
-        issues: issues ? JSON.stringify(issues) : null,
-        budget: budget ? JSON.stringify(budget) : null,
-        clientActions: clientActions ? JSON.stringify(clientActions) : null,
+        workCompleted: workCompleted ? JSON.stringify(workCompleted) : undefined,
+        upcomingWork: upcomingWork ? JSON.stringify(upcomingWork) : undefined,
+        issues: issues ? JSON.stringify(issues) : undefined,
+        budget: budget ? JSON.stringify(budget) : undefined,
+        clientActions: clientActions ? JSON.stringify(clientActions) : undefined,
         weekNumber,
         year,
         projectId,
@@ -250,11 +250,11 @@ export async function updateReport(formData: FormData, reportId: string) {
       data: {
         title: title || existingReport.title,
         executiveSummary: executiveSummary || null,
-        workCompleted: workCompleted ? JSON.stringify(workCompleted) : null,
-        upcomingWork: upcomingWork ? JSON.stringify(upcomingWork) : null,
-        issues: issues ? JSON.stringify(issues) : null,
-        budget: budget ? JSON.stringify(budget) : null,
-        clientActions: clientActions ? JSON.stringify(clientActions) : null,
+        workCompleted: workCompleted ? JSON.stringify(workCompleted) : undefined,
+        upcomingWork: upcomingWork ? JSON.stringify(upcomingWork) : undefined,
+        issues: issues ? JSON.stringify(issues) : undefined,
+        budget: budget ? JSON.stringify(budget) : undefined,
+        clientActions: clientActions ? JSON.stringify(clientActions) : undefined,
         updatedAt: new Date()
       }
     })

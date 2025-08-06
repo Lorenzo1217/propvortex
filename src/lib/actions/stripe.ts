@@ -16,9 +16,18 @@ export async function createCheckoutSession(plan?: string) {
   
   // Default to professional plan if no plan provided
   const planName = plan || 'professional';
+  
+  // Debug logging
+  console.log('🔍 createCheckoutSession called with plan:', plan);
+  console.log('🔍 planName being used:', planName);
+  
   const selectedTier = pricingTiers.find(
     tier => tier.name.toLowerCase() === planName.toLowerCase()
   );
+
+  console.log('🔍 Selected tier:', selectedTier);
+  console.log('🔍 Price ID being used:', selectedTier?.priceId);
+  console.log('🔍 All pricing tiers:', pricingTiers.map(t => ({ name: t.name, priceId: t.priceId })));
 
   if (!selectedTier || !selectedTier.priceId) {
     throw new Error('Invalid pricing plan');

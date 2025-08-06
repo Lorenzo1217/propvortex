@@ -11,12 +11,6 @@ import { getSubscriptionStatus } from "@/lib/subscription";
 import Link from "next/link";
 import { db } from "@/lib/db";
 
-// Test server action
-async function testAction() {
-  'use server';
-  console.log('🟢 TEST ACTION CALLED!');
-}
-
 // Move handleContinueToPayment outside component
 async function handleContinueToPayment(formData: FormData) {
   'use server';
@@ -79,9 +73,16 @@ export default async function SubscriptionSetupPage() {
 
   // Get the plan from user metadata or default to professional
   const plan = (user.unsafeMetadata?.plan as string) || 'professional';
+  
+  // Debug logging
+  console.log('🔍 Subscription setup page - user metadata:', user.unsafeMetadata);
+  console.log('🔍 Plan from metadata:', plan);
+  
   const selectedTier = pricingTiers.find(
     tier => tier.name.toLowerCase() === plan.toLowerCase()
   ) || pricingTiers[0]; // Default to first tier if not found
+  
+  console.log('🔍 Selected tier for display:', selectedTier);
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -180,15 +181,8 @@ export default async function SubscriptionSetupPage() {
                   Continue to Payment
                 </Button>
               </form>
-              
-              {/* Test server action button */}
-              <form action={testAction}>
-                <Button type="submit" variant="outline" className="w-full">
-                  Test Server Action
-                </Button>
-              </form>
 
-              <p className="text-xs text-center text-gray-500">
+              <p className="text-xs text-center text-gray-500 mt-4">
                 By continuing, you agree to our terms of service and privacy policy.
                 Your payment information is securely processed by Stripe.
               </p>

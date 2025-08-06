@@ -185,7 +185,8 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 
 async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
   const customerId = invoice.customer as string;
-  const subscriptionId = invoice.subscription as string | undefined;
+  // Get subscription ID from invoice lines
+  const subscriptionId = invoice.lines?.data?.[0]?.subscription as string | null;
   
   console.log(`Payment succeeded for customer ${customerId}, subscription ${subscriptionId || 'one-time'}`);
   

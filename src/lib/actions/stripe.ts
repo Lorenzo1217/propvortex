@@ -14,24 +14,33 @@ export async function createCheckoutSession(plan?: string) {
 
   const email = user.emailAddresses[0].emailAddress;
   
+  // Debug logging
+  console.log('🔍 Plan from form:', plan);
+  console.log('🔍 Available tiers:', pricingTiers.map(t => ({ name: t.name, priceId: t.priceId })));
+  
   // Default to professional plan if no plan provided
   const planName = plan || 'professional';
+  console.log('🔍 Plan name being used:', planName);
   
-  // Debug logging
-  console.log('🔍 createCheckoutSession called with plan:', plan);
-  console.log('🔍 planName being used:', planName);
-  
+  // Make tier matching case-insensitive
   const selectedTier = pricingTiers.find(
-    tier => tier.name.toLowerCase() === planName.toLowerCase()
+    tier => tier.name.toLowerCase() === planName?.toLowerCase()
   );
 
-  console.log('🔍 Selected tier:', selectedTier);
-  console.log('🔍 Price ID being used:', selectedTier?.priceId);
-  console.log('🔍 All pricing tiers:', pricingTiers.map(t => ({ name: t.name, priceId: t.priceId })));
-
-  if (!selectedTier || !selectedTier.priceId) {
-    throw new Error('Invalid pricing plan');
+  // Check if tier was found
+  if (!selectedTier) {
+    console.error('❌ No tier found for plan:', plan);
+    console.error('❌ Available tier names:', pricingTiers.map(t => t.name));
+    throw new Error(`Invalid plan selected: ${plan}`);
   }
+
+  if (!selectedTier.priceId) {
+    console.error('❌ Selected tier has no price ID:', selectedTier);
+    throw new Error('Selected tier has no price ID');
+  }
+
+  // Log what we're sending to Stripe
+  console.log('✅ Sending to Stripe - Plan:', selectedTier.name, 'Price ID:', selectedTier.priceId);
 
   // Check if user exists in database
   let dbUser = await db.user.findUnique({
@@ -77,6 +86,12 @@ export async function createCheckoutSession(plan?: string) {
     });
   }
 
+  // Log the exact price ID being sent to Stripe
+  console.log('🎯 Creating Stripe checkout session with:');
+  console.log('   - Customer ID:', customerId);
+  console.log('   - Price ID:', selectedTier.priceId);
+  console.log('   - Plan name:', selectedTier.name);
+  
   // Create checkout session with 30-day trial
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
@@ -102,6 +117,8 @@ export async function createCheckoutSession(plan?: string) {
       plan: selectedTier.name,
     },
   });
+  
+  console.log('✅ Checkout session created:', session.id);
 
   // Update the user's project limit immediately based on the selected plan
   // This ensures correct limits even if the webhook fails

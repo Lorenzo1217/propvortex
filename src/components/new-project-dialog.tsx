@@ -15,7 +15,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Plus } from 'lucide-react'
-import { createProject } from '@/lib/actions/projects'
+import { createProject, checkCanCreateProject } from '@/lib/actions/projects'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { AlertCircle } from 'lucide-react'
+import Link from 'next/link'
 
 interface NewProjectDialogProps {
   trigger?: React.ReactNode
@@ -79,12 +82,25 @@ const states = [
 export function NewProjectDialog({ trigger, buttonText = "New Project" }: NewProjectDialogProps) {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showLimitAlert, setShowLimitAlert] = useState(false)
+  const [limitMessage, setLimitMessage] = useState('')
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true)
     try {
+      // Check if user can create more projects
+      const result = await checkCanCreateProject();
+      
+      if (!result.canCreate) {
+        setShowLimitAlert(true)
+        setLimitMessage(result.message || "You've reached your project limit.")
+        setIsLoading(false)
+        return;
+      }
+
       await createProject(formData)
       setOpen(false)
+      setShowLimitAlert(false)
       // Reset form is handled by dialog closing
     } catch (error) {
       console.error('Error creating project:', error)
@@ -113,6 +129,20 @@ export function NewProjectDialog({ trigger, buttonText = "New Project" }: NewPro
             Add a new construction project to start sending beautiful reports to your clients.
           </DialogDescription>
         </DialogHeader>
+        
+        {showLimitAlert && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              {limitMessage}
+              {limitMessage.includes('project limit') && (
+                <Link href="/pricing" className="underline ml-1">
+                  Upgrade to create more projects.
+                </Link>
+              )}
+            </AlertDescription>
+          </Alert>
+        )}
         
         <form action={handleSubmit} className="space-y-6">
           <div className="space-y-2">

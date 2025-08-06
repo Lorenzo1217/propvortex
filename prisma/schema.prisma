@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -17,6 +17,14 @@ model User {
   phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Stripe fields
+  stripeCustomerId     String?   @unique
+  stripePriceId        String?
+  stripeSubscriptionId String?   @unique
+  subscriptionStatus   String?
+  currentPeriodEnd     DateTime?
+  projectLimit         Int?      @default(10)
 
   // Relations
   projects Project[]

@@ -31,7 +31,7 @@ export default function LandingPage() {
               <Link href="/login">Sign In</Link>
             </Button>
             <Button asChild>
-              <Link href="/signup">Start Free Trial</Link>
+              <Link href="/pricing">Start Free Trial</Link>
             </Button>
           </div>
         </div>
@@ -54,14 +54,14 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-6" asChild>
-              <Link href="/signup">Start Your Free Trial</Link>
+              <Link href="/pricing">Start Your Free Trial</Link>
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6" asChild>
               <Link href="#demo">View Live Demo</Link>
             </Button>
           </div>
           <p className="text-sm text-gray-500 mt-4">
-            No credit card required • 14-day free trial • Setup in under 5 minutes
+            No credit card required • 30-day free trial • Setup in under 5 minutes
           </p>
         </div>
       </section>
@@ -214,106 +214,98 @@ export default function LandingPage() {
               Choose Your Plan
             </h2>
             <p className="text-xl text-gray-600">
-              Start free, then grow with plans designed for builders of every size
+              Start with a 30-day free trial. No credit card required. Cancel anytime.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Starter */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Professional */}
             <Card className="border-2 border-gray-200">
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Starter</CardTitle>
-                <div className="text-4xl font-bold">$49<span className="text-lg text-gray-500">/mo</span></div>
-                <CardDescription>Perfect for getting started</CardDescription>
+                <CardTitle className="text-2xl">Professional</CardTitle>
+                <div className="text-4xl font-bold">$149<span className="text-lg text-gray-500">/mo</span></div>
+                <CardDescription>Up to 10 projects</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>1 Active Project</span>
+                    <span>Up to 10 active projects</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>AI-Enhanced Reports</span>
+                    <span>Unlimited reports</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>PDF Export</span>
+                    <span>Photo uploads</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>Read Receipts</span>
+                    <span>Weather integration</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Client access portal</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Email support</span>
                   </li>
                 </ul>
                 <Button className="w-full mt-6" variant="outline" asChild>
-                  <Link href="/signup?plan=starter">Start Free Trial</Link>
+                  <Link href="/pricing">Start Free Trial</Link>
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Pro - Popular */}
+            {/* Unlimited - Popular */}
             <Card className="border-2 border-blue-500 relative">
               <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500">
                 Most Popular
               </Badge>
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Pro</CardTitle>
-                <div className="text-4xl font-bold">$129<span className="text-lg text-gray-500">/mo</span></div>
-                <CardDescription>For growing builders</CardDescription>
+                <CardTitle className="text-2xl">Unlimited</CardTitle>
+                <div className="text-4xl font-bold">$349<span className="text-lg text-gray-500">/mo</span></div>
+                <CardDescription>Unlimited projects</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>5 Active Projects</span>
+                    <span>Unlimited projects</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>Branded Client Portals</span>
+                    <span>Unlimited reports</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>Portfolio Showcase</span>
+                    <span>Photo uploads</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span>Everything in Starter</span>
+                    <span>Weather integration</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Client access portal</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Priority email support</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Advanced analytics</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500" />
+                    <span>Custom branding</span>
                   </li>
                 </ul>
                 <Button className="w-full mt-6" asChild>
-                  <Link href="/signup?plan=pro">Start Free Trial</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Business */}
-            <Card className="border-2 border-gray-200">
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Business</CardTitle>
-                <div className="text-4xl font-bold">$249<span className="text-lg text-gray-500">/mo</span></div>
-                <CardDescription>For established builders</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-center space-x-3">
-                    <Check className="w-4 h-4 text-green-500" />
-                    <span>15 Active Projects</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <Check className="w-4 h-4 text-green-500" />
-                    <span>Team Member Access</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <Check className="w-4 h-4 text-green-500" />
-                    <span>Client Approval Workflows</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <Check className="w-4 h-4 text-green-500" />
-                    <span>Everything in Pro</span>
-                  </li>
-                </ul>
-                <Button className="w-full mt-6" variant="outline" asChild>
-                  <Link href="/signup?plan=business">Start Free Trial</Link>
+                  <Link href="/pricing">Start Free Trial</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -410,10 +402,10 @@ export default function LandingPage() {
             Join builders across Texas who are saving hours and winning more business with PropVortex
           </p>
           <Button size="lg" variant="secondary" className="text-lg px-8 py-6" asChild>
-            <Link href="/signup">Start Your Free Trial Today</Link>
+            <Link href="/pricing">Start Your Free Trial Today</Link>
           </Button>
           <p className="text-sm mt-4 opacity-75">
-            14-day free trial • No credit card required • Cancel anytime
+            30-day free trial • No credit card required • Cancel anytime
           </p>
         </div>
       </section>

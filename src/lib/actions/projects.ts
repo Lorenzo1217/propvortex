@@ -5,6 +5,49 @@ import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
+export async function checkCanCreateProject() {
+  const { userId: clerkUserId } = await auth()
+  
+  if (!clerkUserId) {
+    return { canCreate: false, message: 'Not authenticated' }
+  }
+
+  try {
+    // Get the database user with project count
+    const dbUser = await db.user.findUnique({
+      where: { clerkId: clerkUserId },
+      select: {
+        projectLimit: true,
+        _count: {
+          select: {
+            projects: true
+          }
+        }
+      }
+    })
+
+    if (!dbUser) {
+      return { canCreate: false, message: 'User not found' }
+    }
+
+    // If projectLimit is null, it means unlimited projects
+    if (dbUser.projectLimit === null) {
+      return { canCreate: true }
+    }
+
+    // Check if user is under their limit
+    const canCreate = dbUser._count.projects < dbUser.projectLimit
+    
+    return {
+      canCreate,
+      message: canCreate ? undefined : "You've reached your project limit. Upgrade to create more projects."
+    }
+  } catch (error) {
+    console.error('Error checking project limit:', error)
+    return { canCreate: false, message: 'Failed to check project limit' }
+  }
+}
+
 export async function createProject(formData: FormData) {
   const { userId: clerkUserId } = await auth()
   

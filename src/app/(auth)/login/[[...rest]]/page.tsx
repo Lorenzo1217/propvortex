@@ -1,8 +1,16 @@
 // src/app/(auth)/login/[[...rest]]/page.tsx
 import { SignIn } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  // Check if user is already signed in
+  const user = await currentUser();
+  if (user) {
+    redirect('/subscription/setup');
+  }
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50">
       <div className="mb-8">
@@ -26,7 +34,8 @@ export default function LoginPage() {
             card: "shadow-lg",
           },
         }}
-        redirectUrl="/dashboard"
+        fallbackRedirectUrl="/dashboard"
+        forceRedirectUrl="/dashboard"
       />
       
       <p className="mt-6 text-sm text-gray-600">

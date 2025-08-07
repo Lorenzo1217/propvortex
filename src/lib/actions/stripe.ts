@@ -2,7 +2,7 @@
 
 import { stripe } from '@/lib/stripe';
 import { pricingTiers } from '@/config/pricing';
-import { currentUser, clerkClient } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 
 export async function createCheckoutSession(plan?: string) {
@@ -31,18 +31,6 @@ export async function createCheckoutSession(plan?: string) {
     throw new Error('Selected tier has no price ID');
   }
 
-  // Update user's metadata with the current plan selection
-  try {
-    const clerk = await clerkClient();
-    await clerk.users.updateUserMetadata(user.id, {
-      unsafeMetadata: {
-        plan: planName
-      }
-    });
-  } catch (error) {
-    // Continue with checkout even if metadata update fails
-    console.error('Failed to update user metadata:', error);
-  }
 
   // Check if user already has an active subscription
   const dbUser = await db.user.findUnique({

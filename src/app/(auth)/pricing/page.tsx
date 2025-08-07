@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { pricingTiers } from "@/config/pricing";
 import { Check } from "lucide-react";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const user = await currentUser();
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-50 px-4 py-12">
       {/* Logo */}
@@ -79,8 +81,8 @@ export default function PricingPage() {
                   )}
                   variant={isUnlimited ? "default" : "outline"}
                 >
-                  <Link href={`/signup?plan=${planParam}`}>
-                    Start 30-Day Free Trial
+                  <Link href={user ? `/subscription/setup?plan=${planParam}` : `/signup?plan=${planParam}`}>
+                    {user ? 'Select This Plan' : 'Start 30-Day Free Trial'}
                   </Link>
                 </Button>
               </CardFooter>

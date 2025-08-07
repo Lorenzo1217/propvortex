@@ -21,11 +21,6 @@ export default function SignUpPage() {
       return;
     }
     
-    // Store plan in sessionStorage for OAuth flow
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('selectedPlan', plan);
-    }
-    
     setIsLoading(false);
   }, [plan, router]);
 
@@ -89,11 +84,8 @@ export default function SignUpPage() {
               socialButtonsVariant: "blockButton",
             },
           }}
-          unsafeMetadata={{
-            plan: plan
-          }}
-          fallbackRedirectUrl="/subscription/setup"
-          forceRedirectUrl="/subscription/setup"
+          fallbackRedirectUrl={`/subscription/setup?plan=${plan}`}
+          forceRedirectUrl={`/subscription/setup?plan=${plan}`}
         />
       </div>
       

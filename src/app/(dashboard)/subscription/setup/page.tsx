@@ -34,10 +34,11 @@ async function handleContinueToPayment(formData: FormData) {
 }
 
 export default async function SubscriptionSetupPage({
-  searchParams
+  searchParams,
 }: {
-  searchParams: { plan?: string }
+  searchParams: Promise<{ plan?: string }>
 }) {
+  const params = await searchParams;
   const user = await currentUser();
   
   if (!user) {
@@ -83,7 +84,7 @@ export default async function SubscriptionSetupPage({
   const hasActiveSubscription = subscriptionStatus?.isActive || false;
 
   // Get the plan from URL searchParams or default to professional
-  const plan = searchParams.plan || 'professional';
+  const plan = params.plan || 'professional';
   
   const selectedTier = pricingTiers.find(
     tier => tier.name.toLowerCase() === plan.toLowerCase()

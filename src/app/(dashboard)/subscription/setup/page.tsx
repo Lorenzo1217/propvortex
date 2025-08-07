@@ -16,28 +16,19 @@ async function handleContinueToPayment(formData: FormData) {
   'use server';
   
   const plan = formData.get('plan') as string;
-  console.log('🔵 handleContinueToPayment called with plan:', plan);
   
   let checkoutUrl: string | null = null;
   
   try {
-    console.log('🔵 Creating checkout session...');
     checkoutUrl = await createCheckoutSession(plan);
-    console.log('🔵 Checkout URL received:', checkoutUrl);
   } catch (error) {
-    console.error('❌ Failed to create checkout session:', error);
-    console.error('❌ Error details:', {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined
-    });
+    console.error('Failed to create checkout session:', error);
     redirect('/dashboard?error=checkout_failed');
   }
   
   if (checkoutUrl) {
-    console.log('🔵 Redirecting to Stripe checkout...');
     redirect(checkoutUrl);
   } else {
-    console.error('❌ No checkout URL returned');
     redirect('/dashboard?error=no_checkout_url');
   }
 }
@@ -65,8 +56,24 @@ export default async function SubscriptionSetupPage() {
     }
   }
   
+  // Clear any incomplete Stripe data so users can switch plans freely
+  if (dbUser && dbUser.stripeCustomerId && dbUser.subscriptionStatus !== 'active' && dbUser.subscriptionStatus !== 'trialing') {
+    await db.user.update({
+      where: { id: dbUser.id },
+      data: { 
+        stripeCustomerId: null,
+        stripeSubscriptionId: null,
+        stripePriceId: null
+      }
+    });
+    // Refresh the user data
+    dbUser = await db.user.findUnique({
+      where: { clerkId: user.id }
+    });
+  }
+  
   // Get subscription status
-  const subscriptionStatus = await getSubscriptionStatus(dbUser.id);
+  const subscriptionStatus = dbUser ? await getSubscriptionStatus(dbUser.id) : null;
   
   // Check if user has an active subscription
   const hasActiveSubscription = subscriptionStatus?.isActive || false;
@@ -74,15 +81,9 @@ export default async function SubscriptionSetupPage() {
   // Get the plan from user metadata or default to professional
   const plan = (user.unsafeMetadata?.plan as string) || 'professional';
   
-  // Debug logging
-  console.log('🔍 Subscription setup page - user metadata:', user.unsafeMetadata);
-  console.log('🔍 Plan from metadata:', plan);
-  
   const selectedTier = pricingTiers.find(
     tier => tier.name.toLowerCase() === plan.toLowerCase()
   ) || pricingTiers[0]; // Default to first tier if not found
-  
-  console.log('🔍 Selected tier for display:', selectedTier);
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">

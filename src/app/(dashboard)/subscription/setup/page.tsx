@@ -4,7 +4,7 @@ import { ensureUserInDatabase } from "@/lib/user-helpers";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CreditCard, CheckCircle } from "lucide-react";
+import { CreditCard, CheckCircle, ArrowLeft } from "lucide-react";
 import { createCheckoutSession } from "@/lib/actions/stripe";
 import { pricingTiers } from "@/config/pricing";
 import { getSubscriptionStatus } from "@/lib/subscription";
@@ -91,8 +91,20 @@ export default async function SubscriptionSetupPage({
   ) || pricingTiers[0]; // Default to first tier if not found
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <Card className="max-w-md w-full">
+    <div className="min-h-screen bg-gray-50">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 pt-6">
+        <Link 
+          href="/pricing" 
+          className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Back to pricing</span>
+        </Link>
+      </div>
+
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-80px)]">
+        <Card className="max-w-md w-full">
         {hasActiveSubscription && subscriptionStatus ? (
           // Show current subscription status
           <>
@@ -195,7 +207,8 @@ export default async function SubscriptionSetupPage({
             </CardContent>
           </>
         )}
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 }

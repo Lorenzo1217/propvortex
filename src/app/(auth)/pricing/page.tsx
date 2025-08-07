@@ -3,15 +3,27 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { pricingTiers } from "@/config/pricing";
-import { Check } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 
 export default async function PricingPage() {
   const user = await currentUser();
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50 px-4 py-12">
-      {/* Logo */}
-      <div className="mb-12">
+    <div className="min-h-screen bg-gray-50">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 pt-6">
+        <Link 
+          href="/" 
+          className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Back</span>
+        </Link>
+      </div>
+
+      <div className="flex flex-col items-center px-4 py-12">
+        {/* Logo */}
+        <div className="mb-12">
         <Link href="/" className="flex items-center space-x-2">
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-xl">P</span>
@@ -91,13 +103,14 @@ export default async function PricingPage() {
         })}
       </div>
 
-      {/* Footer Links */}
-      <p className="mt-12 text-sm text-gray-600">
-        Already have an account?{" "}
-        <Link href="/login" className="text-blue-600 hover:text-blue-800 font-medium">
-          Sign in
-        </Link>
-      </p>
+        {/* Footer Links */}
+        <p className="mt-12 text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-600 hover:text-blue-800 font-medium">
+            Sign in
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

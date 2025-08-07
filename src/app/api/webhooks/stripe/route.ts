@@ -84,40 +84,58 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   const priceId = subscriptionItem?.price.id;
   const currentPeriodEnd = subscriptionItem?.current_period_end;
   
-  // Debug subscription data
-  console.log('Subscription data:', {
+  console.log('Subscription created:', {
     id: subscription.id,
-    current_period_end: currentPeriodEnd,
+    customer: customerId,
     status: subscription.status
   });
   
-  // Find the user by Stripe customer ID
-  const user = await db.user.findUnique({
-    where: { stripeCustomerId: customerId },
-  });
-
-  if (!user) {
-    console.error('User not found for customer:', customerId);
+  // Get the clerk ID from subscription metadata
+  const clerkId = (subscription.metadata?.clerkId || (subscription as any).metadata?.clerkId) as string;
+  
+  if (!clerkId) {
+    console.error('No clerkId found in subscription metadata');
     return;
   }
 
-  // Determine project limit based on price ID
-  const tier = pricingTiers.find(t => t.priceId === priceId);
-  const projectLimit = tier?.projectLimit ?? 10; // Default to 10 if not found
-
-  // Update user with subscription details
-  await db.user.update({
-    where: { id: user.id },
-    data: {
-      stripeSubscriptionId: subscription.id,
-      stripePriceId: priceId,
-      subscriptionStatus: subscription.status,
-      currentPeriodEnd: currentPeriodEnd ? new Date(currentPeriodEnd * 1000) : new Date(),
-      projectLimit: projectLimit,
-    },
+  // Get customer details from Stripe
+  const customer = await stripe.customers.retrieve(customerId) as Stripe.Customer;
+  
+  // Find or create the user
+  let user = await db.user.findUnique({
+    where: { clerkId },
   });
 
-  console.log(`Subscription created for user ${user.email}: ${subscription.id}`);
+  if (!user) {
+    // Create the user if they don't exist
+    user = await db.user.create({
+      data: {
+        clerkId,
+        email: customer.email || '',
+        stripeCustomerId: customerId,
+        stripeSubscriptionId: subscription.id,
+        stripePriceId: priceId,
+        subscriptionStatus: subscription.status,
+        currentPeriodEnd: currentPeriodEnd ? new Date(currentPeriodEnd * 1000) : new Date(),
+        projectLimit: pricingTiers.find(t => t.priceId === priceId)?.projectLimit ?? 10,
+      },
+    });
+    console.log(`Created new user for subscription: ${user.email}`);
+  } else {
+    // Update existing user with subscription details
+    await db.user.update({
+      where: { id: user.id },
+      data: {
+        stripeCustomerId: customerId,
+        stripeSubscriptionId: subscription.id,
+        stripePriceId: priceId,
+        subscriptionStatus: subscription.status,
+        currentPeriodEnd: currentPeriodEnd ? new Date(currentPeriodEnd * 1000) : new Date(),
+        projectLimit: pricingTiers.find(t => t.priceId === priceId)?.projectLimit ?? 10,
+      },
+    });
+    console.log(`Updated user subscription: ${user.email}`);
+  }
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {

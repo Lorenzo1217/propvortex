@@ -6,11 +6,16 @@ export interface PricingTier {
   features: string[];
 }
 
+// Debug: Log environment variables
+console.log('🔍 Pricing Config - Environment Variables:');
+console.log('   PROFESSIONAL env var:', process.env.NEXT_PUBLIC_STRIPE_PRICE_PROFESSIONAL);
+console.log('   UNLIMITED env var:', process.env.NEXT_PUBLIC_STRIPE_PRICE_UNLIMITED);
+
 export const pricingTiers: PricingTier[] = [
   {
     name: 'Professional',
     price: 149,
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PROFESSIONAL || 'price_1RsbOELO1XPbZ99QaAHLJY3F',
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PROFESSIONAL || 'price_1RsbLkLO1XPbZ99QlgjkdBpE',
     projectLimit: 10,
     features: [
       'Up to 10 active projects',
@@ -24,7 +29,7 @@ export const pricingTiers: PricingTier[] = [
   {
     name: 'Unlimited',
     price: 349,
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_UNLIMITED || 'price_1RsbLkLO1XPbZ99QlgjkdBpE',
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_UNLIMITED || 'price_1RsbOELO1XPbZ99QaAHLJY3F',
     projectLimit: null,
     features: [
       'Unlimited projects',
@@ -38,6 +43,13 @@ export const pricingTiers: PricingTier[] = [
     ],
   },
 ];
+
+// Debug: Log the final pricing tiers
+console.log('🔍 Final pricing tiers:', pricingTiers.map(t => ({ 
+  name: t.name, 
+  price: t.price,
+  priceId: t.priceId 
+})));
 
 export const getPricingTierByPriceId = (priceId: string | null): PricingTier | null => {
   if (!priceId) return null;

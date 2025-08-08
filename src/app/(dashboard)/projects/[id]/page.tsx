@@ -1,4 +1,3 @@
-import { UserButton } from "@clerk/nextjs";
 import { currentUser, auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -25,7 +24,7 @@ import { ensureUserInDatabase } from "@/lib/user-helpers";
 import { publishReport } from "@/lib/actions/reports";
 import { PhotoViewer } from "@/components/photo-viewer";
 import { ProjectSettingsDialog } from "@/components/project-settings-dialog";
-import { formatProjectAddress, getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
+import { getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
 
 interface PageProps {
   params: Promise<{
@@ -128,50 +127,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <Link 
-                href="/dashboard"
-                className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Dashboard</span>
-              </Link>
-              
-              <Separator orientation="vertical" className="h-6" />
-              
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">P</span>
-                </div>
-                <span className="font-bold text-xl">PropVortex</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Button variant="outline">
-                <Eye className="w-4 h-4 mr-2" />
-                Client Portal
-              </Button>
-              <Button asChild>
-                <Link href={`/projects/${id}/reports/new`}>
-                  <Plus className="w-4 h-4 mr-2" />
-                  New Report
-                </Link>
-              </Button>
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
+          {/* Back Navigation */}
+          <div className="mb-6">
+            <Link 
+              href="/dashboard"
+              className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              Back to Dashboard
+            </Link>
+          </div>
+
           {/* Project Header */}
           <div className="mb-8">
             <div className="flex items-start justify-between">
@@ -202,7 +170,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 )}
               </div>
               
-              <ProjectSettingsDialog project={project} />
+              <div className="flex items-center space-x-3">
+                <Button variant="outline">
+                  <Eye className="w-4 h-4 mr-2" />
+                  Client Portal
+                </Button>
+                <Button asChild>
+                  <Link href={`/projects/${id}/reports/new`}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    New Report
+                  </Link>
+                </Button>
+                <ProjectSettingsDialog project={project} />
+              </div>
             </div>
           </div>
 
@@ -501,7 +481,6 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
           </Tabs>
         </div>
-      </div>
     </div>
   );
 }

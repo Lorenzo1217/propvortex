@@ -1,10 +1,8 @@
-import { UserButton } from "@clerk/nextjs";
 import { currentUser, auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { 
   ArrowLeft, 
   Calendar, 
@@ -99,46 +97,19 @@ export default async function ReportViewPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <Link 
-                href={`/projects/${id}`}
-                className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Project</span>
-              </Link>
-              
-              <Separator orientation="vertical" className="h-6" />
-              
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">P</span>
-                </div>
-                <span className="font-bold text-xl">PropVortex</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link href={`/projects/${id}/reports/${reportId}/edit`}>
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit Report
-                </Link>
-              </Button>
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
+          {/* Back Navigation */}
+          <div className="mb-6">
+            <Link 
+              href={`/projects/${id}`}
+              className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              Back to Project
+            </Link>
+          </div>
+
           {/* Report Header */}
           <div className="mb-8">
             <div className="flex items-start justify-between">
@@ -168,6 +139,15 @@ export default async function ReportViewPage({ params }: PageProps) {
                     Published on {new Date(report.publishedAt).toLocaleDateString()}
                   </p>
                 )}
+              </div>
+              
+              <div className="flex-shrink-0">
+                <Button variant="outline" asChild>
+                  <Link href={`/projects/${id}/reports/${reportId}/edit`}>
+                    <Edit className="w-4 h-4 mr-2" />
+                    Edit Report
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -371,7 +351,6 @@ export default async function ReportViewPage({ params }: PageProps) {
 
 
         </div>
-      </div>
     </div>
   );
 }

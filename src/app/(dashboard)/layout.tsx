@@ -1,6 +1,6 @@
 import { UserButton } from "@clerk/nextjs";
-import { CreditCard, Home } from "lucide-react";
 import Link from "next/link";
+import { DashboardNav } from "@/components/dashboard-nav";
 
 export default function DashboardLayout({
   children,
@@ -23,22 +23,7 @@ export default function DashboardLayout({
                 <span className="font-bold text-xl hidden sm:block">PropVortex</span>
               </Link>
               
-              <div className="hidden md:flex items-center space-x-1 ml-8">
-                <Link 
-                  href="/dashboard" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 flex items-center space-x-2"
-                >
-                  <Home className="h-4 w-4" />
-                  <span>Dashboard</span>
-                </Link>
-                <Link 
-                  href="/billing" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 flex items-center space-x-2"
-                >
-                  <CreditCard className="h-4 w-4" />
-                  <span>Billing</span>
-                </Link>
-              </div>
+              <DashboardNav />
             </div>
             
             <div className="flex items-center space-x-4">

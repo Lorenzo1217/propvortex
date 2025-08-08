@@ -249,14 +249,14 @@ export default async function EditReportPage({ params }: PageProps) {
             <ControlEstimate
               isEditing={true}
               initialData={{
-                professionalFees: report.ceProfessionalFees || '',
-                constructionCosts: report.ceConstructionCosts || '',
-                offsiteUtilities: report.ceOffsiteUtilities || '',
-                ffe: report.ceFFE || '',
-                insuranceFinancing: report.ceInsuranceFinancing || '',
-                total: report.ceTotal || '',
-                contingency: report.ceContingency || '',
-                contingencyUsed: report.ceContingencyUsed || ''
+                professionalFees: report?.ceProfessionalFees || '',
+                constructionCosts: report?.ceConstructionCosts || '',
+                offsiteUtilities: report?.ceOffsiteUtilities || '',
+                ffe: report?.ceFFE || '',
+                insuranceFinancing: report?.ceInsuranceFinancing || '',
+                total: report?.ceTotal || '',
+                contingency: report?.ceContingency || '',
+                contingencyUsed: report?.ceContingencyUsed || ''
               }}
               onChange={(data) => {
                 // Store the data in hidden inputs for form submission
@@ -269,7 +269,9 @@ export default async function EditReportPage({ params }: PageProps) {
                   Object.entries(data).forEach(([key, value]) => {
                     const input = document.createElement('input');
                     input.type = 'hidden';
-                    input.name = `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    // Special handling for FFE field
+                    const fieldName = key === 'ffe' ? 'ceFFE' : `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    input.name = fieldName;
                     input.value = value || '';
                     form.appendChild(input);
                   });

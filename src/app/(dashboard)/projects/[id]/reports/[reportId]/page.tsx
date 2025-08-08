@@ -351,18 +351,18 @@ export default async function ReportViewPage({ params }: PageProps) {
             )}
 
             {/* Control Estimate Update - NEW SECTION */}
-            {(report.ceProfessionalFees || report.ceConstructionCosts || report.ceOffsiteUtilities || 
-              report.ceFFE || report.ceInsuranceFinancing || report.ceTotal || report.ceContingency) && (
+            {(report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
+              report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) && (
               <ControlEstimateDisplay 
                 data={{
-                  professionalFees: report.ceProfessionalFees,
-                  constructionCosts: report.ceConstructionCosts,
-                  offsiteUtilities: report.ceOffsiteUtilities,
-                  ffe: report.ceFFE,
-                  insuranceFinancing: report.ceInsuranceFinancing,
-                  total: report.ceTotal,
-                  contingency: report.ceContingency,
-                  contingencyUsed: report.ceContingencyUsed,
+                  professionalFees: report?.ceProfessionalFees,
+                  constructionCosts: report?.ceConstructionCosts,
+                  offsiteUtilities: report?.ceOffsiteUtilities,
+                  ffe: report?.ceFFE,
+                  insuranceFinancing: report?.ceInsuranceFinancing,
+                  total: report?.ceTotal,
+                  contingency: report?.ceContingency,
+                  contingencyUsed: report?.ceContingencyUsed,
                 }}
               />
             )}

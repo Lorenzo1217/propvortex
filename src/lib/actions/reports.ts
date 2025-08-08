@@ -47,7 +47,7 @@ export async function createReport(formData: FormData, projectId: string) {
   const ceProfessionalFees = formData.get('ceProfessionalFees') as string
   const ceConstructionCosts = formData.get('ceConstructionCosts') as string
   const ceOffsiteUtilities = formData.get('ceOffsiteUtilities') as string
-  const ceFFE = formData.get('ceFfe') as string
+  const ceFFE = formData.get('ceFFE') as string
   const ceInsuranceFinancing = formData.get('ceInsuranceFinancing') as string
   const ceTotal = formData.get('ceTotal') as string
   const ceContingency = formData.get('ceContingency') as string
@@ -249,7 +249,7 @@ export async function updateReport(formData: FormData, reportId: string) {
     const ceProfessionalFees = formData.get('ceProfessionalFees') as string
     const ceConstructionCosts = formData.get('ceConstructionCosts') as string
     const ceOffsiteUtilities = formData.get('ceOffsiteUtilities') as string
-    const ceFFE = formData.get('ceFfe') as string
+    const ceFFE = formData.get('ceFFE') as string
     const ceInsuranceFinancing = formData.get('ceInsuranceFinancing') as string
     const ceTotal = formData.get('ceTotal') as string
     const ceContingency = formData.get('ceContingency') as string

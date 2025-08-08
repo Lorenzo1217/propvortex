@@ -261,7 +261,9 @@ export default async function NewReportPage({ params }: PageProps) {
                   Object.entries(data).forEach(([key, value]) => {
                     const input = document.createElement('input');
                     input.type = 'hidden';
-                    input.name = `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    // Special handling for FFE field
+                    const fieldName = key === 'ffe' ? 'ceFFE' : `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    input.name = fieldName;
                     input.value = value || '';
                     form.appendChild(input);
                   });

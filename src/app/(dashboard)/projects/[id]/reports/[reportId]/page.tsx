@@ -29,7 +29,7 @@ import {
   BudgetDisplay, 
   ClientActionsDisplay 
 } from '@/components/report-sections/display/luxury-report-display'
-// import { ControlEstimateDisplay } from '@/components/report-sections/display/control-estimate-display' // TEMPORARILY DISABLED
+import { ControlEstimateSafe } from '@/components/report-sections/control-estimate-safe' // SAFE VERSION
 
 interface PageProps {
   params: Promise<{
@@ -350,32 +350,8 @@ export default async function ReportViewPage({ params }: PageProps) {
               })()
             )}
 
-            {/* Control Estimate Update - TEMPORARILY DISABLED FOR PRODUCTION HOTFIX */}
-            {/* {(() => {
-              try {
-                if (report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
-                    report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) {
-                  return (
-                    <ControlEstimateDisplay 
-                      data={{
-                        professionalFees: report?.ceProfessionalFees || null,
-                        constructionCosts: report?.ceConstructionCosts || null,
-                        offsiteUtilities: report?.ceOffsiteUtilities || null,
-                        ffe: report?.ceFFE || null,
-                        insuranceFinancing: report?.ceInsuranceFinancing || null,
-                        total: report?.ceTotal || null,
-                        contingency: report?.ceContingency || null,
-                        contingencyUsed: report?.ceContingencyUsed || null,
-                      }}
-                    />
-                  );
-                }
-                return null;
-              } catch (error) {
-                console.error('Control Estimate Display Error:', error);
-                return null;
-              }
-            })()} */}
+            {/* Control Estimate Update - SAFE VERSION */}
+            <ControlEstimateSafe />
 
             {/* Client Actions - UPDATED with backward compatibility */}
             {report.clientActions && (

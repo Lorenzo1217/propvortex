@@ -26,7 +26,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
-// import { ControlEstimate } from '@/components/report-sections/control-estimate' // TEMPORARILY DISABLED
+import { ControlEstimateSafe } from '@/components/report-sections/control-estimate-safe' // SAFE VERSION
 
 interface PageProps {
   params: Promise<{
@@ -247,38 +247,8 @@ export default async function NewReportPage({ params }: PageProps) {
               items={[]}
             />
 
-            {/* Control Estimate Update - TEMPORARILY DISABLED FOR PRODUCTION HOTFIX */}
-            {/* {(() => {
-              try {
-                return (
-                  <ControlEstimate
-                    isEditing={true}
-                    onChange={(data) => {
-                      // Store the data in hidden inputs for form submission
-                      const form = document.getElementById('report-form') as HTMLFormElement;
-                      if (form) {
-                        // Remove existing hidden inputs
-                        form.querySelectorAll('input[name^="ce"]').forEach(input => input.remove());
-                        
-                        // Add new hidden inputs
-                        Object.entries(data).forEach(([key, value]) => {
-                          const input = document.createElement('input');
-                          input.type = 'hidden';
-                          // Special handling for FFE field
-                          const fieldName = key === 'ffe' ? 'ceFFE' : `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                          input.name = fieldName;
-                          input.value = value || '';
-                          form.appendChild(input);
-                        });
-                      }
-                    }}
-                  />
-                );
-              } catch (error) {
-                console.error('Control Estimate Error in Create Page:', error);
-                return null;
-              }
-            })()} */}
+            {/* Control Estimate Update - SAFE VERSION */}
+            <ControlEstimateSafe formId="report-form" />
 
             {/* Client Actions - UPDATED */}
             <ClientActions

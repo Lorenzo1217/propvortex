@@ -60,7 +60,8 @@ export function ControlEstimate({ initialData, onChange, isEditing = true }: Con
       setData(newData);
       onChange?.(newData);
     }
-  }, [data.professionalFees, data.constructionCosts, data.offsiteUtilities, data.ffe, data.insuranceFinancing, autoCalculate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.professionalFees, data.constructionCosts, data.offsiteUtilities, data.ffe, data.insuranceFinancing, autoCalculate, isEditing]);
 
   const handleChange = (field: keyof ControlEstimateData, value: string) => {
     const formattedValue = formatCurrency(value);

@@ -8,134 +8,111 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique
-  email     String   @unique
-  firstName String?
-  lastName  String?
-  company   String?
-  phone     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Stripe fields
+  id                   String    @id @default(cuid())
+  clerkId              String    @unique
+  email                String    @unique
+  firstName            String?
+  lastName             String?
+  company              String?
+  phone                String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  currentPeriodEnd     DateTime?
+  projectLimit         Int?      @default(10)
   stripeCustomerId     String?   @unique
   stripePriceId        String?
   stripeSubscriptionId String?   @unique
   subscriptionStatus   String?
-  currentPeriodEnd     DateTime?
-  projectLimit         Int?      @default(10)
+  projects             Project[]
 
-  // Relations
-  projects Project[]
-  
   @@map("users")
 }
 
 model Project {
-  id          String   @id @default(cuid())
+  id          String          @id @default(cuid())
   name        String
-  
-  // Keep old field for backward compatibility
   address     String
-  
-  // New address fields
   street      String?
   city        String?
   state       String?
   zipCode     String?
-  
   description String?
-  status      ProjectStatus @default(ACTIVE)
+  status      ProjectStatus   @default(ACTIVE)
   startDate   DateTime?
   endDate     DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reports     Report[]
-  clients     ProjectClient[]
   photos      Photo[]
+  clients     ProjectClient[]
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reports     Report[]
 
   @@map("projects")
 }
 
 model ProjectClient {
-  id        String   @id @default(cuid())
-  email     String
-  firstName String
-  lastName  String
-  phone     String?
-  invitedAt DateTime @default(now())
+  id           String    @id @default(cuid())
+  email        String
+  firstName    String
+  lastName     String
+  phone        String?
+  invitedAt    DateTime  @default(now())
   lastViewedAt DateTime?
-
-  // Relations
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId    String
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@unique([projectId, email])
   @@map("project_clients")
 }
 
 model Report {
-  id               String   @id @default(cuid())
-  weekNumber       Int
-  year             Int
-  title            String
-  executiveSummary String?
-  
-  // UPDATED: Convert these to JSON structured data
-  workCompleted    Json?    // Array of work items with impact levels
-  upcomingWork     Json?    // Array of upcoming items with impact levels
-  issues           Json?    // Array of issues with risk levels
-  budget           Json?    // Array of budget items/change orders
-  clientActions    Json?    // Array of action items with priorities
-  
-  isPublished      Boolean  @default(false)
-  publishedAt      DateTime?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  weatherData      Json?    
-  weatherFetchedAt DateTime? 
-
-  // Control Estimate fields
-  ceProfessionalFees   String?
+  id                   String    @id @default(cuid())
+  weekNumber           Int
+  year                 Int
+  title                String
+  executiveSummary     String?
+  workCompleted        Json?
+  upcomingWork         Json?
+  issues               Json?
+  budget               Json?
+  clientActions        Json?
+  isPublished          Boolean   @default(false)
+  publishedAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  weatherData          Json?
+  weatherFetchedAt     DateTime?
+  projectId            String
   ceConstructionCosts  String?
-  ceOffsiteUtilities   String?
-  ceFFE                String?
-  ceInsuranceFinancing String?
-  ceTotal              String?
   ceContingency        String?
   ceContingencyUsed    String?
-
-  // Relations
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  photos    Photo[]
+  ceFFE                String?
+  ceInsuranceFinancing String?
+  ceOffsiteUtilities   String?
+  ceProfessionalFees   String?
+  ceTotal              String?
+  photos               Photo[]
+  project              Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@unique([projectId, weekNumber, year])
   @@map("reports")
 }
 
 model Photo {
-  id          String   @id @default(cuid())
-  filename    String
+  id           String   @id @default(cuid())
+  filename     String
   originalName String
-  mimeType    String
-  size        Int
-  url         String
-  caption     String?
-  tags        String? 
-  uploadedAt  DateTime @default(now())
-
-  // Relations
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  reportId  String?
-  report    Report? @relation(fields: [reportId], references: [id], onDelete: SetNull)
+  mimeType     String
+  size         Int
+  url          String
+  caption      String?
+  tags         String?
+  uploadedAt   DateTime @default(now())
+  projectId    String
+  reportId     String?
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  report       Report?  @relation(fields: [reportId], references: [id])
 
   @@map("photos")
 }

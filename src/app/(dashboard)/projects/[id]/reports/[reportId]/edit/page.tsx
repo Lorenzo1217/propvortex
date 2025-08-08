@@ -25,6 +25,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
+import { ControlEstimate } from '@/components/report-sections/control-estimate'
 
 interface PageProps {
   params: Promise<{
@@ -142,7 +143,7 @@ export default async function EditReportPage({ params }: PageProps) {
           </div>
 
           {/* Report Form */}
-          <form action={handleUpdateReport} className="space-y-8">
+          <form id="report-form" action={handleUpdateReport} className="space-y-8">
             {/* Report Title */}
             <Card>
               <CardHeader>
@@ -242,6 +243,38 @@ export default async function EditReportPage({ params }: PageProps) {
             <BudgetChangeOrders
               name="budget"
               items={report.budget ? JSON.parse(report.budget as string) : []}
+            />
+
+            {/* Control Estimate Update - NEW SECTION */}
+            <ControlEstimate
+              isEditing={true}
+              initialData={{
+                professionalFees: report.ceProfessionalFees || '',
+                constructionCosts: report.ceConstructionCosts || '',
+                offsiteUtilities: report.ceOffsiteUtilities || '',
+                ffe: report.ceFFE || '',
+                insuranceFinancing: report.ceInsuranceFinancing || '',
+                total: report.ceTotal || '',
+                contingency: report.ceContingency || '',
+                contingencyUsed: report.ceContingencyUsed || ''
+              }}
+              onChange={(data) => {
+                // Store the data in hidden inputs for form submission
+                const form = document.getElementById('report-form') as HTMLFormElement;
+                if (form) {
+                  // Remove existing hidden inputs
+                  form.querySelectorAll('input[name^="ce"]').forEach(input => input.remove());
+                  
+                  // Add new hidden inputs
+                  Object.entries(data).forEach(([key, value]) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    input.value = value || '';
+                    form.appendChild(input);
+                  });
+                }
+              }}
             />
 
             {/* Client Actions - UPDATED */}

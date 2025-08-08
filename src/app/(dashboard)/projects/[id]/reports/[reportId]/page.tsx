@@ -13,21 +13,23 @@ import {
   Send,
   Edit,
   Eye,
-  ZoomIn
+  ZoomIn,
+  Camera
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { ensureUserInDatabase } from "@/lib/user-helpers";
 import { publishReport } from "@/lib/actions/reports";
 import { PhotoViewer } from "@/components/photo-viewer";
-import { WeatherForecast } from "@/components/weather-forecast";
+import { LuxuryWeatherForecast } from "@/components/luxury-weather-forecast";
 import { formatProjectAddress } from "@/lib/utils/address";
 import { 
   WorkDisplay, 
   IssuesDisplay, 
   BudgetDisplay, 
   ClientActionsDisplay 
-} from '@/components/report-sections/display/report-display'
+} from '@/components/report-sections/display/luxury-report-display'
+import { ControlEstimateDisplay } from '@/components/report-sections/display/control-estimate-display'
 
 interface PageProps {
   params: Promise<{
@@ -180,7 +182,7 @@ export default async function ReportViewPage({ params }: PageProps) {
           {/* Weather Forecast - NEW SECTION */}
           {report.weatherData && (
             <div className="mb-8">
-              <WeatherForecast 
+              <LuxuryWeatherForecast 
                 weatherData={JSON.parse(report.weatherData as string)}
                 projectLocation={formatProjectAddress(report.project)}
                 isEditing={false}
@@ -188,22 +190,31 @@ export default async function ReportViewPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Report Photos - Read Only with Lightbox */}
+          {/* Report Photos - Luxury Gallery */}
           {report.photos.length > 0 && (
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <span>📸 Project Photos</span>
-                  <Badge variant="outline" className="flex items-center">
-                    <ZoomIn className="w-3 h-3 mr-1" />
-                    Click to expand
+            <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-indigo-50 rounded-lg">
+                      <Camera className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                        Project Photography
+                      </CardTitle>
+                      <CardDescription className="text-gray-600 mt-1">
+                        {report.photos.length} photo{report.photos.length > 1 ? 's' : ''} documenting this week's progress
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="flex items-center gap-1.5 bg-gray-100 text-gray-700 border-0">
+                    <ZoomIn className="w-3.5 h-3.5" />
+                    <span className="text-xs font-medium">Click to view</span>
                   </Badge>
-                </CardTitle>
-                <CardDescription>
-                  Photos included in this week's report • Click any photo to view full size with descriptions
-                </CardDescription>
+                </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-8 py-6">
                 <PhotoViewer photos={report.photos} />
               </CardContent>
             </Card>
@@ -213,14 +224,21 @@ export default async function ReportViewPage({ params }: PageProps) {
           <div className="space-y-6">
             {/* Executive Summary */}
             {report.executiveSummary && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Executive Summary</CardTitle>
+              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gray-100 rounded-lg">
+                      <FileText className="w-5 h-5 text-gray-700" />
+                    </div>
+                    <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                      Executive Summary
+                    </CardTitle>
+                  </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-8 py-6">
                   <HTMLContent 
                     content={report.executiveSummary}
-                    className="text-gray-700"
+                    className="text-gray-700 leading-relaxed prose prose-gray max-w-none"
                   />
                 </CardContent>
               </Card>
@@ -236,14 +254,16 @@ export default async function ReportViewPage({ params }: PageProps) {
                 } catch {
                   // If parsing fails, it's HTML content from old reports
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Work Completed This Week</CardTitle>
+                    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Work Completed This Week
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-8 py-6">
                         <HTMLContent 
                           content={report.workCompleted as string}
-                          className="text-gray-700"
+                          className="text-gray-700 leading-relaxed"
                         />
                       </CardContent>
                     </Card>
@@ -260,14 +280,16 @@ export default async function ReportViewPage({ params }: PageProps) {
                   return <WorkDisplay title="Upcoming Work" items={items} />;
                 } catch {
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Upcoming Work</CardTitle>
+                    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Upcoming Work
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-8 py-6">
                         <HTMLContent 
                           content={report.upcomingWork as string}
-                          className="text-gray-700"
+                          className="text-gray-700 leading-relaxed"
                         />
                       </CardContent>
                     </Card>
@@ -284,14 +306,16 @@ export default async function ReportViewPage({ params }: PageProps) {
                   return <IssuesDisplay items={items} />;
                 } catch {
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Issues & Delays</CardTitle>
+                    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Issues & Delays
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-8 py-6">
                         <HTMLContent 
                           content={report.issues as string}
-                          className="text-gray-700"
+                          className="text-gray-700 leading-relaxed"
                         />
                       </CardContent>
                     </Card>
@@ -308,20 +332,39 @@ export default async function ReportViewPage({ params }: PageProps) {
                   return <BudgetDisplay items={items} />;
                 } catch {
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Budget & Change Orders</CardTitle>
+                    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Budget & Change Orders
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-8 py-6">
                         <HTMLContent 
                           content={report.budget as string}
-                          className="text-gray-700"
+                          className="text-gray-700 leading-relaxed"
                         />
                       </CardContent>
                     </Card>
                   );
                 }
               })()
+            )}
+
+            {/* Control Estimate Update - NEW SECTION */}
+            {(report.ceProfessionalFees || report.ceConstructionCosts || report.ceOffsiteUtilities || 
+              report.ceFFE || report.ceInsuranceFinancing || report.ceTotal || report.ceContingency) && (
+              <ControlEstimateDisplay 
+                data={{
+                  professionalFees: report.ceProfessionalFees,
+                  constructionCosts: report.ceConstructionCosts,
+                  offsiteUtilities: report.ceOffsiteUtilities,
+                  ffe: report.ceFFE,
+                  insuranceFinancing: report.ceInsuranceFinancing,
+                  total: report.ceTotal,
+                  contingency: report.ceContingency,
+                  contingencyUsed: report.ceContingencyUsed,
+                }}
+              />
             )}
 
             {/* Client Actions - UPDATED with backward compatibility */}
@@ -332,14 +375,16 @@ export default async function ReportViewPage({ params }: PageProps) {
                   return <ClientActionsDisplay items={items} />;
                 } catch {
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Client Actions Needed</CardTitle>
+                    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Client Actions Needed
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-8 py-6">
                         <HTMLContent 
                           content={report.clientActions as string}
-                          className="text-gray-700"
+                          className="text-gray-700 leading-relaxed"
                         />
                       </CardContent>
                     </Card>

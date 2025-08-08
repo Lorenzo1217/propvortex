@@ -101,6 +101,16 @@ model Report {
   weatherData      Json?    
   weatherFetchedAt DateTime? 
 
+  // Control Estimate fields
+  ceProfessionalFees   String?
+  ceConstructionCosts  String?
+  ceOffsiteUtilities   String?
+  ceFFE                String?
+  ceInsuranceFinancing String?
+  ceTotal              String?
+  ceContingency        String?
+  ceContingencyUsed    String?
+
   // Relations
   projectId String
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)

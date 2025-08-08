@@ -42,6 +42,16 @@ export async function createReport(formData: FormData, projectId: string) {
   const issuesData = formData.get('issues') as string
   const budgetData = formData.get('budget') as string
   const clientActionsData = formData.get('clientActions') as string
+  
+  // Extract Control Estimate fields
+  const ceProfessionalFees = formData.get('ceProfessionalFees') as string
+  const ceConstructionCosts = formData.get('ceConstructionCosts') as string
+  const ceOffsiteUtilities = formData.get('ceOffsiteUtilities') as string
+  const ceFFE = formData.get('ceFfe') as string
+  const ceInsuranceFinancing = formData.get('ceInsuranceFinancing') as string
+  const ceTotal = formData.get('ceTotal') as string
+  const ceContingency = formData.get('ceContingency') as string
+  const ceContingencyUsed = formData.get('ceContingencyUsed') as string
 
   // Parse the JSON data
   const workCompleted = workCompletedData ? JSON.parse(workCompletedData) : null
@@ -113,7 +123,16 @@ export async function createReport(formData: FormData, projectId: string) {
         projectId,
         isPublished: false, // Start as draft
         weatherData: weatherData ? JSON.stringify(weatherData) : undefined,
-        weatherFetchedAt: weatherData ? new Date() : null
+        weatherFetchedAt: weatherData ? new Date() : null,
+        // Control Estimate fields
+        ceProfessionalFees: ceProfessionalFees || null,
+        ceConstructionCosts: ceConstructionCosts || null,
+        ceOffsiteUtilities: ceOffsiteUtilities || null,
+        ceFFE: ceFFE || null,
+        ceInsuranceFinancing: ceInsuranceFinancing || null,
+        ceTotal: ceTotal || null,
+        ceContingency: ceContingency || null,
+        ceContingencyUsed: ceContingencyUsed || null
       }
     })
 
@@ -225,6 +244,16 @@ export async function updateReport(formData: FormData, reportId: string) {
     const issuesData = formData.get('issues') as string
     const budgetData = formData.get('budget') as string
     const clientActionsData = formData.get('clientActions') as string
+    
+    // Extract Control Estimate fields
+    const ceProfessionalFees = formData.get('ceProfessionalFees') as string
+    const ceConstructionCosts = formData.get('ceConstructionCosts') as string
+    const ceOffsiteUtilities = formData.get('ceOffsiteUtilities') as string
+    const ceFFE = formData.get('ceFfe') as string
+    const ceInsuranceFinancing = formData.get('ceInsuranceFinancing') as string
+    const ceTotal = formData.get('ceTotal') as string
+    const ceContingency = formData.get('ceContingency') as string
+    const ceContingencyUsed = formData.get('ceContingencyUsed') as string
 
     // Parse the JSON data
     const workCompleted = workCompletedData ? JSON.parse(workCompletedData) : null
@@ -255,6 +284,15 @@ export async function updateReport(formData: FormData, reportId: string) {
         issues: issues ? JSON.stringify(issues) : undefined,
         budget: budget ? JSON.stringify(budget) : undefined,
         clientActions: clientActions ? JSON.stringify(clientActions) : undefined,
+        // Control Estimate fields
+        ceProfessionalFees: ceProfessionalFees || null,
+        ceConstructionCosts: ceConstructionCosts || null,
+        ceOffsiteUtilities: ceOffsiteUtilities || null,
+        ceFFE: ceFFE || null,
+        ceInsuranceFinancing: ceInsuranceFinancing || null,
+        ceTotal: ceTotal || null,
+        ceContingency: ceContingency || null,
+        ceContingencyUsed: ceContingencyUsed || null,
         updatedAt: new Date()
       }
     })

@@ -25,7 +25,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
-import { ControlEstimate } from '@/components/report-sections/control-estimate'
+// import { ControlEstimate } from '@/components/report-sections/control-estimate' // TEMPORARILY DISABLED
 
 interface PageProps {
   params: Promise<{
@@ -245,8 +245,8 @@ export default async function EditReportPage({ params }: PageProps) {
               items={report.budget ? JSON.parse(report.budget as string) : []}
             />
 
-            {/* Control Estimate Update - NEW SECTION */}
-            {(() => {
+            {/* Control Estimate Update - TEMPORARILY DISABLED FOR PRODUCTION HOTFIX */}
+            {/* {(() => {
               try {
                 return (
                   <ControlEstimate
@@ -286,7 +286,7 @@ export default async function EditReportPage({ params }: PageProps) {
                 console.error('Control Estimate Error in Edit Page:', error);
                 return null;
               }
-            })()}
+            })()} */}
 
             {/* Client Actions - UPDATED */}
             <ClientActions

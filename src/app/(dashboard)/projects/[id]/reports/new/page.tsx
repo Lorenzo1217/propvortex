@@ -26,7 +26,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
-import { ControlEstimate } from '@/components/report-sections/control-estimate'
+// import { ControlEstimate } from '@/components/report-sections/control-estimate' // TEMPORARILY DISABLED
 
 interface PageProps {
   params: Promise<{
@@ -247,8 +247,8 @@ export default async function NewReportPage({ params }: PageProps) {
               items={[]}
             />
 
-            {/* Control Estimate Update - NEW SECTION */}
-            {(() => {
+            {/* Control Estimate Update - TEMPORARILY DISABLED FOR PRODUCTION HOTFIX */}
+            {/* {(() => {
               try {
                 return (
                   <ControlEstimate
@@ -278,7 +278,7 @@ export default async function NewReportPage({ params }: PageProps) {
                 console.error('Control Estimate Error in Create Page:', error);
                 return null;
               }
-            })()}
+            })()} */}
 
             {/* Client Actions - UPDATED */}
             <ClientActions

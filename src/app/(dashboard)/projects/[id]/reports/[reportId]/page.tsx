@@ -29,7 +29,7 @@ import {
   BudgetDisplay, 
   ClientActionsDisplay 
 } from '@/components/report-sections/display/luxury-report-display'
-import { ControlEstimateDisplay } from '@/components/report-sections/display/control-estimate-display'
+// import { ControlEstimateDisplay } from '@/components/report-sections/display/control-estimate-display' // TEMPORARILY DISABLED
 
 interface PageProps {
   params: Promise<{
@@ -350,8 +350,8 @@ export default async function ReportViewPage({ params }: PageProps) {
               })()
             )}
 
-            {/* Control Estimate Update - NEW SECTION */}
-            {(() => {
+            {/* Control Estimate Update - TEMPORARILY DISABLED FOR PRODUCTION HOTFIX */}
+            {/* {(() => {
               try {
                 if (report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
                     report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) {
@@ -375,7 +375,7 @@ export default async function ReportViewPage({ params }: PageProps) {
                 console.error('Control Estimate Display Error:', error);
                 return null;
               }
-            })()}
+            })()} */}
 
             {/* Client Actions - UPDATED with backward compatibility */}
             {report.clientActions && (

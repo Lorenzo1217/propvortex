@@ -351,21 +351,31 @@ export default async function ReportViewPage({ params }: PageProps) {
             )}
 
             {/* Control Estimate Update - NEW SECTION */}
-            {(report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
-              report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) && (
-              <ControlEstimateDisplay 
-                data={{
-                  professionalFees: report?.ceProfessionalFees,
-                  constructionCosts: report?.ceConstructionCosts,
-                  offsiteUtilities: report?.ceOffsiteUtilities,
-                  ffe: report?.ceFFE,
-                  insuranceFinancing: report?.ceInsuranceFinancing,
-                  total: report?.ceTotal,
-                  contingency: report?.ceContingency,
-                  contingencyUsed: report?.ceContingencyUsed,
-                }}
-              />
-            )}
+            {(() => {
+              try {
+                if (report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
+                    report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) {
+                  return (
+                    <ControlEstimateDisplay 
+                      data={{
+                        professionalFees: report?.ceProfessionalFees || null,
+                        constructionCosts: report?.ceConstructionCosts || null,
+                        offsiteUtilities: report?.ceOffsiteUtilities || null,
+                        ffe: report?.ceFFE || null,
+                        insuranceFinancing: report?.ceInsuranceFinancing || null,
+                        total: report?.ceTotal || null,
+                        contingency: report?.ceContingency || null,
+                        contingencyUsed: report?.ceContingencyUsed || null,
+                      }}
+                    />
+                  );
+                }
+                return null;
+              } catch (error) {
+                console.error('Control Estimate Display Error:', error);
+                return null;
+              }
+            })()}
 
             {/* Client Actions - UPDATED with backward compatibility */}
             {report.clientActions && (

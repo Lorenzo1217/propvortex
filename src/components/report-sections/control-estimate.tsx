@@ -29,14 +29,16 @@ export function ControlEstimate({ initialData, onChange, isEditing = true }: Con
   const [autoCalculate, setAutoCalculate] = useState(true);
 
   // Format number with thousand separators
-  const formatCurrency = (value: string) => {
-    const num = value.replace(/[^0-9]/g, '');
+  const formatCurrency = (value: string | null | undefined) => {
+    if (!value) return '';
+    const num = String(value).replace(/[^0-9]/g, '');
     return num.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   // Parse formatted currency to number
-  const parseCurrency = (value: string): number => {
-    return parseFloat(value.replace(/[^0-9.-]/g, '') || '0');
+  const parseCurrency = (value: string | null | undefined): number => {
+    if (!value) return 0;
+    return parseFloat(String(value).replace(/[^0-9.-]/g, '') || '0');
   };
 
   // Calculate total

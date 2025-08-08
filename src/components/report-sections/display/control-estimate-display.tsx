@@ -18,7 +18,7 @@ export function ControlEstimateDisplay({ data }: ControlEstimateDisplayProps) {
   // Parse currency string to number
   const parseCurrency = (value: string | null | undefined): number => {
     if (!value) return 0;
-    return parseFloat(value.replace(/[^0-9.-]/g, '') || '0');
+    return parseFloat(String(value).replace(/[^0-9.-]/g, '') || '0');
   };
 
   // Format number with thousand separators

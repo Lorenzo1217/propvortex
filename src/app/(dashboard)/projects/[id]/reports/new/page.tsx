@@ -248,28 +248,37 @@ export default async function NewReportPage({ params }: PageProps) {
             />
 
             {/* Control Estimate Update - NEW SECTION */}
-            <ControlEstimate
-              isEditing={true}
-              onChange={(data) => {
-                // Store the data in hidden inputs for form submission
-                const form = document.getElementById('report-form') as HTMLFormElement;
-                if (form) {
-                  // Remove existing hidden inputs
-                  form.querySelectorAll('input[name^="ce"]').forEach(input => input.remove());
-                  
-                  // Add new hidden inputs
-                  Object.entries(data).forEach(([key, value]) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    // Special handling for FFE field
-                    const fieldName = key === 'ffe' ? 'ceFFE' : `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                    input.name = fieldName;
-                    input.value = value || '';
-                    form.appendChild(input);
-                  });
-                }
-              }}
-            />
+            {(() => {
+              try {
+                return (
+                  <ControlEstimate
+                    isEditing={true}
+                    onChange={(data) => {
+                      // Store the data in hidden inputs for form submission
+                      const form = document.getElementById('report-form') as HTMLFormElement;
+                      if (form) {
+                        // Remove existing hidden inputs
+                        form.querySelectorAll('input[name^="ce"]').forEach(input => input.remove());
+                        
+                        // Add new hidden inputs
+                        Object.entries(data).forEach(([key, value]) => {
+                          const input = document.createElement('input');
+                          input.type = 'hidden';
+                          // Special handling for FFE field
+                          const fieldName = key === 'ffe' ? 'ceFFE' : `ce${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                          input.name = fieldName;
+                          input.value = value || '';
+                          form.appendChild(input);
+                        });
+                      }
+                    }}
+                  />
+                );
+              } catch (error) {
+                console.error('Control Estimate Error in Create Page:', error);
+                return null;
+              }
+            })()}
 
             {/* Client Actions - UPDATED */}
             <ClientActions

@@ -3,12 +3,12 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Home, Calendar, Users, BarChart3, MapPin, Clock, CreditCard } from "lucide-react";
+import { Home, Calendar, Users, BarChart3, MapPin, Clock } from "lucide-react";
 import { getUserProjects } from '@/lib/user-helpers';
 import { NewProjectDialog } from '@/components/new-project-dialog';
 import Link from "next/link";
 import { formatProjectAddress } from '@/lib/utils/address';
-import { requireSubscription, getSubscriptionStatus } from '@/lib/subscription';
+import { requireSubscription } from '@/lib/subscription';
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -25,9 +25,6 @@ export default async function DashboardPage() {
 
   // Ensure user exists in our database and check subscription
   const dbUser = await requireSubscription();
-  
-  // Get subscription status
-  const subscriptionStatus = await getSubscriptionStatus(dbUser.id);
   
   // Get user's projects
   const projects = await getUserProjects(dbUser.id);
@@ -50,38 +47,6 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        {/* Subscription Status Card */}
-        {subscriptionStatus && (
-          <Card className="mb-6 border-blue-200 bg-blue-50/50">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <CreditCard className="h-5 w-5 text-blue-600" />
-                  <CardTitle className="text-lg">
-                    {subscriptionStatus.planName} Plan
-                  </CardTitle>
-                </div>
-                <Badge variant="default" className="bg-blue-600">
-                  {subscriptionStatus.status === 'trialing' ? 'Trial' : 'Active'}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-gray-600">
-                {subscriptionStatus.projectLimit 
-                  ? `${subscriptionStatus.projectCount}/${subscriptionStatus.projectLimit} projects used`
-                  : `${subscriptionStatus.projectCount} projects (Unlimited)`
-                }
-              </p>
-              {subscriptionStatus.currentPeriodEnd && (
-                <p className="text-xs text-gray-500 mt-1">
-                  {subscriptionStatus.status === 'trialing' ? 'Trial ends' : 'Renews'} on{' '}
-                  {new Date(subscriptionStatus.currentPeriodEnd).toLocaleDateString()}
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        )}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -14,7 +14,8 @@ import {
   Edit,
   Eye,
   ZoomIn,
-  Camera
+  Camera,
+  Cloud
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -181,13 +182,30 @@ export default async function ReportViewPage({ params }: PageProps) {
 
           {/* Weather Forecast - NEW SECTION */}
           {report.weatherData && (
-            <div className="mb-8">
-              <LuxuryWeatherForecast 
-                weatherData={JSON.parse(report.weatherData as string)}
-                projectLocation={formatProjectAddress(report.project)}
-                isEditing={false}
-              />
-            </div>
+            <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gray-50 rounded-lg">
+                    <Cloud className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                      Weather Outlook
+                    </CardTitle>
+                    <CardDescription className="mt-1">
+                      7-day forecast for construction planning
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="px-8 py-6">
+                <LuxuryWeatherForecast 
+                  weatherData={JSON.parse(report.weatherData as string)}
+                  projectLocation={formatProjectAddress(report.project)}
+                  isEditing={false}
+                />
+              </CardContent>
+            </Card>
           )}
 
           {/* Report Photos - Luxury Gallery */}

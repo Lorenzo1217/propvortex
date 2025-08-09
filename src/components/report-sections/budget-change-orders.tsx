@@ -20,6 +20,16 @@ interface BudgetChangeOrdersProps {
   items?: BudgetItem[]
 }
 
+const getStatusDotColor = (status: string) => {
+  switch(status?.toLowerCase()) {
+    case 'approved': return 'bg-green-500';
+    case 'pending': return 'bg-yellow-500';
+    case 'submitted': return 'bg-blue-500';
+    case 'rejected': return 'bg-red-500';
+    default: return 'bg-gray-400';
+  }
+};
+
 export function BudgetChangeOrders({ name, items: initialItems = [] }: BudgetChangeOrdersProps) {
   const [items, setItems] = useState<BudgetItem[]>(initialItems)
 

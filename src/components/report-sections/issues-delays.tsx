@@ -18,23 +18,23 @@ interface IssuesDelaysProps {
   items?: Issue[]
 }
 
-const riskConfig = {
-  high: { 
-    label: 'High Risk', 
-    color: 'bg-red-100 text-red-800 border-red-300', 
-    emoji: '🔴' 
-  },
-  medium: { 
-    label: 'Medium Risk', 
-    color: 'bg-yellow-100 text-yellow-800 border-yellow-300', 
-    emoji: '🟡' 
-  },
-  low: { 
-    label: 'Low Risk', 
-    color: 'bg-blue-100 text-blue-800 border-blue-300', 
-    emoji: '🔵' 
+const getRiskDotColor = (risk: string) => {
+  switch(risk?.toLowerCase()) {
+    case 'low': return 'bg-blue-500';
+    case 'medium': return 'bg-yellow-500';
+    case 'high': return 'bg-red-500';
+    default: return 'bg-gray-400';
   }
-}
+};
+
+const getRiskLabel = (risk: string) => {
+  switch(risk?.toLowerCase()) {
+    case 'low': return 'Low Risk';
+    case 'medium': return 'Medium Risk';
+    case 'high': return 'High Risk';
+    default: return risk || 'Unknown';
+  }
+};
 
 export function IssuesDelays({ name, items = [] }: IssuesDelaysProps) {
   const [issues, setIssues] = useState<Issue[]>(
@@ -102,9 +102,9 @@ export function IssuesDelays({ name, items = [] }: IssuesDelaysProps) {
                       onChange={(e) => updateIssue(issue.id, { risk: e.target.value as 'high' | 'medium' | 'low' })}
                       className="w-40 px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                     >
-                      <option value="high">🔴 High Risk</option>
-                      <option value="medium">🟡 Medium Risk</option>
-                      <option value="low">🔵 Low Risk</option>
+                      <option value="high">High Risk</option>
+                      <option value="medium">Medium Risk</option>
+                      <option value="low">Low Risk</option>
                     </select>
 
                     <Input

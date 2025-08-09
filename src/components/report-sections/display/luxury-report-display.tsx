@@ -89,35 +89,30 @@ const ImpactIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
   )
 }
 
-// Premium risk indicator
+// Premium risk indicator with clean dot style
 const RiskIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
-  const indicators = {
-    high: { 
-      icon: AlertTriangle, 
-      text: 'High Risk', 
-      className: 'text-red-700',
-      bgClassName: 'bg-red-50 border-red-200'
-    },
-    medium: { 
-      icon: AlertCircle, 
-      text: 'Medium Risk', 
-      className: 'text-amber-700',
-      bgClassName: 'bg-amber-50 border-amber-200'
-    },
-    low: { 
-      icon: Shield, 
-      text: 'Low Risk', 
-      className: 'text-emerald-700',
-      bgClassName: 'bg-emerald-50 border-emerald-200'
+  const getRiskDotColor = (risk: string) => {
+    switch(risk?.toLowerCase()) {
+      case 'low': return 'bg-blue-500';
+      case 'medium': return 'bg-yellow-500';
+      case 'high': return 'bg-red-500';
+      default: return 'bg-gray-400';
     }
-  }
-  
-  const { icon: Icon, text, className, bgClassName } = indicators[level]
+  };
+
+  const getRiskLabel = (risk: string) => {
+    switch(risk?.toLowerCase()) {
+      case 'low': return 'Low Risk';
+      case 'medium': return 'Medium Risk';
+      case 'high': return 'High Risk';
+      default: return risk || 'Unknown';
+    }
+  };
   
   return (
-    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${bgClassName} ${className}`}>
-      <Icon className="w-4 h-4" />
-      <span className="text-xs font-medium tracking-wide">{text}</span>
+    <div className="flex items-center gap-2">
+      <div className={`w-2 h-2 rounded-full ${getRiskDotColor(level)}`}></div>
+      <span className="text-sm font-medium text-gray-700">{getRiskLabel(level)}</span>
     </div>
   )
 }
@@ -167,37 +162,26 @@ const BudgetType = ({ type, amount }: { type: string; amount: string }) => {
   )
 }
 
-// Premium status badge
+// Premium status badge with clean dot style
 const StatusBadge = ({ status }: { status: string }) => {
-  const styles: Record<string, { bg: string; text: string; border: string }> = {
-    pending: { 
-      bg: 'bg-amber-50', 
-      text: 'text-amber-700',
-      border: 'border-amber-200'
-    },
-    approved: { 
-      bg: 'bg-emerald-50', 
-      text: 'text-emerald-700',
-      border: 'border-emerald-200'
-    },
-    submitted: { 
-      bg: 'bg-blue-50', 
-      text: 'text-blue-700',
-      border: 'border-blue-200'
-    },
-    completed: { 
-      bg: 'bg-emerald-50', 
-      text: 'text-emerald-700',
-      border: 'border-emerald-200'
+  const getStatusDotColor = (status: string) => {
+    switch(status?.toLowerCase()) {
+      case 'approved': return 'bg-green-500';
+      case 'pending': return 'bg-yellow-500';
+      case 'submitted': return 'bg-blue-500';
+      case 'completed': return 'bg-green-500';
+      case 'rejected': return 'bg-red-500';
+      default: return 'bg-gray-400';
     }
-  }
-  
-  const style = styles[status] || styles.pending
+  };
   
   return (
-    <span className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide border ${style.bg} ${style.text} ${style.border}`}>
-      {status.charAt(0).toUpperCase() + status.slice(1)}
-    </span>
+    <div className="flex items-center gap-2">
+      <div className={`w-2 h-2 rounded-full ${getStatusDotColor(status)}`}></div>
+      <span className="text-sm font-medium text-gray-700">
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </span>
+    </div>
   )
 }
 

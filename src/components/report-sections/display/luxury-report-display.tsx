@@ -89,13 +89,13 @@ const ImpactIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
   )
 }
 
-// Premium risk indicator with clean dot style
+// Premium risk indicator - matches impact indicator style exactly
 const RiskIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
   const getRiskDotColor = (risk: string) => {
     switch(risk?.toLowerCase()) {
-      case 'low': return 'bg-blue-500';
+      case 'low': return 'bg-green-500';
       case 'medium': return 'bg-yellow-500';
-      case 'high': return 'bg-red-500';
+      case 'high': return 'bg-orange-500';
       default: return 'bg-gray-400';
     }
   };
@@ -322,15 +322,20 @@ export function IssuesDisplay({ items }: { items: IssueItem[] }) {
 }
 
 export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
-  const formatAmount = (amount: string) => {
-    const num = parseFloat(amount)
+  // Match Control Estimate's formatCurrency exactly
+  const formatCurrency = (value: string | number | null | undefined): string => {
+    if (!value) return '$0';
+    const cleanValue = String(value).replace(/[^0-9.-]/g, '');
+    const number = parseFloat(cleanValue);
+    if (isNaN(number)) return '$0';
+    
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(num)
-  }
+    }).format(number);
+  };
   
   // Calculate total change
   const totalChange = items.reduce((sum, item) => {
@@ -354,7 +359,7 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
           </div>
           {totalChange !== 0 && (
             <div className={`text-lg font-medium ${totalChange > 0 ? 'text-red-600' : 'text-emerald-600'}`}>
-              Net: {formatAmount(Math.abs(totalChange).toString())}
+              Net: {formatCurrency(Math.abs(totalChange).toString())}
               {totalChange > 0 ? ' Over' : ' Under'}
             </div>
           )}
@@ -373,8 +378,8 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
                   <BudgetType type={item.type} amount={item.amount} />
                 </div>
                 <div className="text-right space-y-2">
-                  <p className="text-2xl font-light text-gray-900 tabular-nums">
-                    {formatAmount(item.amount)}
+                  <p className="text-lg font-semibold">
+                    {formatCurrency(item.amount)}
                   </p>
                   <StatusBadge status={item.status} />
                 </div>

@@ -285,7 +285,7 @@ export function WorkDisplay({ title, items }: { title: string; items: WorkItem[]
             >
               <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
               <div className="pl-6 pb-4">
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
                   <p className="text-gray-700 leading-relaxed flex-1">{item.description}</p>
                   <ImpactIndicator level={item.impact} />
                 </div>

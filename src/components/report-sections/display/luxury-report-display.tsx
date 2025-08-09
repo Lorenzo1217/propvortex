@@ -392,7 +392,7 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
           {items.map((item) => (
             <div 
               key={item.id} 
-              className="group hover:bg-gray-50/50 rounded-lg p-4 -m-4 transition-all duration-200"
+              className="group bg-gray-50 hover:bg-gray-100/50 rounded-lg p-4 transition-all duration-200"
             >
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1 space-y-2">

@@ -175,12 +175,6 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   <Eye className="w-4 h-4 mr-2" />
                   Client Portal
                 </Button>
-                <Button asChild>
-                  <Link href={`/projects/${id}/reports/new`}>
-                    <Plus className="w-4 h-4 mr-2" />
-                    New Report
-                  </Link>
-                </Button>
                 <ProjectSettingsDialog project={project} />
               </div>
             </div>

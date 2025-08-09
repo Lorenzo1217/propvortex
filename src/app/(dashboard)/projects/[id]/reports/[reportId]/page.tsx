@@ -22,7 +22,7 @@ import { db } from "@/lib/db";
 import { ensureUserInDatabase } from "@/lib/user-helpers";
 import { publishReport } from "@/lib/actions/reports";
 import { PhotoViewer } from "@/components/photo-viewer";
-import { LuxuryWeatherForecast } from "@/components/luxury-weather-forecast";
+import { WeatherForecast } from "@/components/weather-forecast";
 import { formatProjectAddress } from "@/lib/utils/address";
 import { 
   WorkDisplay, 
@@ -180,7 +180,7 @@ export default async function ReportViewPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Weather Forecast - NEW SECTION */}
+          {/* Weather Outlook - Keep simple like edit page */}
           {report.weatherData && (
             <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
               <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
@@ -193,13 +193,13 @@ export default async function ReportViewPage({ params }: PageProps) {
                       Weather Outlook
                     </CardTitle>
                     <CardDescription className="mt-1">
-                      7-day forecast for construction planning
+                      7-day forecast for construction planning • Weather conditions as of report creation
                     </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="px-8 py-6">
-                <LuxuryWeatherForecast 
+                <WeatherForecast 
                   weatherData={JSON.parse(report.weatherData as string)}
                   projectLocation={formatProjectAddress(report.project)}
                   isEditing={false}

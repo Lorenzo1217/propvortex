@@ -1,11 +1,9 @@
 // src/components/weather-forecast.tsx
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CloudRain, Wind, RefreshCw, Umbrella, AlertCircle, AlertTriangle } from "lucide-react"
+import { CloudRain, Wind, RefreshCw, Umbrella, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 
 interface WeatherDay {
@@ -45,14 +43,9 @@ export function WeatherForecast({ weatherData, projectLocation, onRefresh, isEdi
 
   if (!weatherData) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>🌤️ Weather Outlook</CardTitle>
-          <CardDescription>
-            Weather information not available for this week's report
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="text-center py-8 text-gray-500">
+        <p className="text-sm">Weather information not available for this week's report</p>
+      </div>
     )
   }
 
@@ -68,37 +61,31 @@ export function WeatherForecast({ weatherData, projectLocation, onRefresh, isEdi
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <span>🌤️ Weather Outlook</span>
-          {isEditing && onRefresh && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-            >
-              <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-              Update
-            </Button>
-          )}
-        </CardTitle>
-        <CardDescription>
-          7-day forecast for construction planning • Weather conditions as of report creation
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {/* Weather grid - centered and professional */}
-        <div className="flex justify-center">
-          <div className="grid grid-cols-7 gap-2 max-w-6xl">
-            {weatherData.days.map((day, index) => (
-              <DayForecast key={index} day={day} isFirst={index === 0} />
-            ))}
-          </div>
+    <div>
+      {/* Update button for edit mode */}
+      {isEditing && onRefresh && (
+        <div className="flex justify-end mb-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+          >
+            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            Update Weather
+          </Button>
         </div>
-      </CardContent>
-    </Card>
+      )}
+      
+      {/* Weather grid - centered and professional */}
+      <div className="flex justify-center">
+        <div className="grid grid-cols-7 gap-2 max-w-6xl">
+          {weatherData.days.map((day, index) => (
+            <DayForecast key={index} day={day} isFirst={index === 0} />
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 

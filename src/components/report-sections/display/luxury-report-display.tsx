@@ -89,30 +89,37 @@ const ImpactIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
   )
 }
 
-// Premium risk indicator - matches impact indicator style exactly
+// Premium risk indicator - EXACTLY matches impact indicator style
 const RiskIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
-  const getRiskDotColor = (risk: string) => {
-    switch(risk?.toLowerCase()) {
-      case 'low': return 'bg-green-500';
-      case 'medium': return 'bg-yellow-500';
-      case 'high': return 'bg-orange-500';
-      default: return 'bg-gray-400';
+  const indicators = {
+    high: { 
+      text: 'High Risk', 
+      className: 'text-blue-700',
+      bgClassName: 'bg-blue-50',
+      dotColor: 'bg-blue-600'
+    },
+    medium: { 
+      text: 'Medium Risk', 
+      className: 'text-gray-700',
+      bgClassName: 'bg-gray-50',
+      dotColor: 'bg-gray-600'
+    },
+    low: { 
+      text: 'Low Risk', 
+      className: 'text-gray-600',
+      bgClassName: 'bg-gray-50',
+      dotColor: 'bg-gray-400'
     }
-  };
-
-  const getRiskLabel = (risk: string) => {
-    switch(risk?.toLowerCase()) {
-      case 'low': return 'Low Risk';
-      case 'medium': return 'Medium Risk';
-      case 'high': return 'High Risk';
-      default: return risk || 'Unknown';
-    }
-  };
+  }
+  
+  const { text, className, bgClassName, dotColor } = indicators[level]
   
   return (
-    <div className="flex items-center gap-2">
-      <div className={`w-2 h-2 rounded-full ${getRiskDotColor(level)}`}></div>
-      <span className="text-sm font-medium text-gray-700">{getRiskLabel(level)}</span>
+    <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${bgClassName}`}>
+      <div className={`w-2 h-2 rounded-full ${dotColor}`}></div>
+      <span className={`text-xs font-medium tracking-wide ${className}`}>
+        {text}
+      </span>
     </div>
   )
 }

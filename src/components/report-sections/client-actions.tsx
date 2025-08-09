@@ -50,8 +50,8 @@ export function ClientActions({ name, items: initialItems = [] }: ClientActionsP
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
       <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-purple-50 rounded-lg">
-            <Users className="w-5 h-5 text-purple-600" />
+          <div className="p-2 bg-blue-50 rounded-lg">
+            <Users className="w-5 h-5 text-blue-600" />
           </div>
           <div>
             <CardTitle className="text-xl font-light tracking-wide text-gray-900">

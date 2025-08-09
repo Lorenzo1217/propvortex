@@ -185,8 +185,8 @@ export default async function ReportViewPage({ params }: PageProps) {
             <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
               <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-50 rounded-lg">
-                    <Cloud className="w-5 h-5 text-gray-600" />
+                  <div className="p-2 bg-blue-50 rounded-lg">
+                    <Cloud className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <CardTitle className="text-xl font-light tracking-wide text-gray-900">
@@ -214,8 +214,8 @@ export default async function ReportViewPage({ params }: PageProps) {
               <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-indigo-50 rounded-lg">
-                      <Camera className="w-5 h-5 text-indigo-600" />
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                      <Camera className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
                       <CardTitle className="text-xl font-light tracking-wide text-gray-900">
@@ -245,8 +245,8 @@ export default async function ReportViewPage({ params }: PageProps) {
               <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
                 <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-gray-100 rounded-lg">
-                      <FileText className="w-5 h-5 text-gray-700" />
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                      <FileText className="w-5 h-5 text-blue-600" />
                     </div>
                     <CardTitle className="text-xl font-light tracking-wide text-gray-900">
                       Executive Summary

@@ -26,7 +26,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
-import { ControlEstimateSafe } from '@/components/report-sections/control-estimate-safe' // SAFE VERSION
+import { ControlEstimate } from '@/components/report-sections/control-estimate'
 
 interface PageProps {
   params: Promise<{
@@ -247,8 +247,8 @@ export default async function NewReportPage({ params }: PageProps) {
               items={[]}
             />
 
-            {/* Control Estimate Update - SAFE VERSION */}
-            <ControlEstimateSafe formId="report-form" />
+            {/* Control Estimate Update */}
+            <ControlEstimate isEditing={true} />
 
             {/* Client Actions - UPDATED */}
             <ClientActions

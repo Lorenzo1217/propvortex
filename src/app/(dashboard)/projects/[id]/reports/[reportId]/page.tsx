@@ -29,7 +29,7 @@ import {
   BudgetDisplay, 
   ClientActionsDisplay 
 } from '@/components/report-sections/display/luxury-report-display'
-import { ControlEstimateSafe } from '@/components/report-sections/control-estimate-safe' // SAFE VERSION
+import { ControlEstimate } from '@/components/report-sections/control-estimate'
 
 interface PageProps {
   params: Promise<{
@@ -350,8 +350,23 @@ export default async function ReportViewPage({ params }: PageProps) {
               })()
             )}
 
-            {/* Control Estimate Update - SAFE VERSION */}
-            <ControlEstimateSafe />
+            {/* Control Estimate Update */}
+            {(report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
+              report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) && (
+              <ControlEstimate 
+                isEditing={false}
+                initialData={{
+                  professionalFees: report?.ceProfessionalFees || undefined,
+                  constructionCosts: report?.ceConstructionCosts || undefined,
+                  offsiteUtilities: report?.ceOffsiteUtilities || undefined,
+                  ffe: report?.ceFFE || undefined,
+                  insuranceFinancing: report?.ceInsuranceFinancing || undefined,
+                  total: report?.ceTotal || undefined,
+                  contingency: report?.ceContingency || undefined,
+                  contingencyUsed: report?.ceContingencyUsed || undefined
+                }}
+              />
+            )}
 
             {/* Client Actions - UPDATED with backward compatibility */}
             {report.clientActions && (

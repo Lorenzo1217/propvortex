@@ -25,7 +25,7 @@ import { WorkItems } from '@/components/report-sections/work-items'
 import { IssuesDelays } from '@/components/report-sections/issues-delays'
 import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
 import { ClientActions } from '@/components/report-sections/client-actions'
-import { ControlEstimateSafe } from '@/components/report-sections/control-estimate-safe' // SAFE VERSION
+import { ControlEstimate } from '@/components/report-sections/control-estimate'
 
 interface PageProps {
   params: Promise<{
@@ -245,8 +245,20 @@ export default async function EditReportPage({ params }: PageProps) {
               items={report.budget ? JSON.parse(report.budget as string) : []}
             />
 
-            {/* Control Estimate Update - SAFE VERSION */}
-            <ControlEstimateSafe formId="report-form" />
+            {/* Control Estimate Update */}
+            <ControlEstimate 
+              isEditing={true}
+              initialData={{
+                professionalFees: report?.ceProfessionalFees || '',
+                constructionCosts: report?.ceConstructionCosts || '',
+                offsiteUtilities: report?.ceOffsiteUtilities || '',
+                ffe: report?.ceFFE || '',
+                insuranceFinancing: report?.ceInsuranceFinancing || '',
+                total: report?.ceTotal || '',
+                contingency: report?.ceContingency || '',
+                contingencyUsed: report?.ceContingencyUsed || ''
+              }}
+            />
 
             {/* Client Actions - UPDATED */}
             <ClientActions

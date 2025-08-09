@@ -123,47 +123,36 @@ const RiskIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
   )
 }
 
-// Elegant budget type display
-const BudgetType = ({ type, amount }: { type: string; amount: string }) => {
+// Elegant budget type display - clean minimal style
+const BudgetType = ({ type }: { type: string }) => {
   const types: Record<string, { 
     text: string; 
     icon: React.ElementType; 
-    color: string;
-    bgColor: string;
   }> = {
     change_order: { 
       text: 'Change Order', 
-      icon: TrendingUp,
-      color: 'text-blue-700',
-      bgColor: 'bg-blue-50'
+      icon: TrendingUp
     },
     adjustment: { 
       text: 'Budget Adjustment', 
-      icon: Minus,
-      color: 'text-gray-700',
-      bgColor: 'bg-gray-50'
+      icon: Minus
     },
     savings: { 
       text: 'Cost Savings', 
-      icon: TrendingDown,
-      color: 'text-emerald-700',
-      bgColor: 'bg-emerald-50'
+      icon: TrendingDown
     },
     overrun: { 
       text: 'Cost Overrun', 
-      icon: TrendingUp,
-      color: 'text-red-700',
-      bgColor: 'bg-red-50'
+      icon: TrendingUp
     }
   }
   
-  const { text, icon: Icon, color, bgColor } = types[type] || types.adjustment
-  const isPositive = type === 'savings'
+  const { text, icon: Icon } = types[type] || types.adjustment
   
   return (
-    <div className={`flex items-center gap-2 px-3 py-1 rounded-lg ${bgColor}`}>
-      <Icon className={`w-4 h-4 ${color}`} />
-      <span className={`text-sm font-medium ${color}`}>{text}</span>
+    <div className="flex items-center gap-2 text-gray-600">
+      <Icon className="w-4 h-4" />
+      <span className="text-sm">{text}</span>
     </div>
   )
 }
@@ -408,7 +397,7 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1 space-y-2">
                   <p className="text-gray-700 leading-relaxed">{item.description}</p>
-                  <BudgetType type={item.type} amount={item.amount} />
+                  <BudgetType type={item.type} />
                 </div>
                 <div className="text-right space-y-2">
                   <p className="text-lg font-semibold">

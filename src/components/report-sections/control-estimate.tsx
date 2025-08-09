@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DollarSign } from "lucide-react";
+import { DollarSign, TrendingUp } from "lucide-react";
 
 interface ControlEstimateProps {
   initialData?: {
@@ -98,14 +98,18 @@ export function ControlEstimate({ initialData, isEditing = true }: ControlEstima
 
   // Edit mode - simple form inputs
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-900">
-          <DollarSign className="h-5 w-5 text-gray-700" />
-          Control Estimate Update
-        </CardTitle>
+    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-blue-50 rounded-lg">
+            <TrendingUp className="w-5 h-5 text-blue-600" />
+          </div>
+          <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+            Control Estimate Update
+          </CardTitle>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="px-8 py-6 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="ceProfessionalFees">Professional Fees</Label>

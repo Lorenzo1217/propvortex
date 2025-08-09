@@ -64,17 +64,23 @@ export function IssuesDelays({ name, items = [] }: IssuesDelaysProps) {
   }
 
   return (
-    <Card className="p-6">
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-semibold flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 text-gray-700" />
-            Issues & Delays
-          </h3>
-          <p className="text-sm text-gray-600 mt-1">
-            Track challenges, delays, and potential risks to the project timeline
-          </p>
+    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-amber-50 rounded-lg">
+            <AlertTriangle className="w-5 h-5 text-amber-600" />
+          </div>
+          <div>
+            <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+              Issues & Delays
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Track challenges, delays, and potential risks to the project timeline
+            </CardDescription>
+          </div>
         </div>
+      </CardHeader>
+      <CardContent className="px-8 py-6">
 
         <div className="space-y-4">
           {issues.map((issue, index) => (
@@ -140,7 +146,7 @@ export function IssuesDelays({ name, items = [] }: IssuesDelaysProps) {
           name={name}
           value={JSON.stringify(issues.filter(issue => issue.description.trim()))}
         />
-      </div>
+      </CardContent>
     </Card>
   )
 }

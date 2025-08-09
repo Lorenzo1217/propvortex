@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { X, Plus, Hammer } from 'lucide-react'
+import { X, Plus, CheckCircle, Calendar } from 'lucide-react'
 
 interface WorkItem {
   id: string
@@ -55,15 +55,21 @@ export function WorkItems({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-900">
-          <Hammer className="h-5 w-5 text-gray-700" />
-          {title}
-        </CardTitle>
-        <CardDescription>{description}</CardDescription>
+    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-green-50 rounded-lg">
+            {title.includes("Upcoming") ? <Calendar className="w-5 h-5 text-blue-600" /> : <CheckCircle className="w-5 h-5 text-green-600" />}
+          </div>
+          <div>
+            <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+              {title}
+            </CardTitle>
+            <CardDescription className="mt-1">{description}</CardDescription>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="px-8 py-6 space-y-4">
         <input type="hidden" name={name} value={JSON.stringify(items)} />
         
         {items.map((item, index) => (

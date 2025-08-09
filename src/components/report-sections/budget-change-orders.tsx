@@ -44,17 +44,23 @@ export function BudgetChangeOrders({ name, items: initialItems = [] }: BudgetCha
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-900">
-          <DollarSign className="h-5 w-5 text-gray-700" />
-          Budget & Change Orders
-        </CardTitle>
-        <CardDescription>
-          Track change orders, budget adjustments, and cost variations
-        </CardDescription>
+    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-green-50 rounded-lg">
+            <DollarSign className="w-5 h-5 text-green-600" />
+          </div>
+          <div>
+            <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+              Budget & Change Orders
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Track change orders, budget adjustments, and cost variations
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="px-8 py-6 space-y-4">
         <input type="hidden" name={name} value={JSON.stringify(items)} />
         
         {items.length === 0 ? (

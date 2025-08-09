@@ -11,7 +11,12 @@ import {
   FileText,
   Calendar,
   MapPin,
-  Edit
+  Edit,
+  CheckCircle,
+  AlertTriangle,
+  DollarSign,
+  TrendingUp,
+  Users
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -116,46 +121,48 @@ export default async function EditReportPage({ params }: PageProps) {
 
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-start justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  Edit Weekly Report
-                </h1>
-                <div className="flex items-center space-x-4 text-gray-600">
-                  <div className="flex items-center">
-                    <FileText className="w-4 h-4 mr-1" />
-                    Week {report.weekNumber}, {report.year}
-                  </div>
-                  <div className="flex items-center">
-                    <MapPin className="w-4 h-4 mr-1" />
-                    {report.project.name}
-                  </div>
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    Created {new Date(report.createdAt).toLocaleDateString()}
-                  </div>
-                </div>
-                <p className="text-gray-600 mt-2">
-                  Update your weekly progress report for {report.project.name}
-                </p>
+            <h1 className="text-3xl font-light text-gray-900 tracking-wide">
+              Edit Weekly Report
+            </h1>
+            <div className="flex items-center space-x-4 text-gray-600 mt-2">
+              <div className="flex items-center">
+                <FileText className="w-4 h-4 mr-1" />
+                Week {report.weekNumber}, {report.year}
+              </div>
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 mr-1" />
+                {report.project.name}
+              </div>
+              <div className="flex items-center">
+                <Calendar className="w-4 h-4 mr-1" />
+                Created {new Date(report.createdAt).toLocaleDateString()}
               </div>
             </div>
+            <p className="text-gray-600 mt-2">
+              Update your weekly progress report for {report.project.name}
+            </p>
           </div>
 
           {/* Report Form */}
           <form id="report-form" action={handleUpdateReport} className="space-y-8">
             {/* Report Title */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-gray-900">
-                  <Edit className="w-5 h-5 mr-2" />
-                  Report Details
-                </CardTitle>
-                <CardDescription>
-                  Update the basic information about this report
-                </CardDescription>
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-50 rounded-lg">
+                    <Edit className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                      Report Details
+                    </CardTitle>
+                    <CardDescription className="mt-1">
+                      Update the basic information about this report
+                    </CardDescription>
+                  </div>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="px-8 py-6 space-y-4">
                 <div>
                   <Label htmlFor="title">Report Title *</Label>
                   <Input
@@ -163,6 +170,7 @@ export default async function EditReportPage({ params }: PageProps) {
                     name="title"
                     defaultValue={report.title}
                     required
+                    className="mt-1"
                   />
                 </div>
               </CardContent>
@@ -191,20 +199,29 @@ export default async function EditReportPage({ params }: PageProps) {
             />
 
             {/* Executive Summary */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between text-gray-900">
-                  <span>Executive Summary</span>
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gray-100 rounded-lg">
+                      <FileText className="w-5 h-5 text-gray-700" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                        Executive Summary
+                      </CardTitle>
+                      <CardDescription className="mt-1">
+                        High-level overview of this week's progress and key highlights
+                      </CardDescription>
+                    </div>
+                  </div>
                   <Button type="button" variant="outline" size="sm" className="text-gray-600">
                     <Sparkles className="w-4 h-4 mr-2" />
                     AI Enhance
                   </Button>
-                </CardTitle>
-                <CardDescription>
-                  High-level overview of this week's progress and key highlights
-                </CardDescription>
+                </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-8 py-6">
                 <RichTextEditor
                   name="executiveSummary"
                   content={report.executiveSummary || ''}

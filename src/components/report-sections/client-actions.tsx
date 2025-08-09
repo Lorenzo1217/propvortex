@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { X, Plus, CheckCircle } from 'lucide-react'
+import { X, Plus, Users } from 'lucide-react'
 
 interface ClientActionItem {
   id: string
@@ -47,17 +47,23 @@ export function ClientActions({ name, items: initialItems = [] }: ClientActionsP
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-900">
-          <CheckCircle className="h-5 w-5 text-gray-700" />
-          Client Actions Required
-        </CardTitle>
-        <CardDescription>
-          Decisions, approvals, and information needed from the client
-        </CardDescription>
+    <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-purple-50 rounded-lg">
+            <Users className="w-5 h-5 text-purple-600" />
+          </div>
+          <div>
+            <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+              Client Actions Required
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Decisions, approvals, and information needed from the client
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="px-8 py-6 space-y-4">
         <input type="hidden" name={name} value={JSON.stringify(items)} />
         
         {items.length === 0 ? (

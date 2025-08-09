@@ -17,8 +17,7 @@ import {
   ChevronRight,
   Activity,
   Zap,
-  Shield,
-  Target
+  Shield
 } from 'lucide-react'
 
 interface WorkItem {
@@ -219,35 +218,35 @@ const StatusBadge = ({ status }: { status: string }) => {
   )
 }
 
-// Sophisticated priority indicator
+// Sophisticated priority indicator - EXACTLY matches impact indicator style
 const PriorityIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
-  const priorities = {
+  const indicators = {
     high: { 
       text: 'Urgent', 
-      color: 'text-red-700',
-      bg: 'bg-red-50',
-      icon: Zap
+      className: 'text-blue-700',
+      bgClassName: 'bg-blue-50',
+      dotColor: 'bg-blue-600'
     },
     medium: { 
       text: 'Standard', 
-      color: 'text-gray-700',
-      bg: 'bg-gray-50',
-      icon: Clock
+      className: 'text-gray-700',
+      bgClassName: 'bg-gray-50',
+      dotColor: 'bg-gray-600'
     },
     low: { 
       text: 'Low', 
-      color: 'text-gray-600',
-      bg: 'bg-gray-50',
-      icon: Target
+      className: 'text-gray-600',
+      bgClassName: 'bg-gray-50',
+      dotColor: 'bg-gray-400'
     }
   }
   
-  const { text, color, bg, icon: Icon } = priorities[level]
+  const { text, className, bgClassName, dotColor } = indicators[level]
   
   return (
-    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg ${bg}`}>
-      <Icon className={`w-3.5 h-3.5 ${color}`} />
-      <span className={`text-xs font-medium tracking-wide ${color}`}>
+    <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${bgClassName}`}>
+      <div className={`w-2 h-2 rounded-full ${dotColor}`}></div>
+      <span className={`text-xs font-medium tracking-wide ${className}`}>
         {text}
       </span>
     </div>
@@ -448,7 +447,7 @@ export function ClientActionsDisplay({ items }: { items: ClientActionItem[] }) {
           </div>
           {pendingCount > 0 && (
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
               <span className="text-sm font-medium text-gray-700">
                 {pendingCount} Pending
               </span>

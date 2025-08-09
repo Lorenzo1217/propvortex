@@ -96,9 +96,9 @@ export function WorkItems({
                       onChange={(e) => updateItem(item.id, 'impact', e.target.value)}
                       className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                     >
-                      <option value="high">🔴 Critical Impact</option>
-                      <option value="medium">🟡 Moderate Impact</option>
-                      <option value="low">🔵 Minor Impact</option>
+                      <option value="high">Critical Impact</option>
+                      <option value="medium">Moderate Impact</option>
+                      <option value="low">Minor Impact</option>
                     </select>
                   </div>
                 )}

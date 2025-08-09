@@ -113,12 +113,24 @@ export function BudgetChangeOrders({ name, items: initialItems = [] }: BudgetCha
                       <Label htmlFor={`${name}-amount-${item.id}`}>Amount ($)</Label>
                       <Input
                         id={`${name}-amount-${item.id}`}
-                        type="number"
-                        step="0.01"
+                        type="text"
                         value={item.amount}
                         onChange={(e) => updateItem(item.id, 'amount', e.target.value)}
-                        placeholder="0.00"
+                        placeholder="$0"
                         className="mt-1"
+                        onBlur={(e) => {
+                          const value = e.target.value.replace(/[^0-9.-]/g, '');
+                          const number = parseFloat(value);
+                          if (!isNaN(number)) {
+                            e.target.value = new Intl.NumberFormat('en-US', {
+                              style: 'currency',
+                              currency: 'USD',
+                              minimumFractionDigits: 0,
+                              maximumFractionDigits: 0,
+                            }).format(number);
+                            updateItem(item.id, 'amount', e.target.value);
+                          }
+                        }}
                       />
                     </div>
                     

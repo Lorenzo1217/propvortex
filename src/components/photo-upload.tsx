@@ -250,17 +250,23 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Camera className="w-5 h-5 mr-2" />
-            Project Photos
-          </CardTitle>
-          <CardDescription>
-            Upload construction photos and add descriptions. Photos are automatically optimized and stored securely.
-          </CardDescription>
+      <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-50 rounded-lg">
+              <Camera className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                Project Photos
+              </CardTitle>
+              <CardDescription className="mt-1">
+                Upload construction photos and add descriptions. Photos are automatically optimized and stored securely.
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="px-8 py-6 space-y-6">
           {/* Upload Area */}
           {!isUploading && (
             <div 
@@ -324,8 +330,9 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
           {photos.length > 0 && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-gray-900 text-lg">
-                  ✅ Uploaded Photos ({photos.length})
+                <h3 className="font-semibold text-gray-900 text-lg flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-600" />
+                  Uploaded Photos ({photos.length})
                 </h3>
                 <div className="flex items-center space-x-2">
                   <div className="flex items-center text-sm text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">

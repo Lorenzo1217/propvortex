@@ -96,9 +96,9 @@ export function ClientActions({ name, items: initialItems = [] }: ClientActionsP
                         onChange={(e) => updateItem(item.id, 'priority', e.target.value)}
                         className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                       >
-                        <option value="high">🔴 High Priority</option>
-                        <option value="medium">🟡 Medium Priority</option>
-                        <option value="low">🔵 Low Priority</option>
+                        <option value="high">Urgent</option>
+                        <option value="medium">Standard</option>
+                        <option value="low">Low</option>
                       </select>
                     </div>
                     

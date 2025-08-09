@@ -286,7 +286,7 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
                   </svg>
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  📸 Upload Construction Photos
+                  Upload Construction Photos
                 </h3>
                 <p className="text-sm text-gray-500 mb-6">
                   Drag and drop files here, or click to browse
@@ -390,7 +390,7 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
                       </div>
                       <div>
                         <Label htmlFor={`caption-${index}`} className="text-sm font-semibold text-gray-700 mb-2 block">
-                          📝 Photo Description
+                          Photo Description
                         </Label>
                         <div className="flex space-x-2">
                           <Input

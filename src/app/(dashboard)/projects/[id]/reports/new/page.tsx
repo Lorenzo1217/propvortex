@@ -1,37 +1,18 @@
 // src/app/(dashboard)/projects/[id]/reports/new/page.tsx
 import { currentUser, auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { 
-  ArrowLeft, 
-  Save, 
-  Send, 
-  Sparkles,
+  ArrowLeft,
   FileText,
   Calendar,
-  MapPin,
-  Cloud,
-  CheckCircle,
-  AlertTriangle,
-  DollarSign,
-  TrendingUp,
-  Users
+  MapPin
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { ensureUserInDatabase } from "@/lib/user-helpers";
 import { createReport } from "@/lib/actions/reports";
-import { PhotoUpload } from "@/components/photo-upload";
-import { RichTextEditor } from "@/components/rich-text-editor";
 import { formatProjectAddress } from "@/lib/utils/address";
-import { WorkItems } from '@/components/report-sections/work-items'
-import { IssuesDelays } from '@/components/report-sections/issues-delays'
-import { BudgetChangeOrders } from '@/components/report-sections/budget-change-orders'
-import { ClientActions } from '@/components/report-sections/client-actions'
-import { ControlEstimate } from '@/components/report-sections/control-estimate'
+import { ReportFormClient } from '@/components/report-form-client'
 
 interface PageProps {
   params: Promise<{
@@ -98,6 +79,49 @@ export default async function NewReportPage({ params }: PageProps) {
 
   const { weekNumber, year } = getCurrentWeekInfo();
 
+  // Server action to import data from previous report
+  async function importFromPreviousReport() {
+    'use server';
+    
+    // Get the most recent report for this project
+    const previousReport = await db.report.findFirst({
+      where: { projectId: id },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        photos: true,
+      }
+    });
+    
+    if (!previousReport) {
+      // No previous report found - redirect without params
+      redirect(`/projects/${id}/reports/new?nodata=true`);
+    }
+    
+    // Redirect to the same page with query params containing the data
+    const searchParams = new URLSearchParams();
+    searchParams.set('imported', 'true');
+    
+    // Add report data to URL params (for simpler fields)
+    if (previousReport.executiveSummary) searchParams.set('executiveSummary', String(previousReport.executiveSummary));
+    if (previousReport.workCompleted) searchParams.set('workCompleted', String(previousReport.workCompleted));
+    if (previousReport.upcomingWork) searchParams.set('upcomingWork', String(previousReport.upcomingWork));
+    if (previousReport.issues) searchParams.set('issues', String(previousReport.issues));
+    if (previousReport.budget) searchParams.set('budget', String(previousReport.budget));
+    if (previousReport.clientActions) searchParams.set('clientActions', String(previousReport.clientActions));
+    
+    // For Control Estimate fields
+    if (previousReport.ceProfessionalFees) searchParams.set('ceProfessionalFees', previousReport.ceProfessionalFees);
+    if (previousReport.ceConstructionCosts) searchParams.set('ceConstructionCosts', previousReport.ceConstructionCosts);
+    if (previousReport.ceOffsiteUtilities) searchParams.set('ceOffsiteUtilities', previousReport.ceOffsiteUtilities);
+    if (previousReport.ceFFE) searchParams.set('ceFFE', previousReport.ceFFE);
+    if (previousReport.ceInsuranceFinancing) searchParams.set('ceInsuranceFinancing', previousReport.ceInsuranceFinancing);
+    if (previousReport.ceTotal) searchParams.set('ceTotal', previousReport.ceTotal);
+    if (previousReport.ceContingency) searchParams.set('ceContingency', previousReport.ceContingency);
+    if (previousReport.ceContingencyUsed) searchParams.set('ceContingencyUsed', previousReport.ceContingencyUsed);
+    
+    redirect(`/projects/${id}/reports/new?${searchParams.toString()}`);
+  }
+
   // Create a server action with the project ID bound
   async function handleCreateReport(formData: FormData) {
     'use server'
@@ -145,157 +169,17 @@ export default async function NewReportPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* Report Form */}
-          <form id="report-form" action={handleCreateReport} className="space-y-8">
-            {/* Report Title */}
-            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-50 rounded-lg">
-                    <FileText className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                      Report Details
-                    </CardTitle>
-                    <CardDescription className="mt-1">
-                      Basic information about this week's report
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="px-8 py-6 space-y-4">
-                <div>
-                  <Label htmlFor="title">Report Title *</Label>
-                  <Input
-                    id="title"
-                    name="title"
-                    placeholder={`Week ${weekNumber} Progress Report - ${project.name}`}
-                    defaultValue={`Week ${weekNumber} Progress Report - ${project.name}`}
-                    required
-                    className="mt-1"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Weather Forecast Section - UPDATED */}
-            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-50 rounded-lg">
-                    <Cloud className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                      Weather Outlook
-                    </CardTitle>
-                    <CardDescription className="mt-1">
-                      Weather forecast will be automatically added when the report is created
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="px-8 py-6">
-                <div className="text-center py-8 text-gray-500">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-                    <Cloud className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <p className="text-sm">Weather data will be fetched based on project location: <strong className="text-gray-700">{formatProjectAddress(project)}</strong></p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Photo Upload Section */}
-            <PhotoUpload projectId={id} />
-
-            {/* Executive Summary */}
-            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <FileText className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Executive Summary
-                      </CardTitle>
-                      <CardDescription className="mt-1">
-                        High-level overview of this week's progress and key highlights
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <Button type="button" variant="outline" size="sm" className="text-gray-600">
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    AI Enhance
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent className="px-8 py-6">
-                <RichTextEditor
-                  name="executiveSummary"
-                  placeholder="Provide a brief overview of the week's progress, major milestones achieved, and overall project status..."
-                />
-              </CardContent>
-            </Card>
-
-            {/* Work Completed - UPDATED */}
-            <WorkItems
-              name="workCompleted"
-              title="Work Completed This Week"
-              description="List specific tasks, installations, and milestones completed"
-              placeholder="e.g., Completed foundation pour for garage addition"
-              showImpact={true}
-            />
-
-            {/* Upcoming Work - UPDATED */}
-            <WorkItems
-              name="upcomingWork"
-              title="Upcoming Work"
-              description="Planned activities and milestones for next week"
-              placeholder="e.g., Begin framing of second floor"
-              showImpact={true}
-            />
-
-            {/* Issues & Delays - UPDATED */}
-            <IssuesDelays
-              name="issues"
-              items={[]}
-            />
-
-            {/* Budget & Change Orders - UPDATED */}
-            <BudgetChangeOrders
-              name="budget"
-              items={[]}
-            />
-
-            {/* Control Estimate Update */}
-            <ControlEstimate isEditing={true} />
-
-            {/* Client Actions - UPDATED */}
-            <ClientActions
-              name="clientActions"
-              items={[]}
-            />
-
-            {/* Action Buttons */}
-            <div className="flex justify-end space-x-4 pt-6">
-              <Button type="button" variant="outline" asChild>
-                <Link href={`/projects/${id}`}>
-                  Cancel
-                </Link>
-              </Button>
-              <Button type="submit" variant="outline">
-                <Save className="w-4 h-4 mr-2" />
-                Save as Draft
-              </Button>
-              <Button type="submit" className="bg-gray-900 hover:bg-gray-800 text-white">
-                <Send className="w-4 h-4 mr-2" />
-                Create Report
-              </Button>
-            </div>
-          </form>
+          {/* Client Component Form */}
+          <ReportFormClient
+            projectId={id}
+            projectName={project.name}
+            weekNumber={weekNumber}
+            year={year}
+            reportCount={project._count.reports + 1}
+            projectAddress={formatProjectAddress(project)}
+            handleCreateReport={handleCreateReport}
+            importFromPreviousReport={importFromPreviousReport}
+          />
         </div>
     </div>
   );

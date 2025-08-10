@@ -72,17 +72,18 @@ export async function createReport(formData: FormData, projectId: string) {
 
   // Calculate week number and year
   const now = new Date()
-  const year = now.getFullYear()
-  const weekNumber = getWeekNumber(now)
+  let year = now.getFullYear()
+  let weekNumber = getWeekNumber(now)
 
   // Validate required fields
-  if (!title) {
+  let titleToUse = formData.get('title') as string
+  if (!titleToUse) {
     throw new Error('Report title is required')
   }
 
   try {
-    // Check if a report already exists for this week
-    const existingReport = await db.report.findFirst({
+    // Check if a report already exists for this week and auto-advance if needed
+    let existingReport = await db.report.findFirst({
       where: {
         projectId,
         weekNumber,
@@ -90,8 +91,31 @@ export async function createReport(formData: FormData, projectId: string) {
       }
     })
 
-    if (existingReport) {
-      throw new Error(`A report already exists for week ${weekNumber} of ${year}`)
+    // If report exists for current week, advance to next available week
+    let weeksAdvanced = 0
+    while (existingReport && weeksAdvanced < 52) {  // Prevent infinite loop
+      weekNumber++
+      if (weekNumber > 52) {
+        weekNumber = 1
+        year++
+      }
+      
+      existingReport = await db.report.findFirst({
+        where: {
+          projectId,
+          weekNumber,
+          year
+        }
+      })
+      
+      weeksAdvanced++
+    }
+
+    // Update the title to reflect the correct week if we advanced
+    if (weeksAdvanced > 0) {
+      // Replace week number in title if it exists
+      titleToUse = titleToUse.replace(/Week \d+/, `Week ${weekNumber}`)
+      console.log(`📅 Auto-advanced ${weeksAdvanced} week(s) to Week ${weekNumber}, ${year}`)
     }
 
     // Fetch weather data using project location
@@ -111,7 +135,7 @@ export async function createReport(formData: FormData, projectId: string) {
     // Create the report with JSON data stringified
     const report = await db.report.create({
       data: {
-        title,
+        title: titleToUse,
         executiveSummary: executiveSummary || null,
         workCompleted: workCompleted ? JSON.stringify(workCompleted) : undefined,
         upcomingWork: upcomingWork ? JSON.stringify(upcomingWork) : undefined,
@@ -148,8 +172,14 @@ export async function createReport(formData: FormData, projectId: string) {
     revalidatePath(`/projects/${projectId}`)
     
     return { success: true, report }
-  } catch (error) {
+  } catch (error: any) {
     console.error('❌ Error creating report:', error)
+    
+    // More user-friendly error message for unique constraint violations
+    if (error.code === 'P2002') {
+      throw new Error('A report already exists for this week. The system should have auto-advanced, but an error occurred. Please try again.')
+    }
+    
     throw error
   }
 }

@@ -5,7 +5,8 @@ import {
   ArrowLeft,
   FileText,
   Calendar,
-  MapPin
+  MapPin,
+  Info
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -77,7 +78,53 @@ export default async function NewReportPage({ params }: PageProps) {
     notFound();
   }
 
-  const { weekNumber, year } = getCurrentWeekInfo();
+  const { weekNumber: currentWeek, year: currentYear } = getCurrentWeekInfo();
+
+  // Check if current week already has a report
+  const existingCurrentWeekReport = await db.report.findFirst({
+    where: {
+      projectId: id,
+      weekNumber: currentWeek,
+      year: currentYear
+    }
+  });
+
+  // Calculate the next available week
+  let targetWeek = currentWeek;
+  let targetYear = currentYear;
+  let isAutoAdvanced = false;
+
+  if (existingCurrentWeekReport) {
+    // Find the next available week
+    let checkWeek = currentWeek;
+    let checkYear = currentYear;
+    let weeksChecked = 0;
+    
+    do {
+      checkWeek++;
+      if (checkWeek > 52) {
+        checkWeek = 1;
+        checkYear++;
+      }
+      
+      const existingReport = await db.report.findFirst({
+        where: {
+          projectId: id,
+          weekNumber: checkWeek,
+          year: checkYear
+        }
+      });
+      
+      if (!existingReport) {
+        targetWeek = checkWeek;
+        targetYear = checkYear;
+        isAutoAdvanced = true;
+        break;
+      }
+      
+      weeksChecked++;
+    } while (weeksChecked < 52); // Prevent infinite loop
+  }
 
   // Server action to import data from previous report
   async function importFromPreviousReport() {
@@ -153,7 +200,7 @@ export default async function NewReportPage({ params }: PageProps) {
             <div className="flex items-center space-x-4 text-gray-600 mt-2">
               <div className="flex items-center">
                 <FileText className="w-4 h-4 mr-1" />
-                Week {weekNumber}, {year}
+                Week {targetWeek}, {targetYear}
               </div>
               <div className="flex items-center">
                 <MapPin className="w-4 h-4 mr-1" />
@@ -169,12 +216,24 @@ export default async function NewReportPage({ params }: PageProps) {
             </p>
           </div>
 
+          {/* Auto-advance notice */}
+          {isAutoAdvanced && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="flex items-center gap-2 text-blue-700">
+                <Info className="w-5 h-5" />
+                <span>
+                  A report already exists for Week {currentWeek}. Creating report for Week {targetWeek}, {targetYear}.
+                </span>
+              </div>
+            </div>
+          )}
+
           {/* Client Component Form */}
           <ReportFormClient
             projectId={id}
             projectName={project.name}
-            weekNumber={weekNumber}
-            year={year}
+            weekNumber={targetWeek}
+            year={targetYear}
             reportCount={project._count.reports + 1}
             projectAddress={formatProjectAddress(project)}
             handleCreateReport={handleCreateReport}

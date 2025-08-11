@@ -2,7 +2,6 @@ import { currentUser, auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
@@ -144,7 +143,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <div className="mb-8">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <h1 className="text-3xl font-light text-gray-900 tracking-wide mb-2">
                   {project.name}
                 </h1>
                 <div className="flex items-center space-x-4 text-gray-600">
@@ -161,9 +160,20 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     <Calendar className="w-4 h-4 mr-1" />
                     Started {project.startDate ? new Date(project.startDate).toLocaleDateString() : 'Not specified'}
                   </div>
-                  <Badge variant={project.status === 'ACTIVE' ? 'default' : 'secondary'}>
-                    {project.status}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${
+                      project.status === 'ACTIVE' ? 'bg-green-500' : 
+                      project.status === 'COMPLETED' ? 'bg-gray-400' :
+                      project.status === 'ON_HOLD' ? 'bg-yellow-500' :
+                      'bg-red-500'
+                    }`}></div>
+                    <span className="text-sm font-medium text-gray-700">
+                      {project.status === 'ACTIVE' ? 'Active' : 
+                       project.status === 'COMPLETED' ? 'Completed' :
+                       project.status === 'ON_HOLD' ? 'On Hold' :
+                       'Cancelled'}
+                    </span>
+                  </div>
                 </div>
                 {project.description && (
                   <p className="text-gray-600 mt-2">{project.description}</p>
@@ -171,7 +181,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
               
               <div className="flex items-center space-x-3">
-                <Button variant="outline">
+                <Button variant="outline" className="text-gray-600">
                   <Eye className="w-4 h-4 mr-2" />
                   Client Portal
                 </Button>
@@ -182,53 +192,80 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Reports</CardTitle>
-                <FileText className="h-4 w-4 text-muted-foreground" />
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-light text-gray-600">Total Reports</CardTitle>
+                  <div className="p-1.5 bg-blue-50 rounded-lg">
+                    <FileText className="w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{project._count.reports}</div>
-                <p className="text-xs text-muted-foreground">
+                <div className="text-2xl font-semibold">{project._count.reports}</div>
+                <p className="text-xs text-gray-500 mt-1">
                   {hasReports ? `Latest: ${latestReport?.createdAt ? new Date(latestReport.createdAt).toLocaleDateString() : 'N/A'}` : 'No reports yet'}
                 </p>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Photos</CardTitle>
-                <Camera className="h-4 w-4 text-muted-foreground" />
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-light text-gray-600">Photos</CardTitle>
+                  <div className="p-1.5 bg-blue-50 rounded-lg">
+                    <Camera className="w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{publishedPhotos.length}</div>
-                <p className="text-xs text-muted-foreground">From published reports</p>
+                <div className="text-2xl font-semibold">{publishedPhotos.length}</div>
+                <p className="text-xs text-gray-500 mt-1">From published reports</p>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Clients</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-light text-gray-600">Clients</CardTitle>
+                  <div className="p-1.5 bg-blue-50 rounded-lg">
+                    <Users className="w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{project.clients.length}</div>
-                <p className="text-xs text-muted-foreground">
+                <div className="text-2xl font-semibold">{project.clients.length}</div>
+                <p className="text-xs text-gray-500 mt-1">
                   {project.clients.length === 0 ? 'None invited yet' : 'With portal access'}
                 </p>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Status</CardTitle>
-                <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-light text-gray-600">Status</CardTitle>
+                  <div className="p-1.5 bg-blue-50 rounded-lg">
+                    <BarChart3 className="w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">
-                  {project.status === 'ACTIVE' ? '🏗️' : project.status === 'COMPLETED' ? '✅' : '⏸️'}
+                <div className="flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-full ${
+                    project.status === 'ACTIVE' ? 'bg-green-500' : 
+                    project.status === 'COMPLETED' ? 'bg-gray-400' :
+                    project.status === 'ON_HOLD' ? 'bg-yellow-500' :
+                    'bg-red-500'
+                  }`}></div>
+                  <span className="text-xl font-semibold text-gray-800">
+                    {project.status === 'ACTIVE' ? 'Active' : 
+                     project.status === 'COMPLETED' ? 'Completed' :
+                     project.status === 'ON_HOLD' ? 'On Hold' :
+                     'Cancelled'}
+                  </span>
                 </div>
-                <p className="text-xs text-muted-foreground">{project.status.toLowerCase()}</p>
+                <p className="text-xs text-gray-500 mt-1">{project.status.toLowerCase()}</p>
               </CardContent>
             </Card>
           </div>
@@ -243,29 +280,36 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsList>
 
             <TabsContent value="reports" className="space-y-6">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <div>
-                    <CardTitle>Weekly Reports</CardTitle>
-                    <CardDescription>
-                      {hasReports 
-                        ? `${project._count.reports} report${project._count.reports > 1 ? 's' : ''} created for this project`
-                        : 'Create your first weekly report for this project'
-                      }
-                    </CardDescription>
+              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <FileText className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-light text-gray-900">Weekly Reports</CardTitle>
+                        <CardDescription className="mt-1">
+                          {hasReports 
+                            ? `${project._count.reports} report${project._count.reports > 1 ? 's' : ''} created for this project`
+                            : 'Create your first weekly report for this project'
+                          }
+                        </CardDescription>
+                      </div>
+                    </div>
+                    <Button className="bg-gray-900 hover:bg-gray-800" asChild>
+                      <Link href={`/projects/${id}/reports/new`}>
+                        <Plus className="w-4 h-4 mr-2" />
+                        Create Report
+                      </Link>
+                    </Button>
                   </div>
-                  <Button asChild>
-                    <Link href={`/projects/${id}/reports/new`}>
-                      <Plus className="w-4 h-4 mr-2" />
-                      Create Report
-                    </Link>
-                  </Button>
                 </CardHeader>
                 <CardContent>
                   {hasReports ? (
                     <div className="space-y-4">
                       {project.reports.map((report) => (
-                        <div key={report.id} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                        <div key={report.id} className="bg-gray-50 rounded-lg p-4 mb-3">
                           <div className="flex items-start justify-between">
                             <div>
                               <h3 className="font-medium">{report.title}</h3>
@@ -278,10 +322,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                               </p>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Badge variant={report.isPublished ? 'default' : 'secondary'}>
-                                {report.isPublished ? 'Published' : 'Draft'}
-                              </Badge>
-                              <Button variant="outline" size="sm" asChild>
+                              {report.isPublished ? (
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                  <span className="text-sm font-medium text-gray-700">Published</span>
+                                </div>
+                              ) : (
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                                  <span className="text-sm font-medium text-gray-700">Draft</span>
+                                </div>
+                              )}
+                              <Button variant="outline" size="sm" className="text-gray-600" asChild>
                                 <Link href={`/projects/${id}/reports/${report.id}`}>
                                   <Eye className="w-3 h-3 mr-1" />
                                   View
@@ -295,7 +347,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                                   </Button>
                                 </form>
                               ) : (
-                                <Button size="sm" variant="outline">
+                                <Button size="sm" variant="outline" className="text-gray-600">
                                   <Send className="w-3 h-3 mr-1" />
                                   Resend
                                 </Button>
@@ -327,12 +379,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
 
             <TabsContent value="photos" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Project Photos</CardTitle>
-                  <CardDescription>
-                    Photos from published reports ({publishedPhotos.length} photos)
-                  </CardDescription>
+              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                      <Camera className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl font-light text-gray-900">Project Photos</CardTitle>
+                      <CardDescription className="mt-1">
+                        Photos from published reports ({publishedPhotos.length} photos)
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   {publishedPhotos.length > 0 ? (
@@ -359,39 +418,48 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
 
             <TabsContent value="clients" className="space-y-6">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <div>
-                    <CardTitle>Project Clients</CardTitle>
-                    <CardDescription>
-                      Manage who has access to this project's portal
-                    </CardDescription>
+              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <Users className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-light text-gray-900">Project Clients</CardTitle>
+                        <CardDescription className="mt-1">
+                          Manage who has access to this project's portal
+                        </CardDescription>
+                      </div>
+                    </div>
+                    <Button className="bg-gray-900 hover:bg-gray-800">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Invite Client
+                    </Button>
                   </div>
-                  <Button>
-                    <Plus className="w-4 h-4 mr-2" />
-                    Invite Client
-                  </Button>
                 </CardHeader>
                 <CardContent>
                   {project.clients.length > 0 ? (
                     <div className="space-y-4">
                       {project.clients.map((client) => (
-                        <div key={client.id} className="flex items-center justify-between p-4 border rounded-lg">
-                          <div>
-                            <h3 className="font-medium">{client.firstName} {client.lastName}</h3>
-                            <p className="text-sm text-gray-600">{client.email}</p>
-                            <p className="text-xs text-gray-500">
-                              Invited {new Date(client.invitedAt).toLocaleDateString()}
-                              {client.lastViewedAt && ` • Last viewed ${new Date(client.lastViewedAt).toLocaleDateString()}`}
-                            </p>
-                          </div>
-                          <div className="flex space-x-2">
-                            <Button variant="outline" size="sm">
-                              Portal Link
-                            </Button>
-                            <Button variant="outline" size="sm">
-                              Remove
-                            </Button>
+                        <div key={client.id} className="bg-gray-50 rounded-lg p-4 mb-3">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h3 className="font-medium">{client.firstName} {client.lastName}</h3>
+                              <p className="text-sm text-gray-600">{client.email}</p>
+                              <p className="text-xs text-gray-500">
+                                Invited {new Date(client.invitedAt).toLocaleDateString()}
+                                {client.lastViewedAt && ` • Last viewed ${new Date(client.lastViewedAt).toLocaleDateString()}`}
+                              </p>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button variant="outline" size="sm" className="text-gray-600">
+                                Portal Link
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-gray-600">
+                                Remove
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -416,12 +484,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Project Settings</CardTitle>
-                  <CardDescription>
-                    Manage project details and configuration
-                  </CardDescription>
+              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                      <Settings className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl font-light text-gray-900">Project Settings</CardTitle>
+                      <CardDescription className="mt-1">
+                        Manage project details and configuration
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -445,10 +520,21 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     
                     <div>
                       <h3 className="text-lg font-semibold mb-2">Current Project Status</h3>
-                      <div className="flex items-center space-x-2">
-                        <Badge variant={project.status === 'ACTIVE' ? 'default' : 'secondary'}>
-                          {project.status}
-                        </Badge>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-2 h-2 rounded-full ${
+                            project.status === 'ACTIVE' ? 'bg-green-500' : 
+                            project.status === 'COMPLETED' ? 'bg-gray-400' :
+                            project.status === 'ON_HOLD' ? 'bg-yellow-500' :
+                            'bg-red-500'
+                          }`}></div>
+                          <span className="text-sm font-medium text-gray-700">
+                            {project.status === 'ACTIVE' ? 'Active' : 
+                             project.status === 'COMPLETED' ? 'Completed' :
+                             project.status === 'ON_HOLD' ? 'On Hold' :
+                             'Cancelled'}
+                          </span>
+                        </div>
                         <span className="text-sm text-gray-600">
                           {project.status === 'ACTIVE' && 'Project is currently under construction'}
                           {project.status === 'COMPLETED' && 'Project has been completed'}

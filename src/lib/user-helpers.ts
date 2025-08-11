@@ -87,11 +87,29 @@ export async function getUserProjects(userId: string) {
             photos: true,
           }
         }
-      },
-      orderBy: { updatedAt: 'desc' }
+      }
     })
 
-    return projects
+    // Custom sorting: Status priority (ACTIVE first) then by start date (newest first)
+    const sortedProjects = projects.sort((a, b) => {
+      // Status priority: ACTIVE > ON_HOLD > COMPLETED > CANCELLED
+      const statusOrder: Record<string, number> = { 
+        'ACTIVE': 0, 
+        'ON_HOLD': 1, 
+        'COMPLETED': 2, 
+        'CANCELLED': 3 
+      };
+      const statusCompare = (statusOrder[a.status] || 999) - (statusOrder[b.status] || 999);
+      
+      if (statusCompare !== 0) return statusCompare;
+      
+      // If same status, sort by start date (newest first)
+      const aDate = a.startDate ? new Date(a.startDate).getTime() : 0;
+      const bDate = b.startDate ? new Date(b.startDate).getTime() : 0;
+      return bDate - aDate;
+    });
+
+    return sortedProjects
   } catch (error) {
     console.error('❌ Error fetching user projects:', error)
     return []

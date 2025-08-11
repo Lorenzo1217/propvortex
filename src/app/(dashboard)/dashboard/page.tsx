@@ -113,8 +113,8 @@ export default async function DashboardPage() {
         </div>
 
         {/* Projects Section */}
-        <div className="bg-gray-50 rounded-lg p-6 mb-8">
-          <div className="bg-white rounded-lg p-6 shadow-sm">
+        <div className="mb-8">
+          <div className="bg-white rounded-lg p-6 shadow-lg shadow-gray-100/50">
             {/* Section header */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
@@ -151,8 +151,8 @@ export default async function DashboardPage() {
               // Projects Grid
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project) => (
-                  <Card key={project.id} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader>
+                  <Card key={project.id} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                    <CardHeader className="flex-none">
                       <div className="flex justify-between items-start">
                         <div>
                           <CardTitle className="text-lg font-medium">{project.name}</CardTitle>
@@ -177,21 +177,23 @@ export default async function DashboardPage() {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                        <div className="flex items-center gap-1">
-                          <BarChart3 className="w-4 h-4" />
-                          <span>{project._count.reports} reports</span>
+                    <CardContent className="flex-1 flex flex-col">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                          <div className="flex items-center gap-1">
+                            <BarChart3 className="w-4 h-4" />
+                            <span>{project._count.reports} reports</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            <span>{project.clients.length} clients</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{project.clients.length} clients</span>
+                        <div className="text-xs text-gray-500">
+                          Updated {new Date(project.updatedAt).toLocaleDateString()}
                         </div>
                       </div>
-                      <div className="text-xs text-gray-500 mb-3">
-                        Updated {new Date(project.updatedAt).toLocaleDateString()}
-                      </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mt-4">
                         <Button variant="outline" size="sm" className="flex-1 text-gray-600" asChild>
                           <Link href={`/projects/${project.id}`}>
                             View Project

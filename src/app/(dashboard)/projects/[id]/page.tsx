@@ -280,8 +280,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsList>
 
             <TabsContent value="reports" className="space-y-6">
-              <div className="bg-gray-50 rounded-lg p-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="mb-8">
+                <div className="bg-white rounded-lg p-6 shadow-lg shadow-gray-100/50">
                   {/* Section header */}
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
@@ -380,7 +380,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
 
             <TabsContent value="photos" className="space-y-6">
-              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <div className="mb-8">
+                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
                 <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
@@ -416,10 +417,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   )}
                 </CardContent>
               </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="clients" className="space-y-6">
-              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <div className="mb-8">
+                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
                 <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -482,10 +485,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   )}
                 </CardContent>
               </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+              <div className="mb-8">
+                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
                 <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
@@ -559,6 +564,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   </div>
                 </CardContent>
               </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </div>

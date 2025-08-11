@@ -16,7 +16,7 @@ export default function DashboardLayout({
             <div className="flex items-center space-x-4">
               <Link href="/dashboard" className="flex items-center space-x-2">
                 <img 
-                  src="/logo1.svg" 
+                  src="/logo2.svg" 
                   alt="PropVortex" 
                   className="h-8 w-8"
                 />

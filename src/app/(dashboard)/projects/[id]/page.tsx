@@ -281,9 +281,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
             <TabsContent value="reports" className="space-y-6">
               <div className="bg-gray-50 rounded-lg p-6">
-                {/* White card for the header */}
-                <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
-                  <div className="flex items-center justify-between">
+                <div className="bg-white rounded-lg p-6 shadow-sm">
+                  {/* Section header */}
+                  <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-blue-50 rounded-lg">
                         <FileText className="w-5 h-5 text-blue-600" />
@@ -305,11 +305,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       </Link>
                     </Button>
                   </div>
-                </div>
+                  
+                  {/* Reports list - INSIDE the white card */}
                   {hasReports ? (
                     <div className="space-y-3">
                       {project.reports.map((report) => (
-                        <div key={report.id} className="bg-white rounded-lg p-4 shadow-sm">
+                        <div key={report.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
                           <div className="flex items-start justify-between">
                             <div>
                               <h3 className="font-medium">{report.title}</h3>
@@ -358,7 +359,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       ))}
                     </div>
                   ) : (
-                    <div className="bg-white rounded-lg p-12 text-center shadow-sm">
+                    <div className="text-center py-12">
                       <FileText className="mx-auto h-12 w-12 text-gray-400" />
                       <h3 className="mt-2 text-sm font-semibold text-gray-900">No reports yet</h3>
                       <p className="mt-1 text-sm text-gray-500">
@@ -374,6 +375,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       </div>
                     </div>
                   )}
+                </div>
               </div>
             </TabsContent>
 

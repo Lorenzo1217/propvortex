@@ -114,9 +114,9 @@ export default async function DashboardPage() {
 
         {/* Projects Section */}
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
-          {/* White card for the header */}
-          <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
-            <div className="flex items-center justify-between">
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            {/* Section header */}
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-blue-50 rounded-lg">
                   <Home className="w-5 h-5 text-blue-600" />
@@ -133,10 +133,11 @@ export default async function DashboardPage() {
               </div>
               <NewProjectDialog />
             </div>
-          </div>
+            
+            {/* Project cards grid - INSIDE the white card */}
             {projects.length === 0 ? (
               // Empty State
-              <div className="bg-white rounded-lg p-12 text-center shadow-sm">
+              <div className="text-center py-12">
                 <Home className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-semibold text-gray-900">No projects yet</h3>
                 <p className="mt-1 text-sm text-gray-500">
@@ -148,9 +149,9 @@ export default async function DashboardPage() {
               </div>
             ) : (
               // Projects Grid
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project) => (
-                  <Card key={project.id} className="bg-white border-0 shadow-lg shadow-gray-100/50 hover:shadow-xl transition-shadow">
+                  <Card key={project.id} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
@@ -205,6 +206,7 @@ export default async function DashboardPage() {
                 ))}
               </div>
             )}
+          </div>
         </div>
       </div>
     </div>

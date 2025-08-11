@@ -91,7 +91,8 @@ export async function getUserProjects(userId: string) {
     })
 
     // Custom sorting: Status priority (ACTIVE first) then by start date (newest first)
-    const sortedProjects = projects.sort((a, b) => {
+    // Use [...projects] to create a copy and avoid mutating the original array
+    const sortedProjects = [...projects].sort((a, b) => {
       // Status priority: ACTIVE > ON_HOLD > COMPLETED > CANCELLED
       const statusOrder: Record<string, number> = { 
         'ACTIVE': 0, 
@@ -99,7 +100,7 @@ export async function getUserProjects(userId: string) {
         'COMPLETED': 2, 
         'CANCELLED': 3 
       };
-      const statusCompare = (statusOrder[a.status] || 999) - (statusOrder[b.status] || 999);
+      const statusCompare = (statusOrder[a.status] ?? 999) - (statusOrder[b.status] ?? 999);
       
       if (statusCompare !== 0) return statusCompare;
       

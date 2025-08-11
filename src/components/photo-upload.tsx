@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Camera, X, FileImage, CloudUpload, Upload, RefreshCw, ZoomIn, Check, Loader2 } from 'lucide-react'
+import { Camera, X, FileImage, CloudUpload, Upload, ZoomIn, Check, Loader2 } from 'lucide-react'
 import { savePhotoToProject, updatePhotoCaption, deletePhoto } from '@/lib/actions/photos'
 import Image from 'next/image'
 import { PhotoLightbox } from '@/components/photo-lightbox'
@@ -43,6 +43,7 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0)
   const [savingCaptions, setSavingCaptions] = useState<Set<string>>(new Set())
+  const [savedPhotos, setSavedPhotos] = useState<Set<string>>(new Set())
   const [deletingPhotos, setDeletingPhotos] = useState<Set<string>>(new Set())
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -196,6 +197,18 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
       if (!result.success) {
         throw new Error('Failed to save caption')
       }
+      
+      // Add to saved set
+      setSavedPhotos(prev => new Set(prev).add(photo.id!))
+      
+      // Remove "saved" indicator after 2 seconds
+      setTimeout(() => {
+        setSavedPhotos(prev => {
+          const newSet = new Set(prev)
+          newSet.delete(photo.id!)
+          return newSet
+        })
+      }, 2000)
     } catch (error) {
       console.error('Error saving caption:', error)
       alert('Failed to save caption. Please try again.')
@@ -407,13 +420,19 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
                           />
                           {photo.id && (
                             <Button
+                              type="button"
                               size="sm"
                               onClick={() => saveCaptionToDatabase(index)}
                               disabled={savingCaptions.has(photo.id)}
-                              className="bg-green-600 hover:bg-green-700 text-white px-3"
+                              className={savedPhotos.has(photo.id) ? 'bg-green-600 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700 text-white px-3'}
                             >
                               {savingCaptions.has(photo.id) ? (
-                                <RefreshCw className="w-4 h-4 animate-spin" />
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                              ) : savedPhotos.has(photo.id) ? (
+                                <>
+                                  <Check className="w-4 h-4" />
+                                  <span className="ml-1">Saved!</span>
+                                </>
                               ) : (
                                 <Check className="w-4 h-4" />
                               )}

@@ -25,10 +25,7 @@ import { ControlEstimate } from '@/components/report-sections/control-estimate'
 
 interface ReportFormClientProps {
   projectId: string;
-  projectName: string;
   weekNumber: number;
-  year: number;
-  reportCount: number;
   projectAddress: string;
   handleCreateReport: (formData: FormData) => Promise<void>;
   importFromPreviousReport: () => Promise<void>;
@@ -36,10 +33,7 @@ interface ReportFormClientProps {
 
 export function ReportFormClient({
   projectId,
-  projectName,
   weekNumber,
-  year,
-  reportCount,
   projectAddress,
   handleCreateReport,
   importFromPreviousReport
@@ -108,8 +102,8 @@ export function ReportFormClient({
               <Input
                 id="title"
                 name="title"
-                placeholder={`Week ${weekNumber} Progress Report - ${projectName}`}
-                defaultValue={`Week ${weekNumber} Progress Report - ${projectName}`}
+                placeholder={`Week ${weekNumber} Progress Report`}
+                defaultValue={`Week ${weekNumber} Progress Report`}
                 required
                 className="mt-1"
               />

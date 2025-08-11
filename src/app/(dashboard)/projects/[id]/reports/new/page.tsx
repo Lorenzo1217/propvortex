@@ -231,10 +231,7 @@ export default async function NewReportPage({ params }: PageProps) {
           {/* Client Component Form */}
           <ReportFormClient
             projectId={id}
-            projectName={project.name}
             weekNumber={targetWeek}
-            year={targetYear}
-            reportCount={project._count.reports + 1}
             projectAddress={formatProjectAddress(project)}
             handleCreateReport={handleCreateReport}
             importFromPreviousReport={importFromPreviousReport}

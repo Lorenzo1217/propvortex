@@ -280,21 +280,22 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsList>
 
             <TabsContent value="reports" className="space-y-6">
-              <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
-                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+              <div className="bg-gray-50 rounded-lg p-6">
+                {/* White card for the header */}
+                <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-blue-50 rounded-lg">
                         <FileText className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-light text-gray-900">Weekly Reports</CardTitle>
-                        <CardDescription className="mt-1">
+                        <h2 className="text-xl font-medium text-gray-900">Weekly Reports</h2>
+                        <p className="text-sm text-gray-500">
                           {hasReports 
                             ? `${project._count.reports} report${project._count.reports > 1 ? 's' : ''} created for this project`
                             : 'Create your first weekly report for this project'
                           }
-                        </CardDescription>
+                        </p>
                       </div>
                     </div>
                     <Button className="bg-gray-900 hover:bg-gray-800" asChild>
@@ -304,12 +305,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       </Link>
                     </Button>
                   </div>
-                </CardHeader>
-                <CardContent>
+                </div>
                   {hasReports ? (
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {project.reports.map((report) => (
-                        <div key={report.id} className="bg-gray-50 rounded-lg p-4 mb-3">
+                        <div key={report.id} className="bg-white rounded-lg p-4 shadow-sm">
                           <div className="flex items-start justify-between">
                             <div>
                               <h3 className="font-medium">{report.title}</h3>
@@ -358,7 +358,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-center py-12">
+                    <div className="bg-white rounded-lg p-12 text-center shadow-sm">
                       <FileText className="mx-auto h-12 w-12 text-gray-400" />
                       <h3 className="mt-2 text-sm font-semibold text-gray-900">No reports yet</h3>
                       <p className="mt-1 text-sm text-gray-500">
@@ -374,8 +374,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       </div>
                     </div>
                   )}
-                </CardContent>
-              </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="photos" className="space-y-6">

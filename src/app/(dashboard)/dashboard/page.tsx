@@ -114,26 +114,29 @@ export default async function DashboardPage() {
 
         {/* Projects Section */}
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm">
-                <Home className="w-5 h-5 text-blue-600" />
+          {/* White card for the header */}
+          <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <Home className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-medium text-gray-900">Your Projects</h2>
+                  <p className="text-sm text-gray-500">
+                    {projects.length === 0 
+                      ? "Create your first project to start sending beautiful reports"
+                      : `Manage your ${projects.length} project${projects.length > 1 ? 's' : ''}`
+                    }
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-xl font-medium text-gray-900">Your Projects</h2>
-                <p className="text-sm text-gray-500">
-                  {projects.length === 0 
-                    ? "Create your first project to start sending beautiful reports"
-                    : `Manage your ${projects.length} project${projects.length > 1 ? 's' : ''}`
-                  }
-                </p>
-              </div>
+              <NewProjectDialog />
             </div>
-            <NewProjectDialog />
           </div>
             {projects.length === 0 ? (
               // Empty State
-              <div className="text-center py-12">
+              <div className="bg-white rounded-lg p-12 text-center shadow-sm">
                 <Home className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-semibold text-gray-900">No projects yet</h3>
                 <p className="mt-1 text-sm text-gray-500">

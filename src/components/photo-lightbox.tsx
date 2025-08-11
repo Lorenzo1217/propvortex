@@ -3,8 +3,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { X, ChevronLeft, ChevronRight, Download, Calendar, Camera, Loader2 } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Download, Calendar, Loader2, FileText, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
 
 interface Photo {
@@ -193,36 +192,29 @@ export function PhotoLightbox({ photos, initialIndex, isOpen, onClose }: PhotoLi
       style={{ height: '100vh', width: '100vw' }}
       onClick={handleBackgroundClick}
     >
-      {/* Modern Header with Glass Effect */}
-      <div className="absolute top-0 left-0 right-0 z-10 p-6">
-        <div className="flex items-center justify-between text-white bg-black/20 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/10">
-          <div className="flex items-center space-x-6">
-            <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 py-1">
+      {/* Professional Header with Glass Effect */}
+      <div className="absolute top-0 left-0 right-0 z-10 p-6 bg-gradient-to-b from-black/50 to-transparent">
+        <div className="flex items-center justify-between">
+          <div className="text-white">
+            <div className="text-sm font-light text-white/60 mb-1">
               {currentIndex + 1} of {photos.length}
-            </Badge>
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-br from-emerald-500/30 to-blue-500/30 rounded-lg backdrop-blur-sm border border-white/10">
-                <Camera className="w-4 h-4 text-emerald-300" />
-              </div>
-              <div>
-                <p className="font-medium text-sm truncate max-w-xs">
-                  {currentPhoto.originalName}
-                </p>
-                <div className="flex items-center space-x-1 text-xs text-white/70">
-                  <Calendar className="w-3 h-3" />
-                  <span>{new Date(currentPhoto.uploadedAt).toLocaleDateString()}</span>
-                </div>
-              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <ImageIcon className="w-5 h-5 text-white/80" />
+              <span className="text-lg font-light">{currentPhoto.originalName}</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/60 text-xs mt-1">
+              <Calendar className="w-3 h-3" />
+              <span>{new Date(currentPhoto.uploadedAt).toLocaleDateString()}</span>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
+          <div className="flex gap-2">
             <Button 
-              variant="outline" 
-              size="sm" 
               onClick={handleDownload}
               disabled={isDownloading}
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm disabled:opacity-50"
+              className="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
+              size="sm"
             >
               {isDownloading ? (
                 <>
@@ -237,12 +229,11 @@ export function PhotoLightbox({ photos, initialIndex, isOpen, onClose }: PhotoLi
               )}
             </Button>
             <Button 
-              variant="outline" 
-              size="sm" 
               onClick={handleClose}
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
+              className="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
+              size="icon"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </Button>
           </div>
         </div>
@@ -305,7 +296,7 @@ export function PhotoLightbox({ photos, initialIndex, isOpen, onClose }: PhotoLi
                 className="object-contain"
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
-                onError={(e) => {
+                onError={() => {
                   console.error('Image failed to load:', currentPhoto.url)
                 }}
               />
@@ -320,11 +311,12 @@ export function PhotoLightbox({ photos, initialIndex, isOpen, onClose }: PhotoLi
                 {/* Description content with proper scrolling */}
                 <div className="bg-gradient-to-t from-black/95 via-black/90 to-black/80">
                   <div className="p-6 lg:p-8 max-w-5xl mx-auto">
-                    {/* Clean header */}
-                    <div className="mb-4 pb-3 border-b border-white/10">
-                      <h3 className="text-lg lg:text-xl font-semibold text-white tracking-wide">
-                        📝 Description
-                      </h3>
+                    {/* Clean header with icon */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FileText className="w-5 h-5 text-white/80" />
+                        <h3 className="text-lg font-light text-white">Description</h3>
+                      </div>
                     </div>
                     
                     {/* Scrollable description text */}
@@ -334,7 +326,7 @@ export function PhotoLightbox({ photos, initialIndex, isOpen, onClose }: PhotoLi
                         maxHeight: '200px'
                       }}
                     >
-                      <p className="text-white/95 text-sm lg:text-base leading-relaxed whitespace-pre-wrap font-light tracking-wide pr-4">
+                      <p className="text-white/70 text-sm leading-relaxed whitespace-pre-wrap pr-4">
                         {currentPhoto.caption}
                       </p>
                     </div>

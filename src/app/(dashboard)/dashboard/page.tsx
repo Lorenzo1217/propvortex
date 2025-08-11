@@ -113,27 +113,24 @@ export default async function DashboardPage() {
         </div>
 
         {/* Projects Section */}
-        <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
-          <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <Home className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-light text-gray-900">Your Projects</CardTitle>
-                  <CardDescription className="mt-1">
-                    {projects.length === 0 
-                      ? "Create your first project to start sending beautiful reports to your clients."
-                      : `Manage your ${projects.length} project${projects.length > 1 ? 's' : ''}`
-                    }
-                  </CardDescription>
-                </div>
+        <div className="bg-gray-50 rounded-lg p-6 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-white rounded-lg shadow-sm">
+                <Home className="w-5 h-5 text-blue-600" />
               </div>
-              <NewProjectDialog />
+              <div>
+                <h2 className="text-xl font-medium text-gray-900">Your Projects</h2>
+                <p className="text-sm text-gray-500">
+                  {projects.length === 0 
+                    ? "Create your first project to start sending beautiful reports"
+                    : `Manage your ${projects.length} project${projects.length > 1 ? 's' : ''}`
+                  }
+                </p>
+              </div>
             </div>
-          </CardHeader>
-          <CardContent>
+            <NewProjectDialog />
+          </div>
             {projects.length === 0 ? (
               // Empty State
               <div className="text-center py-12">
@@ -205,8 +202,7 @@ export default async function DashboardPage() {
                 ))}
               </div>
             )}
-          </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   );

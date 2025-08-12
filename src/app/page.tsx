@@ -103,9 +103,9 @@ export default function LandingPage() {
                     <Image 
                       src="/logo3.svg" 
                       alt="Morrison Builders" 
-                      width={40} 
-                      height={40} 
-                      className="h-10 w-auto"
+                      width={50} 
+                      height={50} 
+                      className="h-12 w-auto"
                     />
                     <div className="ml-3">
                       <p className="text-sm font-semibold">Morrison Builders</p>
@@ -361,9 +361,9 @@ export default function LandingPage() {
                   <Image 
                     src="/logo3.svg" 
                     alt="Morrison Builders" 
-                    width={60} 
-                    height={60} 
-                    className="h-12 w-auto"
+                    width={80} 
+                    height={80} 
+                    className="h-16 w-auto"
                   />
                 </div>
                 <h3 className="font-semibold text-gray-900">Morrison Builders</h3>

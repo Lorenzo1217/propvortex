@@ -88,7 +88,7 @@ export default function LandingPage() {
             </Button>
           </div>
           <p className="text-sm text-gray-500 mt-4">
-            30-day free trial • No credit card required • Setup in under 5 minutes
+            30-day free trial • Setup in under 5 minutes
           </p>
           <p className="text-sm text-gray-500 mt-2">
             Limited to 25 firms this quarter • Exclusively for luxury builders
@@ -612,7 +612,7 @@ export default function LandingPage() {
               Simple, Transparent Pricing
             </h2>
             <p className="text-xl text-gray-600">
-              Start with a 30-day free trial. No credit card required.
+              Start with a 30-day free trial.
             </p>
           </div>
 
@@ -730,7 +730,7 @@ export default function LandingPage() {
             </Link>
           </Button>
           <p className="text-sm mt-4 opacity-75">
-            No credit card required • Setup in 5 minutes • Cancel anytime
+            30-day free trial • Cancel anytime
           </p>
         </div>
       </section>

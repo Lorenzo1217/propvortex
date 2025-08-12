@@ -18,7 +18,8 @@ import {
   Mail, 
   FileUp, 
   Brain,
-  Check
+  Check,
+  Calendar
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -179,24 +180,63 @@ export default function LandingPage() {
           </h2>
 
           {/* Before/After Visual */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-red-50 rounded-lg p-6 border border-red-200">
-              <h4 className="font-semibold text-red-900 mb-4">Before PropVortex</h4>
-              <ul className="space-y-2 text-sm text-red-700">
-                <li>• Scattered email threads</li>
-                <li>• Inconsistent Word docs</li>
-                <li>• WhatsApp photo dumps</li>
-                <li>• No central client hub</li>
-              </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="text-red-500 mr-2">✗</span>
+                Before PropVortex
+              </h4>
+              <Card className="border border-red-200 bg-red-50/30">
+                <CardContent className="pt-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">Scattered email threads</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">Inconsistent Word docs</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">WhatsApp photo dumps</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">No central client hub</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
-            <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-              <h4 className="font-semibold text-green-900 mb-4">After PropVortex</h4>
-              <ul className="space-y-2 text-sm text-green-700">
-                <li>• Branded client portal</li>
-                <li>• Professional PDF reports</li>
-                <li>• Organized photo galleries</li>
-                <li>• One source of truth</li>
-              </ul>
+
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                After PropVortex
+              </h4>
+              <Card className="border border-green-200 bg-green-50/30">
+                <CardContent className="pt-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">Branded client portal</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">Professional PDF reports</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">Organized photo galleries</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">One source of truth</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
@@ -230,31 +270,29 @@ export default function LandingPage() {
               </div>
             </div>
             <div>
-              <Card className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
-                  <CardTitle className="text-2xl">The PropVortex Solution</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-gray-700">Institutional-quality reports in under 10 minutes</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-gray-700">AI transforms Procore data into polished updates</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-gray-700">Branded client portals that match luxury expectations</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-gray-700">Automated email digests keep clients informed</span>
-                    </div>
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                  The PropVortex Solution
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
+                    <p className="text-gray-700">Institutional-quality reports in under 10 minutes</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="flex items-start">
+                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
+                    <p className="text-gray-700">AI transforms Procore data into polished updates</p>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
+                    <p className="text-gray-700">Branded client portals that match luxury expectations</p>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
+                    <p className="text-gray-700">Automated email digests keep clients informed</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -277,16 +315,18 @@ export default function LandingPage() {
           
           <Card className="bg-white border border-gray-200 rounded-lg shadow-xl max-w-5xl mx-auto">
             <CardHeader className="border-b bg-gray-50">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-center mb-4">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">MB</span>
+                  <div className="w-12 h-12 bg-blue-600 rounded flex items-center justify-center text-white font-bold">
+                    MB
                   </div>
-                  <div>
-                    <CardTitle className="text-xl">Morrison Builders</CardTitle>
-                    <CardDescription>The Henderson Estate • Highland Park</CardDescription>
+                  <div className="text-center">
+                    <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
+                    <p className="text-sm text-gray-500">The Henderson Estate • Highland Park</p>
                   </div>
                 </div>
+              </div>
+              <div className="text-center">
                 <Badge className="bg-blue-50 text-blue-700">Week 24 Report</Badge>
               </div>
             </CardHeader>
@@ -349,29 +389,42 @@ export default function LandingPage() {
               <Separator className="my-6" />
 
               {/* Client Actions Required */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold">Client Actions Required</h3>
-                  <Badge className="bg-yellow-50 text-yellow-700">2 Pending</Badge>
+              <div className="px-8 py-6 border-b border-gray-200">
+                <div className="flex items-center mb-4">
+                  <AlertTriangle className="w-5 h-5 text-amber-500 mr-2" />
+                  <h4 className="font-semibold text-gray-900">Client Actions Required</h4>
+                  <Badge className="ml-2 bg-amber-100 text-amber-800">2 Pending</Badge>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                    <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900">Master Suite Chandelier Selection</p>
-                      <p className="text-sm text-gray-600 mt-1">
-                        Please select from the three options provided by the lighting designer. 
-                        Decision needed by Friday to maintain schedule.
-                      </p>
+                  <div className="border border-amber-200 bg-amber-50/50 rounded-lg p-4">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="flex items-center mb-1">
+                          <AlertTriangle className="w-4 h-4 text-amber-500 mr-2" />
+                          <p className="font-medium text-gray-900">Master Suite Chandelier Selection</p>
+                        </div>
+                        <p className="text-sm text-gray-600 ml-6">Please select from the three options provided by the lighting designer. Decision needed by Friday to maintain schedule.</p>
+                      </div>
+                      <div className="ml-4 text-right">
+                        <Badge variant="outline" className="text-amber-600 border-amber-600">Urgent</Badge>
+                        <p className="text-xs text-gray-500 mt-1">Due Aug 8</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                    <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900">Pool House Cabinet Hardware</p>
-                      <p className="text-sm text-gray-600 mt-1">
-                        Approval needed for $18,500 upgrade to Waterworks fixtures as discussed.
-                      </p>
+                  
+                  <div className="border border-gray-200 bg-white rounded-lg p-4">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="flex items-center mb-1">
+                          <AlertTriangle className="w-4 h-4 text-yellow-500 mr-2" />
+                          <p className="font-medium text-gray-900">Pool House Cabinet Hardware</p>
+                        </div>
+                        <p className="text-sm text-gray-600 ml-6">Approval needed for $18,500 upgrade to Waterworks fixtures as discussed.</p>
+                      </div>
+                      <div className="ml-4 text-right">
+                        <Badge variant="outline">Standard</Badge>
+                        <p className="text-xs text-gray-500 mt-1">Due Aug 11</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -380,35 +433,46 @@ export default function LandingPage() {
               <Separator className="my-6" />
 
               {/* Upcoming Work */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-4">Upcoming Work (Next 2 Weeks)</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Complete master bath marble installation</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Install custom wine cellar cooling system</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Begin exterior limestone detail work</span>
+              <div className="px-8 py-6 border-b border-gray-200">
+                <div className="flex items-center mb-4">
+                  <Calendar className="w-5 h-5 text-gray-400 mr-2" />
+                  <h4 className="font-semibold text-gray-900">Upcoming Work (Next 2 Weeks)</h4>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Complete master bath marble installation</p>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Complete theater room acoustic panels</span>
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Install custom wine cellar cooling system</p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Install smart home integration system</span>
+                  </div>
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Begin exterior limestone detail work</p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-gray-700">Pool house millwork installation</span>
+                  </div>
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Complete theater room acoustic panels</p>
+                    </div>
+                  </div>
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Install smart home integration system</p>
+                    </div>
+                  </div>
+                  <div className="border border-gray-200 bg-white rounded-lg p-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-gray-700">Pool house millwork installation</p>
                     </div>
                   </div>
                 </div>

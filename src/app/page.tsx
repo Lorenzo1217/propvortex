@@ -100,11 +100,11 @@ export default function LandingPage() {
       <section className="py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-center text-sm text-gray-500 mb-4">Trusted by luxury builders in Dallas-Fort Worth</p>
-          <div className="flex justify-center items-center space-x-12 opacity-60">
-            <span className="text-lg font-semibold text-gray-700">BHDS Group</span>
-            <span className="text-lg font-semibold text-gray-700">Morrison Builders</span>
-            <span className="text-lg font-semibold text-gray-700">Highland Park Estates</span>
-            <span className="text-lg font-semibold text-gray-700">Vanguard Custom Homes</span>
+          <div className="grid grid-cols-2 md:flex md:justify-center md:items-center gap-6 md:space-x-12 md:gap-0 opacity-60">
+            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">BHDS Group</span>
+            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Morrison Builders</span>
+            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Highland Park Estates</span>
+            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Vanguard Custom Homes</span>
           </div>
         </div>
       </section>

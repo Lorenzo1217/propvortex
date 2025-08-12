@@ -64,7 +64,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-white py-20">
+      <section className="bg-gradient-to-b from-white to-gray-50 py-20 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -82,13 +82,15 @@ export default function LandingPage() {
                 Built for luxury design-build firms delivering $2M–$10M+ custom homes.
               </p>
               <div className="flex gap-4 flex-col sm:flex-row mb-4">
-                <Link href="/signup?plan=professional">
-                  <Button size="lg" className="bg-black text-white hover:bg-gray-800 w-full sm:w-auto">
+                <Link href="/signup?plan=professional" className="w-full sm:w-auto">
+                  <Button size="lg" className="bg-black text-white hover:bg-gray-800 w-full">
                     Request Your Free Trial
                   </Button>
                 </Link>
-                <Link href="#demo">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">View Live Demo</Button>
+                <Link href="#demo" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full">
+                    View Live Demo
+                  </Button>
                 </Link>
               </div>
               <p className="text-sm text-gray-500">30-day free trial • Setup in under 5 minutes • Limited spots available</p>
@@ -153,7 +155,7 @@ export default function LandingPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-4">
               <Image src="/logo2.svg" alt="PropVortex" width={100} height={100} className="h-20 w-auto opacity-80" />
             </div>
             <Badge className="mb-4" variant="default">
@@ -771,22 +773,22 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-light mb-4">
+      <section className="py-20 bg-gradient-to-r from-gray-900 to-black text-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to Match the Quality Your Luxury Clients Expect?
           </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join exclusive luxury builders who are saving hours every week while delivering 
-            institutional-quality reports to their discerning clients.
+          <p className="text-xl text-gray-300 mb-8">
+            Join exclusive luxury builders who are saving hours every week while
+            delivering institutional-quality reports to their discerning clients.
           </p>
-          <Button size="lg" variant="secondary" className="px-8" asChild>
-            <Link href="/signup?plan=professional">
+          <Link href="/signup?plan=professional">
+            <Button size="lg" className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6">
               Request Your 30-Day Free Trial
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-          <p className="text-sm mt-4 opacity-75">
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          <p className="text-sm text-gray-400 mt-6">
             30-day free trial • Cancel anytime
           </p>
         </div>

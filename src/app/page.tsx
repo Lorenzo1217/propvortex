@@ -69,18 +69,15 @@ export default function LandingPage() {
           <Badge variant="secondary" className="mb-4">
             Trusted by luxury home builders ($10M+ estates)
           </Badge>
-          <h1 className="text-4xl lg:text-6xl font-light text-gray-900 tracking-wide mb-2">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
             Your Builds Speak for Themselves.
-            <br />
-            <span className="font-normal">Your Reports Should Too.</span>
+            <span className="block text-blue-600 mt-2">Your Reports Should Too.</span>
           </h1>
-          <p className="text-lg text-gray-600 mb-2">
-            Built for luxury design-build firms and owner's reps delivering $2M–$10M+ custom homes
+          <p className="text-xl text-gray-600 mb-4 max-w-2xl mx-auto">
+            Transform technical updates into stunning client reports in under 10 minutes.
           </p>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Create institutional-quality construction reports in under 10 minutes. 
-            PropVortex transforms your technical updates into stunning client experiences 
-            that match the caliber of your luxury projects.
+          <p className="text-lg text-gray-600 mb-8">
+            Built for luxury design-build firms delivering $2M–$10M+ custom homes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8" asChild>
@@ -113,17 +110,20 @@ export default function LandingPage() {
       </section>
 
       {/* AI Automation Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-blue-50 text-blue-700 hover:bg-blue-100">
+            <div className="flex justify-center mb-6">
+              <Image src="/logo2.svg" alt="PropVortex" width={60} height={60} className="h-12 w-auto opacity-80" />
+            </div>
+            <Badge className="mb-4" variant="default">
               <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered Automation
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 tracking-wide mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               From Chaos to Client-Ready in Minutes
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our AI suite transforms scattered updates into polished reports automatically
             </p>
           </div>
@@ -141,16 +141,16 @@ export default function LandingPage() {
               </CardHeader>
             </Card>
 
-            <Card className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <Card className="border border-gray-200">
               <CardHeader>
-                <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center mb-3">
-                  <FileUp className="w-5 h-5 text-purple-600" />
-                </div>
-                <CardTitle className="text-lg">Paste from Procore</CardTitle>
-                <CardDescription>
-                  Copy data from Procore and we'll format it perfectly for your reports
-                </CardDescription>
+                <FileUp className="w-8 h-8 text-blue-600 mb-2" />
+                <CardTitle className="text-lg">Paste from Any Tool</CardTitle>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-600">
+                  Copy data from Excel, Procore, BuilderTrend, or MS Project. AI reformats it perfectly for your reports.
+                </p>
+              </CardContent>
             </Card>
 
             <Card className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -173,7 +173,7 @@ export default function LandingPage() {
       </section>
 
       {/* Problem/Solution Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-light text-gray-900 tracking-wide mb-8 text-center">
             Stop Losing Hours to Outdated Reporting
@@ -299,7 +299,7 @@ export default function LandingPage() {
       </section>
 
       {/* Live Demo Section */}
-      <section id="demo" className="py-20 bg-white">
+      <section id="demo" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-green-50 text-green-700 hover:bg-green-100">
@@ -314,22 +314,20 @@ export default function LandingPage() {
           </div>
           
           <Card className="bg-white border border-gray-200 rounded-lg shadow-xl max-w-5xl mx-auto">
-            <CardHeader className="border-b bg-gray-50">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex items-center space-x-4">
+            <div className="bg-white px-8 py-6 border-b border-gray-200">
+              <div className="text-center mb-4">
+                <div className="flex justify-center mb-3">
                   <div className="w-12 h-12 bg-blue-600 rounded flex items-center justify-center text-white font-bold">
                     MB
                   </div>
-                  <div className="text-center">
-                    <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
-                    <p className="text-sm text-gray-500">The Henderson Estate • Highland Park</p>
-                  </div>
                 </div>
+                <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
+                <p className="text-sm text-gray-500">The Henderson Estate • Highland Park</p>
               </div>
-              <div className="text-center">
-                <Badge className="bg-blue-50 text-blue-700">Week 24 Report</Badge>
+              <div className="flex justify-center">
+                <Badge className="bg-green-100 text-green-800">Week 24 Report</Badge>
               </div>
-            </CardHeader>
+            </div>
             <CardContent className="p-6">
               {/* Executive Summary */}
               <div className="mb-8">
@@ -519,7 +517,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gray-50">
+      <section id="features" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-light text-gray-900 tracking-wide mb-4">
@@ -607,7 +605,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-white">
+      <section id="pricing" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-light text-gray-900 tracking-wide mb-4">

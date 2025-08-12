@@ -103,7 +103,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:flex md:justify-center md:items-center gap-6 md:space-x-12 md:gap-0 opacity-60">
             <span className="text-center text-sm md:text-lg font-semibold text-gray-700">BHDS Group</span>
             <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Morrison Builders</span>
-            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Highland Park Estates</span>
+            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Luxury Estates Group</span>
             <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Vanguard Custom Homes</span>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
-              <Image src="/logo2.svg" alt="PropVortex" width={60} height={60} className="h-12 w-auto opacity-80" />
+              <Image src="/logo2.svg" alt="PropVortex" width={100} height={100} className="h-20 w-auto opacity-80" />
             </div>
             <Badge className="mb-4" variant="default">
               <Sparkles className="w-3 h-3 mr-1" />
@@ -309,7 +309,7 @@ export default function LandingPage() {
               This is What Your Clients Will See
             </h2>
             <p className="text-xl text-gray-600">
-              A premium, branded experience worthy of Highland Park estates
+              A premium, branded experience worthy of multi-million dollar estates
             </p>
           </div>
           
@@ -322,7 +322,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
-                <p className="text-sm text-gray-500">The Henderson Estate • Highland Park</p>
+                <p className="text-sm text-gray-500">The Henderson Estate • Multi-Million Dollar Custom Home</p>
               </div>
               <div className="flex justify-center">
                 <Badge className="bg-green-100 text-green-800">Week 24 Report</Badge>

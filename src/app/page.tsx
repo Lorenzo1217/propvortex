@@ -16,7 +16,6 @@ import {
   ArrowRight, 
   Sparkles, 
   Mail, 
-  MessageSquare, 
   FileUp, 
   Brain,
   Check
@@ -56,7 +55,7 @@ export default function LandingPage() {
                 <Link href="/login">Sign In</Link>
               </Button>
               <Button className="bg-black text-white hover:bg-gray-800" asChild>
-                <Link href="/signup?plan=professional">Start Free Trial</Link>
+                <Link href="/signup?plan=professional">Request Your Free Trial</Link>
               </Button>
             </div>
           </div>
@@ -69,19 +68,22 @@ export default function LandingPage() {
           <Badge variant="secondary" className="mb-4">
             Trusted by luxury home builders ($10M+ estates)
           </Badge>
-          <h1 className="text-4xl lg:text-6xl font-light text-gray-900 tracking-wide mb-6">
+          <h1 className="text-4xl lg:text-6xl font-light text-gray-900 tracking-wide mb-2">
             Your Builds Speak for Themselves.
             <br />
             <span className="font-normal">Your Reports Should Too.</span>
           </h1>
+          <p className="text-lg text-gray-600 mb-2">
+            Built for luxury design-build firms and owner's reps delivering $2M–$10M+ custom homes
+          </p>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Create Goldman Sachs-quality construction reports in under 10 minutes. 
+            Create institutional-quality construction reports in under 10 minutes. 
             PropVortex transforms your technical updates into stunning client experiences 
             that match the caliber of your luxury projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8" asChild>
-              <Link href="/signup?plan=professional">Start Your Free Trial</Link>
+              <Link href="/signup?plan=professional">Request Your Free Trial</Link>
             </Button>
             <Button variant="outline" size="lg" className="px-8" asChild>
               <Link href="#demo">View Live Demo</Link>
@@ -90,6 +92,22 @@ export default function LandingPage() {
           <p className="text-sm text-gray-500 mt-4">
             30-day free trial • No credit card required • Setup in under 5 minutes
           </p>
+          <p className="text-sm text-gray-500 mt-2">
+            Limited to 25 firms this quarter • Exclusively for luxury builders
+          </p>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-8 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-center text-sm text-gray-500 mb-4">Trusted by luxury builders in Dallas-Fort Worth</p>
+          <div className="flex justify-center items-center space-x-12 opacity-60">
+            <span className="text-lg font-semibold text-gray-700">BHDS Group</span>
+            <span className="text-lg font-semibold text-gray-700">Morrison Builders</span>
+            <span className="text-lg font-semibold text-gray-700">Highland Park Estates</span>
+            <span className="text-lg font-semibold text-gray-700">Vanguard Custom Homes</span>
+          </div>
         </div>
       </section>
 
@@ -110,7 +128,7 @@ export default function LandingPage() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <Card className="border border-gray-200 md:col-span-2 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <CardHeader>
                 <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
                   <Mail className="w-5 h-5 text-blue-600" />
@@ -145,18 +163,10 @@ export default function LandingPage() {
                 </CardDescription>
               </CardHeader>
             </Card>
+          </div>
 
-            <Card className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-3">
-                  <MessageSquare className="w-5 h-5 text-orange-600" />
-                </div>
-                <CardTitle className="text-lg">Auto Notifications</CardTitle>
-                <CardDescription>
-                  Clients get notified when reports are ready with key highlights
-                </CardDescription>
-              </CardHeader>
-            </Card>
+          <div className="mt-6 text-center">
+            <p className="text-gray-500 text-sm">Email → AI → Report</p>
           </div>
         </div>
       </section>
@@ -164,11 +174,34 @@ export default function LandingPage() {
       {/* Problem/Solution Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-light text-gray-900 tracking-wide mb-8 text-center">
+            Stop Losing Hours to Outdated Reporting
+          </h2>
+
+          {/* Before/After Visual */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div className="bg-red-50 rounded-lg p-6 border border-red-200">
+              <h4 className="font-semibold text-red-900 mb-4">Before PropVortex</h4>
+              <ul className="space-y-2 text-sm text-red-700">
+                <li>• Scattered email threads</li>
+                <li>• Inconsistent Word docs</li>
+                <li>• WhatsApp photo dumps</li>
+                <li>• No central client hub</li>
+              </ul>
+            </div>
+            <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+              <h4 className="font-semibold text-green-900 mb-4">After PropVortex</h4>
+              <ul className="space-y-2 text-sm text-green-700">
+                <li>• Branded client portal</li>
+                <li>• Professional PDF reports</li>
+                <li>• Organized photo galleries</li>
+                <li>• One source of truth</li>
+              </ul>
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-light text-gray-900 tracking-wide mb-6">
-                Stop Losing Hours to Manual Reports
-              </h2>
               <div className="space-y-4 mb-8">
                 <div className="flex items-start space-x-3">
                   <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5">
@@ -205,7 +238,7 @@ export default function LandingPage() {
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-gray-700">Goldman Sachs-quality reports in under 10 minutes</span>
+                      <span className="text-gray-700">Institutional-quality reports in under 10 minutes</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-500" />
@@ -402,6 +435,25 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Testimonial Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h3 className="text-2xl font-bold mb-8">What Luxury Builders Are Saying</h3>
+          <Card className="border border-gray-200 p-8">
+            <p className="text-lg text-gray-700 italic mb-4">
+              "PropVortex transformed our client updates from a weekly headache into a 5-minute task. 
+              Our homeowners love the reports, and our team saves hours every week. It's a must-have for luxury builds."
+            </p>
+            <div className="flex items-center justify-center mt-6">
+              <div>
+                <p className="font-semibold">Lawrence Barbara</p>
+                <p className="text-sm text-gray-500">BHDS Group – Dallas, TX</p>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -511,7 +563,7 @@ export default function LandingPage() {
                   <span className="text-4xl font-light">$149</span>
                   <span className="text-gray-500">/month</span>
                 </div>
-                <CardDescription className="mt-2">Perfect for growing builders</CardDescription>
+                <CardDescription className="mt-2">Perfect for boutique luxury builders</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-8">
@@ -541,7 +593,7 @@ export default function LandingPage() {
                   </li>
                 </ul>
                 <Button variant="outline" className="w-full" asChild>
-                  <Link href="/signup?plan=professional">Start Free Trial</Link>
+                  <Link href="/signup?plan=professional">Request Free Trial</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -557,7 +609,7 @@ export default function LandingPage() {
                   <span className="text-4xl font-light">$349</span>
                   <span className="text-gray-500">/month</span>
                 </div>
-                <CardDescription className="mt-2">For established luxury builders</CardDescription>
+                <CardDescription className="mt-2">For established design-build firms</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-8">
@@ -591,7 +643,7 @@ export default function LandingPage() {
                   </li>
                 </ul>
                 <Button className="w-full bg-black text-white hover:bg-gray-800" asChild>
-                  <Link href="/signup?plan=unlimited">Start Free Trial</Link>
+                  <Link href="/signup?plan=unlimited">Request Free Trial</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -603,15 +655,15 @@ export default function LandingPage() {
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-light mb-4">
-            Ready to Elevate Your Client Experience?
+            Ready to Match the Quality Your Luxury Clients Expect?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join luxury builders who are saving hours every week while delivering 
-            Goldman Sachs-quality reports to their discerning clients.
+            Join exclusive luxury builders who are saving hours every week while delivering 
+            institutional-quality reports to their discerning clients.
           </p>
           <Button size="lg" variant="secondary" className="px-8" asChild>
             <Link href="/signup?plan=professional">
-              Start Your 30-Day Free Trial
+              Request Your 30-Day Free Trial
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
@@ -634,7 +686,7 @@ export default function LandingPage() {
                 className="h-8 w-auto mb-4 brightness-0 invert"
               />
               <p className="text-gray-400 text-sm">
-                Professional construction reporting for luxury home builders.
+                Premium project reporting for luxury custom home builders and their clients.
               </p>
             </div>
             <div>

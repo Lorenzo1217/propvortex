@@ -91,8 +91,7 @@ export default function LandingPage() {
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">View Live Demo</Button>
                 </Link>
               </div>
-              <p className="text-sm text-gray-500">30-day free trial • Setup in under 5 minutes</p>
-              <p className="text-sm text-gray-500 mt-2">Limited to 25 firms this quarter • Exclusively for luxury builders</p>
+              <p className="text-sm text-gray-500">30-day free trial • Setup in under 5 minutes • Limited spots available</p>
             </div>
             
             <div className="hidden lg:block">
@@ -103,9 +102,9 @@ export default function LandingPage() {
                     <Image 
                       src="/logo3.svg" 
                       alt="Morrison Builders" 
-                      width={50} 
-                      height={50} 
-                      className="h-12 w-auto"
+                      width={60} 
+                      height={60} 
+                      className="h-14 w-auto"
                     />
                     <div className="ml-3">
                       <p className="text-sm font-semibold">Morrison Builders</p>

@@ -658,6 +658,9 @@ export default function LandingPage() {
             <p className="text-xl text-gray-600">
               Start with a 30-day free trial.
             </p>
+            <p className="text-lg text-gray-700 mt-4 font-medium">
+              Call us at <a href="tel:2142336811" className="text-blue-600 hover:text-blue-700 underline">(214) 233-6811</a> to speak with a product expert.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

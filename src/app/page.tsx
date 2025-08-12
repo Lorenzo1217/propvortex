@@ -761,6 +761,15 @@ export default function LandingPage() {
               </CardContent>
             </Card>
           </div>
+          
+          {/* Phone Contact Banner */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center px-6 py-3 bg-gray-100 rounded-full">
+              <span className="text-sm text-gray-600">
+                Questions? Call <a href="tel:2142336811" className="font-semibold text-gray-900 hover:text-blue-600">(214) 233-6811</a> to speak with a product expert
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 

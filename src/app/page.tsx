@@ -100,9 +100,13 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform skew-y-0 -rotate-6 rounded-3xl"></div>
                 <div className="relative bg-white shadow-xl rounded-lg p-6">
                   <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
-                      MB
-                    </div>
+                    <Image 
+                      src="/logo3.svg" 
+                      alt="Morrison Builders" 
+                      width={40} 
+                      height={40} 
+                      className="h-10 w-auto"
+                    />
                     <div className="ml-3">
                       <p className="text-sm font-semibold">Morrison Builders</p>
                       <p className="text-xs text-gray-500">Weekly Report • Week 24</p>
@@ -354,9 +358,13 @@ export default function LandingPage() {
             <div className="bg-white px-8 py-6 border-b border-gray-200">
               <div className="text-center mb-4">
                 <div className="flex justify-center mb-3">
-                  <div className="w-12 h-12 bg-blue-600 rounded flex items-center justify-center text-white font-bold">
-                    MB
-                  </div>
+                  <Image 
+                    src="/logo3.svg" 
+                    alt="Morrison Builders" 
+                    width={60} 
+                    height={60} 
+                    className="h-12 w-auto"
+                  />
                 </div>
                 <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
                 <p className="text-sm text-gray-500">The Henderson Estate • Multi-Million Dollar Custom Home</p>

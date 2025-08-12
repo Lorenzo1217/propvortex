@@ -355,15 +355,15 @@ export default function LandingPage() {
           </div>
           
           <Card className="bg-white border border-gray-200 rounded-lg shadow-xl max-w-5xl mx-auto">
-            <div className="bg-white px-8 py-6 border-b border-gray-200">
-              <div className="text-center mb-4">
-                <div className="flex justify-center mb-3">
+            <div className="bg-white px-8 py-4 border-b border-gray-200">
+              <div className="text-center mb-3">
+                <div className="flex justify-center mb-2">
                   <Image 
                     src="/logo3.svg" 
                     alt="Morrison Builders" 
-                    width={80} 
-                    height={80} 
-                    className="h-16 w-auto"
+                    width={120} 
+                    height={120} 
+                    className="h-24 w-auto"
                   />
                 </div>
                 <h3 className="font-semibold text-gray-900">Morrison Builders</h3>

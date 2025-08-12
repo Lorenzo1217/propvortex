@@ -73,7 +73,7 @@ export default function LandingPage() {
               </Badge>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">
                 Your Builds Speak for Themselves.
-                <span className="block text-blue-600 mt-2">Your Reports Should Too.</span>
+                <span className="block text-gray-900 mt-2">Your Reports Should Too.</span>
               </h1>
               <p className="text-xl text-gray-600 mb-4">
                 Transform technical updates into stunning client reports in under 10 minutes.
@@ -84,7 +84,7 @@ export default function LandingPage() {
               <div className="flex gap-4 flex-col sm:flex-row mb-4">
                 <Link href="/signup?plan=professional" className="w-full sm:w-auto">
                   <Button size="lg" className="bg-black text-white hover:bg-gray-800 w-full">
-                    Request Your Free Trial
+                    Request Your 30-Day Free Trial
                   </Button>
                 </Link>
                 <Link href="#demo" className="w-full sm:w-auto">
@@ -93,12 +93,12 @@ export default function LandingPage() {
                   </Button>
                 </Link>
               </div>
-              <p className="text-sm text-gray-500">30-day free trial • Setup in under 5 minutes • Limited spots available</p>
+              <p className="text-sm text-gray-500">Setup in under 5 minutes</p>
             </div>
             
             <div className="hidden lg:block">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform skew-y-0 -rotate-6 rounded-3xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 shadow-lg transform skew-y-0 -rotate-6 rounded-3xl"></div>
                 <div className="relative bg-white shadow-xl rounded-lg p-6">
                   <div className="flex items-center mb-4">
                     <Image 
@@ -124,7 +124,7 @@ export default function LandingPage() {
                       <span className="text-xs font-semibold">68%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-600 h-2 rounded-full" style={{ width: '68%' }}></div>
+                      <div className="bg-gray-800 h-2 rounded-full" style={{ width: '68%' }}></div>
                     </div>
                   </div>
                   <div className="mt-4 flex items-center text-xs text-gray-500">
@@ -152,7 +152,7 @@ export default function LandingPage() {
       </section>
 
       {/* AI Automation Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">

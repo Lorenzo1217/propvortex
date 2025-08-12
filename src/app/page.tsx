@@ -64,35 +64,72 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 lg:py-32 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge variant="secondary" className="mb-4">
-            Trusted by luxury home builders ($10M+ estates)
-          </Badge>
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Your Builds Speak for Themselves.
-            <span className="block text-blue-600 mt-2">Your Reports Should Too.</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-4 max-w-2xl mx-auto">
-            Transform technical updates into stunning client reports in under 10 minutes.
-          </p>
-          <p className="text-lg text-gray-600 mb-8">
-            Built for luxury design-build firms delivering $2M–$10M+ custom homes.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8" asChild>
-              <Link href="/signup?plan=professional">Request Your Free Trial</Link>
-            </Button>
-            <Button variant="outline" size="lg" className="px-8" asChild>
-              <Link href="#demo">View Live Demo</Link>
-            </Button>
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-4" variant="secondary">
+                Trusted by luxury home builders ($10M+ estates)
+              </Badge>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">
+                Your Builds Speak for Themselves.
+                <span className="block text-blue-600 mt-2">Your Reports Should Too.</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-4">
+                Transform technical updates into stunning client reports in under 10 minutes.
+              </p>
+              <p className="text-lg text-gray-600 mb-8">
+                Built for luxury design-build firms delivering $2M–$10M+ custom homes.
+              </p>
+              <div className="flex gap-4 flex-col sm:flex-row mb-4">
+                <Link href="/signup?plan=professional">
+                  <Button size="lg" className="bg-black text-white hover:bg-gray-800 w-full sm:w-auto">
+                    Request Your Free Trial
+                  </Button>
+                </Link>
+                <Link href="#demo">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto">View Live Demo</Button>
+                </Link>
+              </div>
+              <p className="text-sm text-gray-500">30-day free trial • Setup in under 5 minutes</p>
+              <p className="text-sm text-gray-500 mt-2">Limited to 25 firms this quarter • Exclusively for luxury builders</p>
+            </div>
+            
+            <div className="hidden lg:block">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform skew-y-0 -rotate-6 rounded-3xl"></div>
+                <div className="relative bg-white shadow-xl rounded-lg p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
+                      MB
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-semibold">Morrison Builders</p>
+                      <p className="text-xs text-gray-500">Weekly Report • Week 24</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="h-2 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-2 bg-gray-200 rounded"></div>
+                    <div className="h-2 bg-gray-200 rounded w-5/6"></div>
+                  </div>
+                  <div className="mt-4 pt-4 border-t">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-xs text-gray-500">Project Progress</span>
+                      <span className="text-xs font-semibold">68%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full" style={{ width: '68%' }}></div>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center text-xs text-gray-500">
+                    <CheckCircle className="w-3 h-3 text-green-500 mr-1" />
+                    AI-Enhanced • Professional PDF Ready
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-gray-500 mt-4">
-            30-day free trial • Setup in under 5 minutes
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            Limited to 25 firms this quarter • Exclusively for luxury builders
-          </p>
         </div>
       </section>
 
@@ -148,7 +185,7 @@ export default function LandingPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Copy data from Excel, Procore, BuilderTrend, or MS Project. AI reformats it perfectly for your reports.
+                  Copy data from Excel, Procore, BuilderTrend, or MS Project. Upload PDFs like OAC meeting transcripts. AI reformats everything perfectly.
                 </p>
               </CardContent>
             </Card>
@@ -685,7 +722,11 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">Procore integration</span>
+                    <span className="text-gray-700">AI document upload (PDFs, Excel, OAC transcripts)</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700">Built-in CRM system</span>
                   </li>
                   <li className="flex items-center space-x-3">
                     <Check className="w-4 h-4 text-green-500 flex-shrink-0" />

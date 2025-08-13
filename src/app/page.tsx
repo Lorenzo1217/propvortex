@@ -20,7 +20,6 @@ import {
   Sparkles, 
   Mail, 
   FileUp, 
-  Brain,
   Check,
   Calendar
 } from "lucide-react"
@@ -35,10 +34,10 @@ export default function LandingPage() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
-    const elements = document.querySelectorAll('.fade-in-up');
+    const elements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left, .slide-in-right');
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
@@ -104,12 +103,12 @@ export default function LandingPage() {
               </p>
               <div className="flex gap-4 flex-col sm:flex-row mb-4 fade-in-up delay-300">
                 <Link href="/signup?plan=professional" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-black hover:bg-gray-100 w-full">
+                  <Button size="lg" className="bg-white text-black hover:bg-black hover:text-white transition-all duration-300 w-full">
                     Request Your 30-Day Free Trial
                   </Button>
                 </Link>
                 <Link href="#demo" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full border-gray-300 text-gray-300 hover:bg-white hover:text-black">
+                  <Button size="lg" variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black transition-all duration-300">
                     View Live Demo
                   </Button>
                 </Link>
@@ -130,8 +129,8 @@ export default function LandingPage() {
                       className="h-14 w-auto"
                     />
                     <div className="ml-3">
-                      <p className="text-sm font-semibold">Morrison Builders</p>
-                      <p className="text-xs text-gray-500">Weekly Report • Week 24</p>
+                      <p className="text-sm font-semibold text-gray-900">Morrison Builders</p>
+                      <p className="text-xs text-gray-600">Weekly Report • Week 24</p>
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -171,60 +170,47 @@ export default function LandingPage() {
       </div>
 
       {/* AI Automation Section */}
-      <section className="pt-4 pb-8 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex justify-center">
-              <Image src="/logo2.svg" alt="PropVortex" width={100} height={100} className="h-20 w-auto opacity-80" />
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <Image src="/logo2.svg" alt="PropVortex" width={80} height={80} className="h-16 w-auto opacity-80" />
             </div>
-            <Badge className="mb-4" variant="default">
-              <Sparkles className="w-3 h-3 mr-1" />
+            <Badge className="mb-4 bg-gray-800 text-gray-200" variant="secondary">
               AI-Powered Automation
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 mb-4 fade-in-up">
               From Chaos to Client-Ready in Minutes
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 fade-in-up delay-100">
               Our AI suite transforms scattered updates into polished reports automatically
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-up delay-100">
-            <div className="md:col-span-2 bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg text-white">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg text-white transform hover:scale-105 transition-all duration-300 fade-in-up delay-100">
               <Mail className="w-8 h-8 mb-4 text-white" />
               <h3 className="text-lg font-semibold mb-2 text-white">Email Forwarding AI</h3>
               <p className="text-sm text-gray-300">
                 Forward subcontractor emails and our AI extracts updates automatically
               </p>
             </div>
-
-            <Card className="border border-gray-200">
-              <CardHeader>
-                <FileUp className="w-8 h-8 text-blue-600 mb-2" />
-                <CardTitle className="text-lg">Paste from Any Tool</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600">
-                  Copy data from Excel, Procore, BuilderTrend, or MS Project. Upload PDFs like OAC meeting transcripts. AI reformats everything perfectly.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center mb-3">
-                  <Brain className="w-5 h-5 text-green-600" />
-                </div>
-                <CardTitle className="text-lg">AI Writing Assistant</CardTitle>
-                <CardDescription>
-                  Transforms technical notes into clear, professional client updates
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-500 text-sm">Email → AI → Report</p>
+            
+            <div className="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg text-white transform hover:scale-105 transition-all duration-300 fade-in-up delay-200">
+              <FileUp className="w-8 h-8 mb-4 text-white" />
+              <h3 className="text-lg font-semibold mb-2 text-white">Paste from Any Tool</h3>
+              <p className="text-sm text-gray-300">
+                Copy data from Excel, Procore, BuilderTrend, or MS Project. Upload PDFs like OAC meeting transcripts. AI reformats everything perfectly.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg text-white transform hover:scale-105 transition-all duration-300 fade-in-up delay-300">
+              <Sparkles className="w-8 h-8 mb-4 text-white" />
+              <h3 className="text-lg font-semibold mb-2 text-white">AI Writing Assistant</h3>
+              <p className="text-sm text-gray-300">
+                Transforms technical notes into clear, professional client updates
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -679,7 +665,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Professional Plan */}
-            <Card className="bg-white border border-gray-200 rounded-lg">
+            <Card className="bg-white border border-gray-200 rounded-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 fade-in-up delay-100">
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl font-light">Professional</CardTitle>
                 <div className="mt-4">
@@ -722,7 +708,7 @@ export default function LandingPage() {
             </Card>
 
             {/* Unlimited Plan */}
-            <Card className="bg-white border-2 border-blue-500 rounded-lg relative">
+            <Card className="bg-white border-2 border-blue-500 rounded-lg relative transform hover:scale-105 hover:shadow-2xl transition-all duration-300 fade-in-up delay-200">
               <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white">
                 Most Popular
               </Badge>
@@ -793,12 +779,12 @@ export default function LandingPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 fade-in-up">
             Ready to Match the Quality Your Luxury Clients Expect?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-300 mb-8 fade-in-up delay-100">
             Join exclusive luxury builders who are saving hours every week while
             delivering institutional-quality reports to their discerning clients.
           </p>
-          <Link href="/signup?plan=professional">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6">
+          <Link href="/signup?plan=professional" className="fade-in-up delay-200">
+            <Button size="lg" className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6 transform hover:scale-110 transition-all duration-300">
               Request Your 30-Day Free Trial
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

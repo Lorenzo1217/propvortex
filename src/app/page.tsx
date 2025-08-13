@@ -424,152 +424,53 @@ export default function LandingPage() {
                   {/* Weather grid - centered and professional */}
                   <div className="flex justify-center">
                     <div className="grid grid-cols-7 gap-2 max-w-6xl">
-                      {/* Thursday - Hot with delay */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Thu</p>
-                          <p className="text-xs text-gray-500">8/7</p>
-                          <Badge variant="outline" className="mt-1 text-xs py-0 px-1">Report Date</Badge>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Sun className="w-10 h-10 text-gray-700" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">104°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">91°</span>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
-                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
-                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
-                        </div>
-                      </div>
-                      
-                      {/* Friday - Hot */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Fri</p>
-                          <p className="text-xs text-gray-500">8/8</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Sun className="w-10 h-10 text-gray-700" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">102°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">89°</span>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
-                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
-                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
-                        </div>
-                      </div>
-                      
-                      {/* Saturday - Rain */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Sat</p>
-                          <p className="text-xs text-gray-500">8/9</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <CloudRain className="w-10 h-10 text-gray-700" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">95°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">78°</span>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
-                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
-                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
-                        </div>
-                      </div>
-                      
-                      {/* Sunday - Cloudy */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-200 bg-white transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Sun</p>
-                          <p className="text-xs text-gray-500">8/10</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Cloud className="w-10 h-10 text-gray-600" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">98°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">82°</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Monday - Hot */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Mon</p>
-                          <p className="text-xs text-gray-500">8/11</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Sun className="w-10 h-10 text-gray-700" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">101°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">87°</span>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
-                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
-                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
-                        </div>
-                      </div>
-                      
-                      {/* Tuesday - Very Hot */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Tue</p>
-                          <p className="text-xs text-gray-500">8/12</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Sun className="w-10 h-10 text-gray-700" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">103°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">90°</span>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
-                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
-                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
-                        </div>
-                      </div>
-                      
-                      {/* Wednesday - Partly Cloudy */}
-                      <div className="flex flex-col p-3 rounded-lg border border-gray-200 bg-white transition-all min-w-[100px]">
-                        <div className="text-center mb-2">
-                          <p className="font-semibold text-sm text-gray-900">Wed</p>
-                          <p className="text-xs text-gray-500">8/13</p>
-                        </div>
-                        <div className="flex justify-center mb-3">
-                          <Cloud className="w-10 h-10 text-gray-600" />
-                        </div>
-                        <div className="text-center mb-3">
-                          <div className="flex items-center justify-center space-x-1">
-                            <span className="text-lg font-semibold">99°</span>
-                            <span className="text-sm text-gray-400">/</span>
-                            <span className="text-sm text-gray-500">85°</span>
-                          </div>
-                        </div>
-                      </div>
+                      {(() => {
+                        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                        const today = new Date();
+                        const weatherData = [
+                          { temp: '104°', low: '91°', icon: Sun, hasDelay: true },
+                          { temp: '102°', low: '89°', icon: Sun, hasDelay: true },
+                          { temp: '95°', low: '78°', icon: CloudRain, hasDelay: true },
+                          { temp: '98°', low: '82°', icon: Cloud, hasDelay: false },
+                          { temp: '101°', low: '87°', icon: Sun, hasDelay: true },
+                          { temp: '103°', low: '90°', icon: Sun, hasDelay: true },
+                          { temp: '99°', low: '85°', icon: Cloud, hasDelay: false }
+                        ];
+                        
+                        return weatherData.map((weather, index) => {
+                          const date = new Date(today);
+                          date.setDate(today.getDate() + index);
+                          const dayName = days[date.getDay()];
+                          const monthDay = `${date.getMonth() + 1}/${date.getDate()}`;
+                          const WeatherIcon = weather.icon;
+                          
+                          return (
+                            <div key={index} className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                              <div className="text-center mb-2">
+                                <p className="font-semibold text-sm text-gray-900">{dayName}</p>
+                                <p className="text-xs text-gray-500">{monthDay}</p>
+                                {index === 0 && <Badge variant="outline" className="mt-1 text-xs py-0 px-1">Report Date</Badge>}
+                              </div>
+                              <div className="flex justify-center mb-3">
+                                <WeatherIcon className="w-10 h-10 text-gray-700" />
+                              </div>
+                              <div className="text-center mb-3">
+                                <div className="flex items-center justify-center space-x-1">
+                                  <span className="text-lg font-semibold">{weather.temp}</span>
+                                  <span className="text-sm text-gray-400">/</span>
+                                  <span className="text-sm text-gray-500">{weather.low}</span>
+                                </div>
+                              </div>
+                              {weather.hasDelay && (
+                                <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                                  <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                                  <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      )()}
                     </div>
                   </div>
                 </div>
@@ -621,11 +522,17 @@ export default function LandingPage() {
               {/* 3. Executive Summary */}
               <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
                 <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <FileText className="w-5 h-5 text-blue-600" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <FileText className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="text-xl font-light tracking-wide text-gray-900">Executive Summary</h3>
                     </div>
-                    <h3 className="text-xl font-light tracking-wide text-gray-900">Executive Summary</h3>
+                    <Badge variant="secondary" className="flex items-center gap-1.5 bg-blue-50 text-blue-700 border-0">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span className="text-xs font-medium">AI Generated</span>
+                    </Badge>
                   </div>
                 </div>
                 <div className="px-8 py-6">
@@ -640,11 +547,17 @@ export default function LandingPage() {
               {/* 4. Work Completed This Week */}
               <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
                 <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <CheckCircle className="w-5 h-5 text-blue-600" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <CheckCircle className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="text-xl font-light tracking-wide text-gray-900">Work Completed This Week</h3>
                     </div>
-                    <h3 className="text-xl font-light tracking-wide text-gray-900">Work Completed This Week</h3>
+                    <Badge variant="secondary" className="flex items-center gap-1.5 bg-blue-50 text-blue-700 border-0">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span className="text-xs font-medium">AI Generated from project schedule</span>
+                    </Badge>
                   </div>
                 </div>
                 <div className="px-8 py-6">
@@ -691,11 +604,17 @@ export default function LandingPage() {
               {/* 5. Upcoming Work */}
               <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
                 <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <Clock className="w-5 h-5 text-blue-600" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <Clock className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="text-xl font-light tracking-wide text-gray-900">Upcoming Work</h3>
                     </div>
-                    <h3 className="text-xl font-light tracking-wide text-gray-900">Upcoming Work</h3>
+                    <Badge variant="secondary" className="flex items-center gap-1.5 bg-blue-50 text-blue-700 border-0">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span className="text-xs font-medium">AI Generated from project schedule</span>
+                    </Badge>
                   </div>
                 </div>
                 <div className="px-8 py-6">
@@ -842,30 +761,30 @@ export default function LandingPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between p-2">
                     <span className="text-gray-600">Professional Fees</span>
-                    <span className="font-semibold text-gray-900">$1,936</span>
+                    <span className="font-semibold text-gray-900">$125,000</span>
                   </div>
                   <div className="flex justify-between p-2">
                     <span className="text-gray-600">Construction Costs</span>
-                    <span className="font-semibold text-gray-900">$2,344,446</span>
+                    <span className="font-semibold text-gray-900">$2,850,000</span>
                   </div>
                   <div className="flex justify-between p-2">
-                    <span className="text-gray-600">Insurance & Financing</span>
-                    <span className="font-semibold text-gray-900">$2,000,000</span>
+                    <span className="text-gray-600">Permits & Inspections</span>
+                    <span className="font-semibold text-gray-900">$45,000</span>
                   </div>
                   <div className="border-t pt-3 mt-3">
                     <div className="flex justify-between">
                       <span className="font-semibold text-gray-900">Project Total</span>
-                      <span className="font-bold text-xl text-gray-900">$12,351,345</span>
+                      <span className="font-bold text-xl text-gray-900">$3,020,000</span>
                     </div>
                   </div>
                   <div className="bg-green-50 rounded-lg p-4 mt-4">
                     <p className="text-xs font-semibold text-gray-700 mb-2">CONTINGENCY TRACKING</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                      <div className="bg-green-500 h-2 rounded-full" style={{ width: '99%' }}></div>
+                      <div className="bg-green-500 h-2 rounded-full" style={{ width: '85%' }}></div>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Remaining</span>
-                      <span className="font-bold text-green-600">$14,511,108</span>
+                      <span className="text-gray-600">Remaining: 85%</span>
+                      <span className="font-bold text-green-600">$255,000</span>
                     </div>
                   </div>
                 </div>

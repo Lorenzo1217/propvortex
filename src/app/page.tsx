@@ -1,3 +1,7 @@
+"use client"
+
+import { useEffect } from 'react'
+import './animations.css'
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -23,6 +27,24 @@ import {
 } from "lucide-react"
 
 export default function LandingPage() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.fade-in-up');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
@@ -71,24 +93,24 @@ export default function LandingPage() {
               <Badge className="mb-4 bg-gray-800 text-gray-200" variant="secondary">
                 Trusted by luxury home builders ($10M+ estates)
               </Badge>
-              <h1 className="text-5xl font-bold text-white mb-6">
+              <h1 className="text-5xl font-bold text-white mb-6 fade-in-up">
                 Your Builds Speak for Themselves.
                 <span className="block text-gray-300 mt-2">Your Reports Should Too.</span>
               </h1>
-              <p className="text-xl text-gray-300 mb-4">
+              <p className="text-xl text-gray-300 mb-4 fade-in-up delay-100">
                 Transform technical updates into stunning client reports in under 10 minutes.
               </p>
-              <p className="text-lg text-gray-400 mb-8">
+              <p className="text-lg text-gray-400 mb-8 fade-in-up delay-200">
                 Built for luxury design-build firms delivering $2M–$10M+ custom homes.
               </p>
-              <div className="flex gap-4 flex-col sm:flex-row mb-4">
+              <div className="flex gap-4 flex-col sm:flex-row mb-4 fade-in-up delay-300">
                 <Link href="/signup?plan=professional" className="w-full sm:w-auto">
                   <Button size="lg" className="bg-white text-black hover:bg-gray-100 w-full">
                     Request Your 30-Day Free Trial
                   </Button>
                 </Link>
                 <Link href="#demo" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black">
+                  <Button size="lg" variant="outline" className="w-full border-gray-300 text-gray-300 hover:bg-white hover:text-black">
                     View Live Demo
                   </Button>
                 </Link>
@@ -150,17 +172,17 @@ export default function LandingPage() {
       </div>
 
       {/* AI Automation Section */}
-      <section className="py-8 bg-gray-50">
+      <section className="pt-4 pb-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center">
               <Image src="/logo2.svg" alt="PropVortex" width={100} height={100} className="h-20 w-auto opacity-80" />
             </div>
             <Badge className="mb-4" variant="default">
               <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered Automation
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 fade-in-up">
               From Chaos to Client-Ready in Minutes
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -168,18 +190,14 @@ export default function LandingPage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border border-gray-200 md:col-span-2 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-                  <Mail className="w-5 h-5 text-blue-600" />
-                </div>
-                <CardTitle className="text-lg">Email Forwarding AI</CardTitle>
-                <CardDescription>
-                  Forward subcontractor emails and our AI extracts updates automatically
-                </CardDescription>
-              </CardHeader>
-            </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-up delay-100">
+            <div className="md:col-span-2 bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg text-white">
+              <Mail className="w-8 h-8 mb-4 text-white" />
+              <h3 className="text-lg font-semibold mb-2 text-white">Email Forwarding AI</h3>
+              <p className="text-sm text-gray-300">
+                Forward subcontractor emails and our AI extracts updates automatically
+              </p>
+            </div>
 
             <Card className="border border-gray-200">
               <CardHeader>
@@ -773,7 +791,7 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-gray-900 to-black text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 fade-in-up">
             Ready to Match the Quality Your Luxury Clients Expect?
           </h2>
           <p className="text-xl text-gray-300 mb-8">

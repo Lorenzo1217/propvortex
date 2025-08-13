@@ -952,10 +952,10 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>{/* End of report content */}
-          </div>{/* End of white rounded container */}
-        </div>{/* End of max-width container */}
-      </section>{/* End of demo section */}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonial Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-black">

@@ -108,7 +108,7 @@ export default function LandingPage() {
                   </Button>
                 </Link>
                 <Link href="#demo" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black transition-all duration-300">
+                  <Button size="lg" className="bg-white text-black hover:bg-black hover:text-white transition-all duration-300 w-full">
                     View Live Demo
                   </Button>
                 </Link>
@@ -218,124 +218,144 @@ export default function LandingPage() {
       {/* Problem/Solution Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-light text-gray-900 tracking-wide mb-8 text-center">
-            Stop Losing Hours to Outdated Reporting
-          </h2>
-
-          {/* Before/After Visual */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="text-red-500 mr-2">✗</span>
-                Before PropVortex
-              </h4>
-              <Card className="border border-red-200 bg-red-50/30">
-                <CardContent className="pt-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">Scattered email threads</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">Inconsistent Word docs</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">WhatsApp photo dumps</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">No central client hub</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up">
+              Stop Losing Hours to Outdated Reporting
+            </h2>
+            <p className="text-xl text-gray-600 fade-in-up delay-100">
+              Transform your workflow from chaos to clarity
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Before Column */}
+            <div className="bg-gray-50 rounded-xl p-8 border border-gray-200 fade-in-up delay-200">
+              <div className="flex items-center mb-6">
+                <div className="w-8 h-8 text-red-500 mr-3">✕</div>
+                <h3 className="text-2xl font-bold text-gray-900">Before PropVortex</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-3 mt-1">✕</span>
+                  <span className="text-gray-700">Scattered email threads</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-3 mt-1">✕</span>
+                  <span className="text-gray-700">Inconsistent Word docs</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-3 mt-1">✕</span>
+                  <span className="text-gray-700">WhatsApp photo dumps</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-3 mt-1">✕</span>
+                  <span className="text-gray-700">No central client hub</span>
+                </li>
+              </ul>
+              <div className="mt-8 pt-6 border-t border-gray-300">
+                <p className="text-red-600 font-semibold">The Problem:</p>
+                <p className="text-gray-700 mt-2">• Spending 3-4 hours every week writing the same reports</p>
+                <p className="text-gray-700 mt-2">• Anxious clients calling for updates because reports are unclear</p>
+                <p className="text-gray-700 mt-2">• Reports that don't match the quality of your $10M+ projects</p>
+                <p className="text-gray-700 mt-2">• Scattered updates across email, texts, and project management tools</p>
+              </div>
             </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                After PropVortex
-              </h4>
-              <Card className="border border-green-200 bg-green-50/30">
-                <CardContent className="pt-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">Branded client portal</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">Professional PDF reports</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">Organized photo galleries</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">One source of truth</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
+            
+            {/* After Column */}
+            <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-8 text-white fade-in-up delay-300">
+              <div className="flex items-center mb-6">
+                <CheckCircle className="w-8 h-8 text-green-400 mr-3" />
+                <h3 className="text-2xl font-bold text-white">After PropVortex</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-3 mt-1">✓</span>
+                  <span className="text-gray-200">Branded client portal</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-3 mt-1">✓</span>
+                  <span className="text-gray-200">Professional PDF reports</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-3 mt-1">✓</span>
+                  <span className="text-gray-200">Organized photo galleries</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-3 mt-1">✓</span>
+                  <span className="text-gray-200">One source of truth</span>
+                </li>
+              </ul>
+              <div className="mt-8 pt-6 border-t border-gray-700">
+                <p className="text-green-400 font-semibold">The PropVortex Solution:</p>
+                <p className="text-gray-200 mt-2">• Institutional-quality reports in under 10 minutes</p>
+                <p className="text-gray-200 mt-2">• AI transforms Procore data into polished updates</p>
+                <p className="text-gray-200 mt-2">• Branded client portals that match luxury expectations</p>
+                <p className="text-gray-200 mt-2">• Automated email digests keep clients informed</p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5">
-                    <span className="text-red-600 text-sm">✗</span>
-                  </div>
-                  <p className="text-gray-600">Spending 3-4 hours every week writing the same reports</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5">
-                    <span className="text-red-600 text-sm">✗</span>
-                  </div>
-                  <p className="text-gray-600">Anxious clients calling for updates because reports are unclear</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5">
-                    <span className="text-red-600 text-sm">✗</span>
-                  </div>
-                  <p className="text-gray-600">Reports that don't match the quality of your $10M+ projects</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5">
-                    <span className="text-red-600 text-sm">✗</span>
-                  </div>
-                  <p className="text-gray-600">Scattered updates across email, texts, and project management tools</p>
-                </div>
-              </div>
+      {/* Built for Luxury Home Builders Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4 fade-in-up">
+              Built for Luxury Home Builders
+            </h2>
+            <p className="text-xl text-gray-300 fade-in-up delay-100">
+              Every feature designed to match the sophistication of your high-end projects
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-100">
+              <Sparkles className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">AI-Powered Writing</h3>
+              <p className="text-gray-300">
+                Transform technical updates into eloquent narratives worthy of your clientele
+              </p>
             </div>
-            <div>
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                  The PropVortex Solution
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">Institutional-quality reports in under 10 minutes</p>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">AI transforms Procore data into polished updates</p>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">Branded client portals that match luxury expectations</p>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">Automated email digests keep clients informed</p>
-                  </div>
-                </div>
-              </div>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-200">
+              <DollarSign className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Financial Tracking</h3>
+              <p className="text-gray-300">
+                Real-time budget tracking with change order management and contingency monitoring
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-300">
+              <Camera className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Professional Photography</h3>
+              <p className="text-gray-300">
+                Showcase craftsmanship with high-res galleries, annotations, and progress comparisons
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-400">
+              <FileText className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Branded Reports</h3>
+              <p className="text-gray-300">
+                Custom-branded PDF reports that reflect your company's premium positioning
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-500">
+              <Users className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Client Portal</h3>
+              <p className="text-gray-300">
+                Dedicated portals for each project with secure access and real-time updates
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 fade-in-up delay-500">
+              <TrendingUp className="w-10 h-10 text-white mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Portfolio Showcase</h3>
+              <p className="text-gray-300">
+                Turn completed projects into stunning marketing materials for future clients
+              </p>
             </div>
           </div>
         </div>
@@ -708,8 +728,8 @@ export default function LandingPage() {
             </Card>
 
             {/* Unlimited Plan */}
-            <Card className="bg-white border-2 border-blue-500 rounded-lg relative transform hover:scale-105 hover:shadow-2xl transition-all duration-300 fade-in-up delay-200">
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white">
+            <Card className="bg-white border-2 border-gray-900 rounded-lg relative transform hover:scale-105 hover:shadow-2xl transition-all duration-300 fade-in-up delay-200">
+              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-gray-900 to-black text-white">
                 Most Popular
               </Badge>
               <CardHeader className="text-center pb-8">

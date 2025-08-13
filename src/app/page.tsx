@@ -64,36 +64,36 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-white to-gray-50 py-20 border-b border-gray-100">
+      <section className="bg-gradient-to-r from-gray-900 to-black text-white py-20 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4" variant="secondary">
+              <Badge className="mb-4 bg-gray-800 text-gray-200" variant="secondary">
                 Trusted by luxury home builders ($10M+ estates)
               </Badge>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl font-bold text-white mb-6">
                 Your Builds Speak for Themselves.
-                <span className="block text-gray-900 mt-2">Your Reports Should Too.</span>
+                <span className="block text-gray-300 mt-2">Your Reports Should Too.</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-4">
+              <p className="text-xl text-gray-300 mb-4">
                 Transform technical updates into stunning client reports in under 10 minutes.
               </p>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-400 mb-8">
                 Built for luxury design-build firms delivering $2M–$10M+ custom homes.
               </p>
               <div className="flex gap-4 flex-col sm:flex-row mb-4">
                 <Link href="/signup?plan=professional" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-black text-white hover:bg-gray-800 w-full">
+                  <Button size="lg" className="bg-white text-black hover:bg-gray-100 w-full">
                     Request Your 30-Day Free Trial
                   </Button>
                 </Link>
                 <Link href="#demo" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full">
+                  <Button size="lg" variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black">
                     View Live Demo
                   </Button>
                 </Link>
               </div>
-              <p className="text-sm text-gray-500">Setup in under 5 minutes</p>
+              <p className="text-sm text-gray-400">Setup in under 5 minutes</p>
             </div>
             
             <div className="hidden lg:block">
@@ -139,23 +139,21 @@ export default function LandingPage() {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-8 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-sm text-gray-500 mb-4">Trusted by luxury builders in Dallas-Fort Worth</p>
-          <div className="grid grid-cols-2 md:flex md:justify-center md:items-center gap-6 md:space-x-12 md:gap-0 opacity-60">
-            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">BHDS Group</span>
-            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Morrison Builders</span>
-            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Luxury Estates Group</span>
-            <span className="text-center text-sm md:text-lg font-semibold text-gray-700">Vanguard Custom Homes</span>
-          </div>
+      <div className="text-center py-8 bg-gray-50 border-y border-gray-200">
+        <p className="text-sm text-gray-500 mb-4">Trusted by luxury builders in Dallas-Fort Worth</p>
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
+          <span className="text-gray-700 font-medium text-sm sm:text-base">BHDS Group</span>
+          <span className="text-gray-700 font-medium text-sm sm:text-base">Morrison Builders</span>
+          <span className="text-gray-700 font-medium text-sm sm:text-base">Luxury Estates Group</span>
+          <span className="text-gray-700 font-medium text-sm sm:text-base">Vanguard Custom Homes</span>
         </div>
-      </section>
+      </div>
 
       {/* AI Automation Section */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-4">
+          <div className="text-center">
+            <div className="flex justify-center mb-2">
               <Image src="/logo2.svg" alt="PropVortex" width={100} height={100} className="h-20 w-auto opacity-80" />
             </div>
             <Badge className="mb-4" variant="default">

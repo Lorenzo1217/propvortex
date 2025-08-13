@@ -21,7 +21,10 @@ import {
   FileUp, 
   Check,
   Quote,
-  Clock
+  Clock,
+  Cloud,
+  Sun,
+  CloudRain
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -361,10 +364,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Live Demo Section */}
+      {/* Live Demo Section - Complete Weekly Report */}
       <section id="demo" className="py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 fade-in-up">
             <Badge className="mb-4 bg-gray-800 text-gray-200" variant="secondary">
               Live Demo
             </Badge>
@@ -376,7 +379,7 @@ export default function LandingPage() {
             </p>
           </div>
           
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden mx-auto max-w-4xl">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden mx-auto max-w-4xl fade-in-up delay-200">
             {/* Header */}
             <div className="bg-white px-8 py-6 border-b border-gray-200">
               <div className="text-center">
@@ -391,169 +394,357 @@ export default function LandingPage() {
                 </div>
                 <h3 className="font-semibold text-gray-900 text-xl">Morrison Builders</h3>
                 <p className="text-sm text-gray-500">The Henderson Estate</p>
+                <p className="text-xs text-gray-400 mt-1">5116 Steinbeck St, Carrollton, TX 75010</p>
               </div>
-              <div className="flex justify-center mt-4">
-                <Badge className="bg-green-100 text-green-800">Week 24 Report</Badge>
+              <div className="flex justify-center mt-4 gap-2">
+                <Badge className="bg-green-100 text-green-800">Week 32</Badge>
+                <Badge className="bg-blue-100 text-blue-800">Published</Badge>
               </div>
             </div>
             
-            {/* Report Content */}
-            <div className="p-8 space-y-8">
-              {/* Executive Summary */}
-              <div>
-                <div className="flex items-center mb-3">
-                  <Sparkles className="w-5 h-5 text-gray-600 mr-2" />
-                  <h4 className="text-lg font-semibold text-gray-900">Executive Summary</h4>
-                  <Badge className="ml-2 bg-green-100 text-green-800 text-xs">AI Enhanced</Badge>
+            {/* Report Content - EXACT ORDER FROM REAL REPORTS */}
+            <div className="p-8 space-y-6">
+              
+              {/* 1. Weather Outlook */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                      <Cloud className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Weather Outlook</h3>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 mb-4">7-day forecast for construction planning</p>
+                
+                <div className="grid grid-cols-7 gap-2">
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Thu</p>
+                    <p className="text-xs text-gray-400">8/7</p>
+                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
+                    <p className="text-sm font-semibold">104°</p>
+                    <p className="text-xs text-gray-500">91°</p>
+                    <p className="text-xs text-red-600 mt-1">Delay</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Fri</p>
+                    <p className="text-xs text-gray-400">8/8</p>
+                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
+                    <p className="text-sm font-semibold">102°</p>
+                    <p className="text-xs text-gray-500">89°</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Sat</p>
+                    <p className="text-xs text-gray-400">8/9</p>
+                    <CloudRain className="w-6 h-6 mx-auto my-2 text-gray-500" />
+                    <p className="text-sm font-semibold">95°</p>
+                    <p className="text-xs text-gray-500">78°</p>
+                    <p className="text-xs text-red-600 mt-1">Delay</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Sun</p>
+                    <p className="text-xs text-gray-400">8/10</p>
+                    <Cloud className="w-6 h-6 mx-auto my-2 text-gray-400" />
+                    <p className="text-sm font-semibold">98°</p>
+                    <p className="text-xs text-gray-500">82°</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Mon</p>
+                    <p className="text-xs text-gray-400">8/11</p>
+                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
+                    <p className="text-sm font-semibold">101°</p>
+                    <p className="text-xs text-gray-500">87°</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Tue</p>
+                    <p className="text-xs text-gray-400">8/12</p>
+                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
+                    <p className="text-sm font-semibold">103°</p>
+                    <p className="text-xs text-gray-500">90°</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-gray-600">Wed</p>
+                    <p className="text-xs text-gray-400">8/13</p>
+                    <Cloud className="w-6 h-6 mx-auto my-2 text-gray-400" />
+                    <p className="text-sm font-semibold">99°</p>
+                    <p className="text-xs text-gray-500">85°</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Project Photography */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                        <Camera className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="text-lg font-light tracking-wide text-gray-900">Project Photography</h3>
+                    </div>
+                    <button className="text-sm text-blue-600 hover:text-blue-700">Click to view</button>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-500 mb-3">2 photos documenting this week's progress</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Executive Summary */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                      <FileText className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Executive Summary</h3>
+                  </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  Excellent progress this week on the Henderson Estate. Interior millwork installation is 85% complete, with the library and wine cellar finishing ahead of schedule. The imported Italian marble for the master bath has arrived and installation begins Monday. We remain on track for our Q3 completion target.
+                  This week, we made great progress across the project. The custom bookcases and stone tile around 
+                  the fireplace were installed, and the backyard patio steps were completed. Everything is tracking 
+                  on schedule, and we're preparing for the next phase of interior finishes.
                 </p>
               </div>
 
-              {/* Progress Bar */}
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-medium text-gray-700">Overall Progress</span>
-                  <span className="text-sm font-semibold text-gray-900">68%</span>
+              {/* 4. Work Completed This Week */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                      <CheckCircle className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Work Completed This Week</h3>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div className="bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full" style={{ width: '68%' }}></div>
-                </div>
-              </div>
-
-              {/* Work Completed This Week */}
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Work Completed This Week</h4>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Completed master bath marble installation</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Installed custom wine cellar cooling system</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Finished exterior limestone detail work</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Completed theater room acoustic panels</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Upcoming Work */}
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Upcoming Work (Next 2 Weeks)</h4>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Begin pool house millwork installation</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Install smart home integration system</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Complete theater room projector calibration</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Budget Update */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Budget Update</h4>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Original Contract</span>
-                    <span className="font-semibold text-gray-900">$12,750,000</span>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Installed backyard stone patio steps and completed final grading</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                        <span className="text-gray-600">Moderate Impact</span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Approved Changes</span>
-                    <span className="font-semibold text-green-600">+$425,000</span>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Set and secured custom built-in wall bookcases in living room</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                        <span className="text-gray-600">Moderate Impact</span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Current Contract</span>
-                    <span className="font-semibold text-gray-900">$13,175,000</span>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Completed electrical rough-in inspection and passed city approval</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
+                        <span className="text-blue-600">Critical Impact</span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="pt-3 mt-3 border-t border-gray-200">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Contingency Remaining</span>
-                      <div className="text-right">
-                        <span className="font-semibold text-gray-900">$387,500</span>
-                        <span className="text-xs text-gray-500 block">3% of budget</span>
+                </div>
+              </div>
+
+              {/* 5. Upcoming Work */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                      <Clock className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Upcoming Work</h3>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Begin interior painting throughout main living areas</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                        <span className="text-gray-600">Minor Impact</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Install kitchen cabinetry and prep for countertop templating</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                        <span className="text-gray-600">Moderate Impact</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-start justify-between">
+                      <p className="text-gray-700">Schedule HVAC final inspection and perform system testing</p>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
+                        <span className="text-blue-600">Critical Impact</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. Issues & Delays */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center mr-3">
+                      <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Issues & Delays</h3>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="border-l-4 border-yellow-400 bg-yellow-50 p-3 rounded-r">
+                    <p className="font-medium text-gray-900">Stone Tile Delivery Delay</p>
+                    <p className="text-sm text-gray-600 mt-1">Minor 2-day delay; no impact on overall schedule</p>
+                    <span className="inline-flex items-center text-xs mt-2">
+                      <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-1"></span>
+                      <span className="text-yellow-700">Low Risk</span>
+                    </span>
+                  </div>
+                  <div className="border-l-4 border-orange-400 bg-orange-50 p-3 rounded-r">
+                    <p className="font-medium text-gray-900">Cabinet Hardware Shipment Delay</p>
+                    <p className="text-sm text-gray-600 mt-1">May delay cabinet installation if not resolved</p>
+                    <span className="inline-flex items-center text-xs mt-2">
+                      <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1"></span>
+                      <span className="text-orange-700">Medium Risk</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 7. Budget & Change Orders */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                        <DollarSign className="w-5 h-5 text-blue-600" />
                       </div>
+                      <h3 className="text-lg font-light tracking-wide text-gray-900">Budget & Change Orders</h3>
                     </div>
+                    <Badge className="bg-red-100 text-red-700">Net: $3,130 Over</Badge>
                   </div>
-                </div>
-              </div>
-
-              {/* Client Actions Required */}
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <div className="flex items-center mb-3">
-                  <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2" />
-                  <h4 className="text-lg font-semibold text-gray-900">Client Actions Required</h4>
-                  <Badge className="ml-2 bg-yellow-100 text-yellow-800 text-xs">2 Pending</Badge>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-start">
-                    <div className="bg-yellow-600 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <p className="text-gray-900 font-medium">Master Suite Chandelier Selection</p>
-                      <p className="text-sm text-gray-600">Please select from the three options provided by the lighting designer.</p>
-                      <p className="text-xs text-yellow-700 mt-1 font-medium">Due: Aug 8</p>
+                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                    <div>
+                      <p className="font-medium text-gray-900">Upgrade to Stone Fireplace Surround</p>
+                      <p className="text-xs text-gray-500">Change Order</p>
                     </div>
-                    <Button size="sm" variant="outline" className="ml-4">
-                      Urgent
-                    </Button>
+                    <div className="text-right">
+                      <p className="font-semibold text-gray-900">$2,750</p>
+                      <Badge className="text-xs bg-green-100 text-green-700">Approved</Badge>
+                    </div>
                   </div>
-                  <div className="flex items-start">
-                    <div className="bg-yellow-600 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <p className="text-gray-900 font-medium">Pool House Cabinet Hardware</p>
-                      <p className="text-sm text-gray-600">Approval needed for $16,500 upgrade to Waterworks fixtures.</p>
-                      <p className="text-xs text-gray-500 mt-1">Due: Aug 11</p>
+                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                    <div>
+                      <p className="font-medium text-gray-900">Bulk Purchase Discount on Flooring</p>
+                      <p className="text-xs text-gray-500">Cost Savings</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="ml-4">
-                      Standard
-                    </Button>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">-$600</p>
+                      <Badge className="text-xs bg-yellow-100 text-yellow-700">Pending</Badge>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* This Week's Progress Photos */}
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">This Week's Progress Photos</h4>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Camera className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Camera className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Camera className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Camera className="w-8 h-8 text-gray-400" />
+              {/* 8. Control Estimate Update */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                      <TrendingUp className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-light tracking-wide text-gray-900">Control Estimate Update</h3>
                   </div>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">12 photos uploaded this week • Click to view full gallery</p>
+                <div className="space-y-2">
+                  <div className="flex justify-between p-2">
+                    <span className="text-gray-600">Professional Fees</span>
+                    <span className="font-semibold text-gray-900">$1,936</span>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-gray-600">Construction Costs</span>
+                    <span className="font-semibold text-gray-900">$2,344,446</span>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-gray-600">Insurance & Financing</span>
+                    <span className="font-semibold text-gray-900">$2,000,000</span>
+                  </div>
+                  <div className="border-t pt-3 mt-3">
+                    <div className="flex justify-between">
+                      <span className="font-semibold text-gray-900">Project Total</span>
+                      <span className="font-bold text-xl text-gray-900">$12,351,345</span>
+                    </div>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-4 mt-4">
+                    <p className="text-xs font-semibold text-gray-700 mb-2">CONTINGENCY TRACKING</p>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                      <div className="bg-green-500 h-2 rounded-full" style={{ width: '99%' }}></div>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Remaining</span>
+                      <span className="font-bold text-green-600">$14,511,108</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Weather Impact */}
-              <div className="border-t pt-6">
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Weather Outlook</h4>
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <p className="text-sm text-gray-700">
-                    <span className="font-medium">No weather delays expected.</span> Clear conditions forecasted for the next 7 days. Ideal for exterior work completion.
-                  </p>
+              {/* 9. Client Actions Required */}
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
+                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                        <Users className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="text-lg font-light tracking-wide text-gray-900">Client Actions Required</h3>
+                    </div>
+                    <Badge className="bg-blue-100 text-blue-700">4 Pending</Badge>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-medium text-gray-900">Confirm outdoor lighting placement</p>
+                        <p className="text-xs text-gray-600 mt-1">Selection Required • Due Aug 8</p>
+                      </div>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
+                        <span className="text-blue-700">Urgent</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 border-l-4 border-gray-300 p-3 rounded-r">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-medium text-gray-900">Review master bathroom tile selection</p>
+                        <p className="text-xs text-gray-600 mt-1">Approval Required • Due Aug 11</p>
+                      </div>
+                      <span className="inline-flex items-center text-xs">
+                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                        <span className="text-gray-600">Standard</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

@@ -25,7 +25,8 @@ import {
   Cloud,
   Sun,
   CloudRain,
-  ZoomIn
+  ZoomIn,
+  ChevronRight
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -871,41 +872,82 @@ export default function LandingPage() {
               </div>
 
               {/* 9. Client Actions Required */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+              <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
                         <Users className="w-5 h-5 text-blue-600" />
                       </div>
-                      <h3 className="text-lg font-light tracking-wide text-gray-900">Client Actions Required</h3>
+                      <h3 className="text-xl font-light tracking-wide text-gray-900">Client Actions Required</h3>
                     </div>
-                    <Badge className="bg-blue-100 text-blue-700">4 Pending</Badge>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                      <span className="text-sm font-medium text-gray-700">2 Pending</span>
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <p className="font-medium text-gray-900">Confirm outdoor lighting placement</p>
-                        <p className="text-xs text-gray-600 mt-1">Selection Required • Due Aug 8</p>
+                <div className="px-8 py-6">
+                  <div className="space-y-5">
+                    <div className="group">
+                      <div className="rounded-lg border bg-white border-gray-200 hover:border-gray-300 hover:shadow-md p-5 transition-all duration-200">
+                        <div className="flex items-start justify-between gap-6">
+                          <div className="flex-1 space-y-3">
+                            <p className="leading-relaxed text-gray-700">
+                              Confirm outdoor lighting placement for front entrance and landscape areas
+                            </p>
+                            <div className="flex items-center gap-4">
+                              <div className="flex items-center gap-2 text-gray-600">
+                                <div className="p-1 bg-gray-100 rounded">
+                                  <CheckCircle className="w-3.5 h-3.5" />
+                                </div>
+                                <span className="text-sm font-light">Selection Required</span>
+                              </div>
+                              <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                <Clock className="w-3.5 h-3.5" />
+                                <span>Due Aug 8</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-end gap-2">
+                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50">
+                              <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                              <span className="text-xs font-medium tracking-wide text-blue-700">Urgent</span>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                          </div>
+                        </div>
                       </div>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
-                        <span className="text-blue-700">Urgent</span>
-                      </span>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 border-l-4 border-gray-300 p-3 rounded-r">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <p className="font-medium text-gray-900">Review master bathroom tile selection</p>
-                        <p className="text-xs text-gray-600 mt-1">Approval Required • Due Aug 11</p>
+                    <div className="group">
+                      <div className="rounded-lg border bg-white border-gray-200 hover:border-gray-300 hover:shadow-md p-5 transition-all duration-200">
+                        <div className="flex items-start justify-between gap-6">
+                          <div className="flex-1 space-y-3">
+                            <p className="leading-relaxed text-gray-700">
+                              Review and approve master bathroom tile selection from provided samples
+                            </p>
+                            <div className="flex items-center gap-4">
+                              <div className="flex items-center gap-2 text-gray-600">
+                                <div className="p-1 bg-gray-100 rounded">
+                                  <Users className="w-3.5 h-3.5" />
+                                </div>
+                                <span className="text-sm font-light">Approval Required</span>
+                              </div>
+                              <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                <Clock className="w-3.5 h-3.5" />
+                                <span>Due Aug 11</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-end gap-2">
+                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                              <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                              <span className="text-xs font-medium tracking-wide text-gray-700">Standard</span>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                          </div>
+                        </div>
                       </div>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
-                        <span className="text-gray-600">Standard</span>
-                      </span>
                     </div>
                   </div>
                 </div>

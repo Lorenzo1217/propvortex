@@ -11,7 +11,6 @@ import {
   FileText, 
   Camera, 
   Users, 
-  Zap, 
   TrendingUp, 
   DollarSign, 
   CheckCircle, 
@@ -362,29 +361,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-black">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 fade-in-up">
-              What Luxury Builders Are Saying
-            </h2>
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 fade-in-up delay-100">
-              <Quote className="w-12 h-12 text-gray-400 mx-auto mb-6" />
-              <p className="text-xl text-gray-200 italic mb-8 leading-relaxed">
-                "PropVortex transformed our client updates from a weekly headache into a 5-minute task. 
-                Our homeowners love the reports, and our team saves hours every week. It's a must-have for 
-                luxury builds."
-              </p>
-              <div className="flex flex-col items-center">
-                <p className="text-white font-semibold text-lg">Lawrence Barbara</p>
-                <p className="text-gray-400">BHDS Group – Dallas, TX</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Live Demo Section */}
       <section id="demo" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -589,108 +565,24 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h3 className="text-2xl font-bold mb-8">What Luxury Builders Are Saying</h3>
-          <Card className="border border-gray-200 p-8">
-            <p className="text-lg text-gray-700 italic mb-4">
-              "PropVortex transformed our client updates from a weekly headache into a 5-minute task. 
-              Our homeowners love the reports, and our team saves hours every week. It's a must-have for luxury builds."
-            </p>
-            <div className="flex items-center justify-center mt-6">
-              <div>
-                <p className="font-semibold">Lawrence Barbara</p>
-                <p className="text-sm text-gray-500">BHDS Group – Dallas, TX</p>
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-black">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-12">
+              What Luxury Builders Are Saying
+            </h2>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+              <Quote className="w-12 h-12 text-gray-400 mx-auto mb-6" />
+              <p className="text-xl text-gray-200 italic mb-8 leading-relaxed">
+                "PropVortex transformed our client updates from a weekly headache into a 5-minute task. 
+                Our homeowners love the reports, and our team saves hours every week. It's a must-have for 
+                luxury builds."
+              </p>
+              <div className="flex flex-col items-center">
+                <p className="text-white font-semibold text-lg">Lawrence Barbara</p>
+                <p className="text-gray-400">BHDS Group – Dallas, TX</p>
               </div>
             </div>
-          </Card>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 tracking-wide mb-4">
-              Built for Luxury Home Builders
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Every feature designed to match the sophistication of your high-end projects
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-                  <Zap className="w-5 h-5 text-blue-600" />
-                </div>
-                <CardTitle>AI-Powered Writing</CardTitle>
-                <CardDescription>
-                  Transform technical updates into eloquent narratives worthy of your clientele
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center mb-3">
-                  <DollarSign className="w-5 h-5 text-purple-600" />
-                </div>
-                <CardTitle>Financial Tracking</CardTitle>
-                <CardDescription>
-                  Real-time budget tracking with change order management and contingency monitoring
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center mb-3">
-                  <Camera className="w-5 h-5 text-green-600" />
-                </div>
-                <CardTitle>Professional Photography</CardTitle>
-                <CardDescription>
-                  Showcase craftsmanship with high-res galleries, annotations, and progress comparisons
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-3">
-                  <FileText className="w-5 h-5 text-orange-600" />
-                </div>
-                <CardTitle>Branded Reports</CardTitle>
-                <CardDescription>
-                  Custom-branded PDF reports that reflect your company's premium positioning
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center mb-3">
-                  <Users className="w-5 h-5 text-teal-600" />
-                </div>
-                <CardTitle>Client Portal</CardTitle>
-                <CardDescription>
-                  Dedicated portals for each project with secure access and real-time updates
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 rounded-lg">
-              <CardHeader>
-                <div className="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center mb-3">
-                  <TrendingUp className="w-5 h-5 text-pink-600" />
-                </div>
-                <CardTitle>Portfolio Showcase</CardTitle>
-                <CardDescription>
-                  Turn completed projects into stunning marketing materials for future clients
-                </CardDescription>
-              </CardHeader>
-            </Card>
           </div>
         </div>
       </section>

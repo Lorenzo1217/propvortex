@@ -21,7 +21,8 @@ import {
   Mail, 
   FileUp, 
   Check,
-  Calendar
+  Calendar,
+  Quote
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -227,7 +228,7 @@ export default function LandingPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Before Column */}
             <div className="bg-gray-50 rounded-xl p-8 border border-gray-200 fade-in-up delay-200">
               <div className="flex items-center mb-6">
@@ -262,35 +263,35 @@ export default function LandingPage() {
             </div>
             
             {/* After Column */}
-            <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-8 text-white fade-in-up delay-300">
+            <div className="bg-gray-50 rounded-xl p-8 border border-gray-200 fade-in-up delay-300">
               <div className="flex items-center mb-6">
-                <CheckCircle className="w-8 h-8 text-green-400 mr-3" />
-                <h3 className="text-2xl font-bold text-white">After PropVortex</h3>
+                <CheckCircle className="w-8 h-8 text-green-500 mr-3" />
+                <h3 className="text-2xl font-bold text-gray-900">After PropVortex</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <span className="text-green-400 mr-3 mt-1">✓</span>
-                  <span className="text-gray-200">Branded client portal</span>
+                  <span className="text-green-500 mr-3 mt-1">✓</span>
+                  <span className="text-gray-700">Branded client portal</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-400 mr-3 mt-1">✓</span>
-                  <span className="text-gray-200">Professional PDF reports</span>
+                  <span className="text-green-500 mr-3 mt-1">✓</span>
+                  <span className="text-gray-700">Professional PDF reports</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-400 mr-3 mt-1">✓</span>
-                  <span className="text-gray-200">Organized photo galleries</span>
+                  <span className="text-green-500 mr-3 mt-1">✓</span>
+                  <span className="text-gray-700">Organized photo galleries</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-400 mr-3 mt-1">✓</span>
-                  <span className="text-gray-200">One source of truth</span>
+                  <span className="text-green-500 mr-3 mt-1">✓</span>
+                  <span className="text-gray-700">One source of truth</span>
                 </li>
               </ul>
-              <div className="mt-8 pt-6 border-t border-gray-700">
-                <p className="text-green-400 font-semibold">The PropVortex Solution:</p>
-                <p className="text-gray-200 mt-2">• Institutional-quality reports in under 10 minutes</p>
-                <p className="text-gray-200 mt-2">• AI transforms Procore data into polished updates</p>
-                <p className="text-gray-200 mt-2">• Branded client portals that match luxury expectations</p>
-                <p className="text-gray-200 mt-2">• Automated email digests keep clients informed</p>
+              <div className="mt-8 pt-6 border-t border-gray-300">
+                <p className="text-green-600 font-semibold">The PropVortex Solution:</p>
+                <p className="text-gray-700 mt-2">• Institutional-quality reports in under 10 minutes</p>
+                <p className="text-gray-700 mt-2">• AI transforms Procore data into polished updates</p>
+                <p className="text-gray-700 mt-2">• Branded client portals that match luxury expectations</p>
+                <p className="text-gray-700 mt-2">• Automated email digests keep clients informed</p>
               </div>
             </div>
           </div>
@@ -361,6 +362,29 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Testimonial Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-black">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 fade-in-up">
+              What Luxury Builders Are Saying
+            </h2>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 fade-in-up delay-100">
+              <Quote className="w-12 h-12 text-gray-400 mx-auto mb-6" />
+              <p className="text-xl text-gray-200 italic mb-8 leading-relaxed">
+                "PropVortex transformed our client updates from a weekly headache into a 5-minute task. 
+                Our homeowners love the reports, and our team saves hours every week. It's a must-have for 
+                luxury builds."
+              </p>
+              <div className="flex flex-col items-center">
+                <p className="text-white font-semibold text-lg">Lawrence Barbara</p>
+                <p className="text-gray-400">BHDS Group – Dallas, TX</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Live Demo Section */}
       <section id="demo" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -389,7 +413,7 @@ export default function LandingPage() {
                   />
                 </div>
                 <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
-                <p className="text-sm text-gray-500">The Henderson Estate • Multi-Million Dollar Custom Home</p>
+                <p className="text-sm text-gray-500">The Henderson Estate</p>
               </div>
               <div className="flex justify-center">
                 <Badge className="bg-green-100 text-green-800">Week 24 Report</Badge>

@@ -20,8 +20,8 @@ import {
   Mail, 
   FileUp, 
   Check,
-  Calendar,
-  Quote
+  Quote,
+  Clock
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -363,12 +363,12 @@ export default function LandingPage() {
 
       {/* Live Demo Section */}
       <section id="demo" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-green-50 text-green-700 hover:bg-green-100">
+            <Badge className="mb-4 bg-gray-800 text-gray-200" variant="secondary">
               Live Demo
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 tracking-wide mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               This is What Your Clients Will See
             </h2>
             <p className="text-xl text-gray-600">
@@ -376,191 +376,186 @@ export default function LandingPage() {
             </p>
           </div>
           
-          <Card className="bg-white border border-gray-200 rounded-lg shadow-xl max-w-5xl mx-auto">
-            <div className="bg-white px-8 py-4 border-b border-gray-200">
-              <div className="text-center mb-3">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden mx-auto max-w-4xl">
+            {/* Header */}
+            <div className="bg-white px-8 py-6 border-b border-gray-200">
+              <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Image 
                     src="/logo3.svg" 
                     alt="Morrison Builders" 
-                    width={120} 
-                    height={120} 
-                    className="h-24 w-auto"
+                    width={140} 
+                    height={140} 
+                    className="h-32 w-auto"
                   />
                 </div>
-                <h3 className="font-semibold text-gray-900">Morrison Builders</h3>
+                <h3 className="font-semibold text-gray-900 text-xl">Morrison Builders</h3>
                 <p className="text-sm text-gray-500">The Henderson Estate</p>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-4">
                 <Badge className="bg-green-100 text-green-800">Week 24 Report</Badge>
               </div>
             </div>
-            <CardContent className="p-6">
+            
+            {/* Report Content */}
+            <div className="p-8 space-y-8">
               {/* Executive Summary */}
-              <div className="mb-8">
-                <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-lg font-semibold">Executive Summary</h3>
-                  <Badge variant="outline" className="text-xs">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    AI Enhanced
-                  </Badge>
+              <div>
+                <div className="flex items-center mb-3">
+                  <Sparkles className="w-5 h-5 text-gray-600 mr-2" />
+                  <h4 className="text-lg font-semibold text-gray-900">Executive Summary</h4>
+                  <Badge className="ml-2 bg-green-100 text-green-800 text-xs">AI Enhanced</Badge>
                 </div>
-                <p className="text-gray-600">
-                  Excellent progress this week on the Henderson Estate. Interior millwork installation 
-                  is 85% complete, with the library and wine cellar finishing ahead of schedule. 
-                  The imported Italian marble for the master bath has arrived and installation begins Monday. 
-                  We remain on track for our Q3 completion target.
+                <p className="text-gray-700 leading-relaxed">
+                  Excellent progress this week on the Henderson Estate. Interior millwork installation is 85% complete, with the library and wine cellar finishing ahead of schedule. The imported Italian marble for the master bath has arrived and installation begins Monday. We remain on track for our Q3 completion target.
                 </p>
               </div>
 
-              <Separator className="my-6" />
-
-              {/* Control Estimate Update */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-4">Control Estimate Update</h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-600">Original Contract</span>
-                      <span className="font-semibold">$12,750,000</span>
-                    </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-600">Approved Changes</span>
-                      <span className="font-semibold text-green-600">+$425,000</span>
-                    </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-600">Current Contract</span>
-                      <span className="font-semibold">$13,175,000</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="mb-2">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-sm text-gray-600">Progress</span>
-                        <span className="text-sm font-semibold">68%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-blue-600 h-2 rounded-full" style={{ width: '68%' }}></div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Contingency Remaining</span>
-                      <span className="font-semibold">$387,500</span>
-                    </div>
-                  </div>
+              {/* Progress Bar */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-gray-700">Overall Progress</span>
+                  <span className="text-sm font-semibold text-gray-900">68%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full" style={{ width: '68%' }}></div>
                 </div>
               </div>
 
-              <Separator className="my-6" />
-
-              {/* Client Actions Required */}
-              <div className="px-8 py-6 border-b border-gray-200">
-                <div className="flex items-center mb-4">
-                  <AlertTriangle className="w-5 h-5 text-amber-500 mr-2" />
-                  <h4 className="font-semibold text-gray-900">Client Actions Required</h4>
-                  <Badge className="ml-2 bg-amber-100 text-amber-800">2 Pending</Badge>
-                </div>
-                <div className="space-y-3">
-                  <div className="border border-amber-200 bg-amber-50/50 rounded-lg p-4">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center mb-1">
-                          <AlertTriangle className="w-4 h-4 text-amber-500 mr-2" />
-                          <p className="font-medium text-gray-900">Master Suite Chandelier Selection</p>
-                        </div>
-                        <p className="text-sm text-gray-600 ml-6">Please select from the three options provided by the lighting designer. Decision needed by Friday to maintain schedule.</p>
-                      </div>
-                      <div className="ml-4 text-right">
-                        <Badge variant="outline" className="text-amber-600 border-amber-600">Urgent</Badge>
-                        <p className="text-xs text-gray-500 mt-1">Due Aug 8</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="border border-gray-200 bg-white rounded-lg p-4">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center mb-1">
-                          <AlertTriangle className="w-4 h-4 text-yellow-500 mr-2" />
-                          <p className="font-medium text-gray-900">Pool House Cabinet Hardware</p>
-                        </div>
-                        <p className="text-sm text-gray-600 ml-6">Approval needed for $18,500 upgrade to Waterworks fixtures as discussed.</p>
-                      </div>
-                      <div className="ml-4 text-right">
-                        <Badge variant="outline">Standard</Badge>
-                        <p className="text-xs text-gray-500 mt-1">Due Aug 11</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Work Completed This Week */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Work Completed This Week</h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Completed master bath marble installation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Installed custom wine cellar cooling system</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Finished exterior limestone detail work</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Completed theater room acoustic panels</span>
+                  </li>
+                </ul>
               </div>
-
-              <Separator className="my-6" />
 
               {/* Upcoming Work */}
-              <div className="px-8 py-6 border-b border-gray-200">
-                <div className="flex items-center mb-4">
-                  <Calendar className="w-5 h-5 text-gray-400 mr-2" />
-                  <h4 className="font-semibold text-gray-900">Upcoming Work (Next 2 Weeks)</h4>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Complete master bath marble installation</p>
-                    </div>
-                  </div>
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Install custom wine cellar cooling system</p>
-                    </div>
-                  </div>
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Begin exterior limestone detail work</p>
-                    </div>
-                  </div>
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Complete theater room acoustic panels</p>
-                    </div>
-                  </div>
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Install smart home integration system</p>
-                    </div>
-                  </div>
-                  <div className="border border-gray-200 bg-white rounded-lg p-3">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-700">Pool house millwork installation</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <Separator className="my-6" />
-
-              {/* Photo Gallery */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">This Week's Progress Photos</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                      <Camera className="w-8 h-8 text-gray-400" />
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-gray-500 mt-3">
-                  12 photos uploaded this week • Click to view full gallery
-                </p>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Upcoming Work (Next 2 Weeks)</h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Begin pool house millwork installation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Install smart home integration system</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Complete theater room projector calibration</span>
+                  </li>
+                </ul>
               </div>
-            </CardContent>
-          </Card>
+
+              {/* Budget Update */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Budget Update</h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Original Contract</span>
+                    <span className="font-semibold text-gray-900">$12,750,000</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Approved Changes</span>
+                    <span className="font-semibold text-green-600">+$425,000</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Current Contract</span>
+                    <span className="font-semibold text-gray-900">$13,175,000</span>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-gray-200">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Contingency Remaining</span>
+                      <div className="text-right">
+                        <span className="font-semibold text-gray-900">$387,500</span>
+                        <span className="text-xs text-gray-500 block">3% of budget</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Client Actions Required */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="flex items-center mb-3">
+                  <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2" />
+                  <h4 className="text-lg font-semibold text-gray-900">Client Actions Required</h4>
+                  <Badge className="ml-2 bg-yellow-100 text-yellow-800 text-xs">2 Pending</Badge>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <div className="bg-yellow-600 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></div>
+                    <div className="flex-1">
+                      <p className="text-gray-900 font-medium">Master Suite Chandelier Selection</p>
+                      <p className="text-sm text-gray-600">Please select from the three options provided by the lighting designer.</p>
+                      <p className="text-xs text-yellow-700 mt-1 font-medium">Due: Aug 8</p>
+                    </div>
+                    <Button size="sm" variant="outline" className="ml-4">
+                      Urgent
+                    </Button>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="bg-yellow-600 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></div>
+                    <div className="flex-1">
+                      <p className="text-gray-900 font-medium">Pool House Cabinet Hardware</p>
+                      <p className="text-sm text-gray-600">Approval needed for $16,500 upgrade to Waterworks fixtures.</p>
+                      <p className="text-xs text-gray-500 mt-1">Due: Aug 11</p>
+                    </div>
+                    <Button size="sm" variant="ghost" className="ml-4">
+                      Standard
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* This Week's Progress Photos */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">This Week's Progress Photos</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-gray-400" />
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">12 photos uploaded this week • Click to view full gallery</p>
+              </div>
+
+              {/* Weather Impact */}
+              <div className="border-t pt-6">
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Weather Outlook</h4>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <p className="text-sm text-gray-700">
+                    <span className="font-medium">No weather delays expected.</span> Clear conditions forecasted for the next 7 days. Ideal for exterior work completion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

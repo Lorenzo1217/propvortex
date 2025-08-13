@@ -165,13 +165,9 @@ export default function LandingPage() {
 
       {/* Trusted By Section */}
       <div className="text-center py-8 bg-gray-50 border-y border-gray-200">
-        <p className="text-sm text-gray-500 mb-4">Trusted by luxury builders in Dallas-Fort Worth</p>
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-          <span className="text-gray-700 font-medium text-sm sm:text-base">BHDS Group</span>
-          <span className="text-gray-700 font-medium text-sm sm:text-base">Morrison Builders</span>
-          <span className="text-gray-700 font-medium text-sm sm:text-base">Luxury Estates Group</span>
-          <span className="text-gray-700 font-medium text-sm sm:text-base">Vanguard Custom Homes</span>
-        </div>
+        <p className="text-lg text-gray-700 font-medium">
+          Trusted by builders managing over <span className="text-gray-900 font-bold">$100+ million</span> in active projects
+        </p>
       </div>
 
       {/* AI Automation Section */}

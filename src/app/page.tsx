@@ -24,7 +24,8 @@ import {
   Clock,
   Cloud,
   Sun,
-  CloudRain
+  CloudRain,
+  ZoomIn
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -394,7 +395,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="font-semibold text-gray-900 text-xl">Morrison Builders</h3>
                 <p className="text-sm text-gray-500">The Henderson Estate</p>
-                <p className="text-xs text-gray-400 mt-1">5116 Steinbeck St, Carrollton, TX 75010</p>
+                <p className="text-xs text-gray-400 mt-1">1234 Estate Drive, Highland Park, TX 75205</p>
               </div>
               <div className="flex justify-center mt-4 gap-2">
                 <Badge className="bg-green-100 text-green-800">Week 32</Badge>
@@ -406,221 +407,386 @@ export default function LandingPage() {
             <div className="p-8 space-y-6">
               
               {/* 1. Weather Outlook */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
                       <Cloud className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-light tracking-wide text-gray-900">Weather Outlook</h3>
+                    <div>
+                      <h3 className="text-xl font-light tracking-wide text-gray-900">Weather Outlook</h3>
+                      <p className="text-sm text-gray-500 mt-1">7-day forecast for construction planning • Weather conditions as of report creation</p>
+                    </div>
                   </div>
                 </div>
-                <p className="text-xs text-gray-500 mb-4">7-day forecast for construction planning</p>
-                
-                <div className="grid grid-cols-7 gap-2">
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Thu</p>
-                    <p className="text-xs text-gray-400">8/7</p>
-                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
-                    <p className="text-sm font-semibold">104°</p>
-                    <p className="text-xs text-gray-500">91°</p>
-                    <p className="text-xs text-red-600 mt-1">Delay</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Fri</p>
-                    <p className="text-xs text-gray-400">8/8</p>
-                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
-                    <p className="text-sm font-semibold">102°</p>
-                    <p className="text-xs text-gray-500">89°</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Sat</p>
-                    <p className="text-xs text-gray-400">8/9</p>
-                    <CloudRain className="w-6 h-6 mx-auto my-2 text-gray-500" />
-                    <p className="text-sm font-semibold">95°</p>
-                    <p className="text-xs text-gray-500">78°</p>
-                    <p className="text-xs text-red-600 mt-1">Delay</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Sun</p>
-                    <p className="text-xs text-gray-400">8/10</p>
-                    <Cloud className="w-6 h-6 mx-auto my-2 text-gray-400" />
-                    <p className="text-sm font-semibold">98°</p>
-                    <p className="text-xs text-gray-500">82°</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Mon</p>
-                    <p className="text-xs text-gray-400">8/11</p>
-                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
-                    <p className="text-sm font-semibold">101°</p>
-                    <p className="text-xs text-gray-500">87°</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Tue</p>
-                    <p className="text-xs text-gray-400">8/12</p>
-                    <Sun className="w-6 h-6 mx-auto my-2 text-yellow-500" />
-                    <p className="text-sm font-semibold">103°</p>
-                    <p className="text-xs text-gray-500">90°</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs font-medium text-gray-600">Wed</p>
-                    <p className="text-xs text-gray-400">8/13</p>
-                    <Cloud className="w-6 h-6 mx-auto my-2 text-gray-400" />
-                    <p className="text-sm font-semibold">99°</p>
-                    <p className="text-xs text-gray-500">85°</p>
+                <div className="px-8 py-6">
+                  {/* Weather grid - centered and professional */}
+                  <div className="flex justify-center">
+                    <div className="grid grid-cols-7 gap-2 max-w-6xl">
+                      {/* Thursday - Hot with delay */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Thu</p>
+                          <p className="text-xs text-gray-500">8/7</p>
+                          <Badge variant="outline" className="mt-1 text-xs py-0 px-1">Report Date</Badge>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Sun className="w-10 h-10 text-gray-700" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">104°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">91°</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                        </div>
+                      </div>
+                      
+                      {/* Friday - Hot */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Fri</p>
+                          <p className="text-xs text-gray-500">8/8</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Sun className="w-10 h-10 text-gray-700" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">102°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">89°</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                        </div>
+                      </div>
+                      
+                      {/* Saturday - Rain */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Sat</p>
+                          <p className="text-xs text-gray-500">8/9</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <CloudRain className="w-10 h-10 text-gray-700" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">95°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">78°</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                        </div>
+                      </div>
+                      
+                      {/* Sunday - Cloudy */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-200 bg-white transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Sun</p>
+                          <p className="text-xs text-gray-500">8/10</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Cloud className="w-10 h-10 text-gray-600" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">98°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">82°</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Monday - Hot */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Mon</p>
+                          <p className="text-xs text-gray-500">8/11</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Sun className="w-10 h-10 text-gray-700" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">101°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">87°</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                        </div>
+                      </div>
+                      
+                      {/* Tuesday - Very Hot */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-300 bg-gray-50 shadow-sm transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Tue</p>
+                          <p className="text-xs text-gray-500">8/12</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Sun className="w-10 h-10 text-gray-700" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">103°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">90°</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-200 text-center">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-500 mx-auto mb-0.5" />
+                          <p className="text-xs text-red-600 font-medium">Possible Delays</p>
+                        </div>
+                      </div>
+                      
+                      {/* Wednesday - Partly Cloudy */}
+                      <div className="flex flex-col p-3 rounded-lg border border-gray-200 bg-white transition-all min-w-[100px]">
+                        <div className="text-center mb-2">
+                          <p className="font-semibold text-sm text-gray-900">Wed</p>
+                          <p className="text-xs text-gray-500">8/13</p>
+                        </div>
+                        <div className="flex justify-center mb-3">
+                          <Cloud className="w-10 h-10 text-gray-600" />
+                        </div>
+                        <div className="text-center mb-3">
+                          <div className="flex items-center justify-center space-x-1">
+                            <span className="text-lg font-semibold">99°</span>
+                            <span className="text-sm text-gray-400">/</span>
+                            <span className="text-sm text-gray-500">85°</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* 2. Project Photography */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
+              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-lg">
                         <Camera className="w-5 h-5 text-blue-600" />
                       </div>
-                      <h3 className="text-lg font-light tracking-wide text-gray-900">Project Photography</h3>
+                      <div>
+                        <h3 className="text-xl font-light tracking-wide text-gray-900">Project Photography</h3>
+                        <p className="text-gray-600 mt-1">6 photos documenting this week's progress</p>
+                      </div>
                     </div>
-                    <button className="text-sm text-blue-600 hover:text-blue-700">Click to view</button>
+                    <Badge variant="secondary" className="flex items-center gap-1.5 bg-gray-100 text-gray-700 border-0">
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span className="text-xs font-medium">Click to view</span>
+                    </Badge>
                   </div>
                 </div>
-                <p className="text-sm text-gray-500 mb-3">2 photos documenting this week's progress</p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
-                    <Camera className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
-                    <Camera className="w-8 h-8 text-gray-400" />
+                <div className="px-8 py-6">
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* 3. Executive Summary */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+              <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
                       <FileText className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-light tracking-wide text-gray-900">Executive Summary</h3>
+                    <h3 className="text-xl font-light tracking-wide text-gray-900">Executive Summary</h3>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
-                  This week, we made great progress across the project. The custom bookcases and stone tile around 
-                  the fireplace were installed, and the backyard patio steps were completed. Everything is tracking 
-                  on schedule, and we're preparing for the next phase of interior finishes.
-                </p>
+                <div className="px-8 py-6">
+                  <p className="text-gray-700 leading-relaxed prose prose-gray max-w-none">
+                    This week, we made great progress across the project. The custom bookcases and stone tile around 
+                    the fireplace were installed, and the backyard patio steps were completed. Everything is tracking 
+                    on schedule, and we're preparing for the next phase of interior finishes.
+                  </p>
+                </div>
               </div>
 
               {/* 4. Work Completed This Week */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+              <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
                       <CheckCircle className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-light tracking-wide text-gray-900">Work Completed This Week</h3>
+                    <h3 className="text-xl font-light tracking-wide text-gray-900">Work Completed This Week</h3>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Installed backyard stone patio steps and completed final grading</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
-                        <span className="text-gray-600">Moderate Impact</span>
-                      </span>
+                <div className="px-8 py-6">
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Installed backyard stone patio steps and completed final grading</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-700">Moderate Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Set and secured custom built-in wall bookcases in living room</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
-                        <span className="text-gray-600">Moderate Impact</span>
-                      </span>
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Set and secured custom built-in wall bookcases in living room</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-700">Moderate Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Completed electrical rough-in inspection and passed city approval</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
-                        <span className="text-blue-600">Critical Impact</span>
-                      </span>
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Completed electrical rough-in inspection and passed city approval</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50">
+                            <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-blue-700">Critical Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* 5. Upcoming Work */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
+              <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
                       <Clock className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-light tracking-wide text-gray-900">Upcoming Work</h3>
+                    <h3 className="text-xl font-light tracking-wide text-gray-900">Upcoming Work</h3>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Begin interior painting throughout main living areas</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
-                        <span className="text-gray-600">Minor Impact</span>
-                      </span>
+                <div className="px-8 py-6">
+                  <div className="space-y-4">
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Begin interior painting throughout main living areas</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-600">Minor Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Install kitchen cabinetry and prep for countertop templating</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
-                        <span className="text-gray-600">Moderate Impact</span>
-                      </span>
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Install kitchen cabinetry and prep for countertop templating</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-700">Moderate Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-start justify-between">
-                      <p className="text-gray-700">Schedule HVAC final inspection and perform system testing</p>
-                      <span className="inline-flex items-center text-xs">
-                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
-                        <span className="text-blue-600">Critical Impact</span>
-                      </span>
+                    <div className="group relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 group-hover:bg-blue-400 transition-colors duration-300"></div>
+                      <div className="pl-6 pb-4">
+                        <div className="flex items-start justify-between gap-4 bg-gray-50 rounded-lg p-4">
+                          <p className="text-gray-700 leading-relaxed flex-1">Schedule HVAC final inspection and perform system testing</p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50">
+                            <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-blue-700">Critical Impact</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* 6. Issues & Delays */}
-              <div className="bg-white rounded-lg shadow-lg shadow-gray-100/50 p-6">
-                <div className="bg-gradient-to-r from-gray-50 to-white p-4 -m-6 mb-4 rounded-t-lg">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center mr-3">
-                      <AlertTriangle className="w-5 h-5 text-yellow-600" />
+              <div className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                      <AlertTriangle className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-light tracking-wide text-gray-900">Issues & Delays</h3>
+                    <h3 className="text-xl font-light tracking-wide text-gray-900">Issues & Delays</h3>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="border-l-4 border-yellow-400 bg-yellow-50 p-3 rounded-r">
-                    <p className="font-medium text-gray-900">Stone Tile Delivery Delay</p>
-                    <p className="text-sm text-gray-600 mt-1">Minor 2-day delay; no impact on overall schedule</p>
-                    <span className="inline-flex items-center text-xs mt-2">
-                      <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-1"></span>
-                      <span className="text-yellow-700">Low Risk</span>
-                    </span>
-                  </div>
-                  <div className="border-l-4 border-orange-400 bg-orange-50 p-3 rounded-r">
-                    <p className="font-medium text-gray-900">Cabinet Hardware Shipment Delay</p>
-                    <p className="text-sm text-gray-600 mt-1">May delay cabinet installation if not resolved</p>
-                    <span className="inline-flex items-center text-xs mt-2">
-                      <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1"></span>
-                      <span className="text-orange-700">Medium Risk</span>
-                    </span>
+                <div className="px-8 py-6">
+                  <div className="space-y-6">
+                    <div className="group">
+                      <div className="bg-gray-50/50 rounded-lg p-5 hover:bg-gray-50 transition-all duration-200">
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <p className="text-gray-700 leading-relaxed flex-1 font-light">
+                            Stone Tile Delivery Delay
+                          </p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-600">Low Risk</span>
+                          </div>
+                        </div>
+                        <div className="mt-3 pl-4 border-l-2 border-gray-200">
+                          <p className="text-sm text-gray-600">
+                            <span className="font-medium text-gray-700">Impact Analysis:</span> Minor 2-day delay; no impact on overall schedule
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="group">
+                      <div className="bg-gray-50/50 rounded-lg p-5 hover:bg-gray-50 transition-all duration-200">
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <p className="text-gray-700 leading-relaxed flex-1 font-light">
+                            Cabinet Hardware Shipment Delay
+                          </p>
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50">
+                            <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                            <span className="text-xs font-medium tracking-wide text-gray-700">Medium Risk</span>
+                          </div>
+                        </div>
+                        <div className="mt-3 pl-4 border-l-2 border-gray-200">
+                          <p className="text-sm text-gray-600">
+                            <span className="font-medium text-gray-700">Impact Analysis:</span> May delay cabinet installation if not resolved
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

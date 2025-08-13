@@ -952,6 +952,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

@@ -203,13 +203,35 @@ export async function publishReport(reportId: string) {
         }
       },
       include: {
-        project: true
+        project: {
+          include: {
+            clients: true,
+            user: {
+              include: {
+                companyRelation: true
+              }
+            }
+          }
+        }
       }
     })
 
     if (!report) {
       throw new Error('Report not found or access denied')
     }
+
+    // Check if this is the first published report for the project
+    const previousPublishedReports = await db.report.count({
+      where: {
+        projectId: report.projectId,
+        isPublished: true,
+        id: {
+          not: reportId
+        }
+      }
+    })
+    
+    const isFirstReport = previousPublishedReports === 0
 
     // Update report to published
     const updatedReport = await db.report.update({
@@ -221,6 +243,51 @@ export async function publishReport(reportId: string) {
     })
 
     console.log('✅ Report published:', updatedReport.title)
+
+    // Send notifications to all project clients
+    if (report.project.clients.length > 0) {
+      console.log(`📧 Sending notifications to ${report.project.clients.length} clients...`)
+      
+      const { sendBatchNotifications } = await import('@/lib/services/notifications')
+      
+      const notificationResults = await sendBatchNotifications(
+        report.project.clients,
+        report.project,
+        updatedReport,
+        report.project.user.companyRelation,
+        isFirstReport
+      )
+      
+      // Update client invitation status for first-time clients
+      const clientsToUpdate = report.project.clients.filter(client => !client.isInvited)
+      if (clientsToUpdate.length > 0) {
+        console.log(`📝 Updating invitation status for ${clientsToUpdate.length} clients...`)
+        
+        await db.projectClient.updateMany({
+          where: {
+            id: {
+              in: clientsToUpdate.map(c => c.id)
+            }
+          },
+          data: {
+            isInvited: true,
+            invitedAt: new Date()
+          }
+        })
+      }
+      
+      // Log notification summary
+      let successCount = 0
+      let failureCount = 0
+      notificationResults.forEach((result) => {
+        if (result.email.success) successCount++
+        else failureCount++
+      })
+      
+      console.log(`📊 Notification Summary: ${successCount} successful, ${failureCount} failed`)
+    } else {
+      console.log('ℹ️ No clients to notify for this project')
+    }
 
     // Revalidate the project page
     revalidatePath(`/projects/${report.projectId}`)

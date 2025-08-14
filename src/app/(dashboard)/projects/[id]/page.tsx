@@ -24,6 +24,8 @@ import { publishReport } from "@/lib/actions/reports";
 import { PhotoViewer } from "@/components/photo-viewer";
 import { ProjectSettingsDialog } from "@/components/project-settings-dialog";
 import { getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
+import { ProjectClientsList } from "@/components/project-clients-list";
+import { getProjectClients } from "@/lib/actions/projects";
 
 interface PageProps {
   params: Promise<{
@@ -421,71 +423,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </TabsContent>
 
             <TabsContent value="clients" className="space-y-6">
-              <div className="mb-8">
-                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
-                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-blue-50 rounded-lg">
-                        <Users className="w-5 h-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-xl font-light text-gray-900">Project Clients</CardTitle>
-                        <CardDescription className="mt-1">
-                          Manage who has access to this project's portal
-                        </CardDescription>
-                      </div>
-                    </div>
-                    <Button className="bg-gray-900 hover:bg-gray-800">
-                      <Plus className="w-4 h-4 mr-2" />
-                      Invite Client
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  {project.clients.length > 0 ? (
-                    <div className="space-y-4">
-                      {project.clients.map((client) => (
-                        <div key={client.id} className="bg-gray-50 rounded-lg p-4 mb-3">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <h3 className="font-medium">{client.firstName} {client.lastName}</h3>
-                              <p className="text-sm text-gray-600">{client.email}</p>
-                              <p className="text-xs text-gray-500">
-                                Invited {new Date(client.invitedAt).toLocaleDateString()}
-                                {client.lastViewedAt && ` • Last viewed ${new Date(client.lastViewedAt).toLocaleDateString()}`}
-                              </p>
-                            </div>
-                            <div className="flex space-x-2">
-                              <Button variant="outline" size="sm" className="text-gray-600">
-                                Portal Link
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-gray-600">
-                                Remove
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12">
-                      <Users className="mx-auto h-12 w-12 text-gray-400" />
-                      <h3 className="mt-2 text-sm font-semibold text-gray-900">No clients invited</h3>
-                      <p className="mt-1 text-sm text-gray-500">
-                        Invite your clients to give them access to the project portal.
-                      </p>
-                      <div className="mt-6">
-                        <Button>
-                          <Plus className="w-4 h-4 mr-2" />
-                          Invite Your First Client
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-              </div>
+              <ProjectClientsList 
+                projectId={id} 
+                clients={project.clients}
+              />
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">

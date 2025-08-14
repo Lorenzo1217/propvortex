@@ -76,6 +76,14 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  
+  /* Brand Colors - Dynamically set by BrandProvider */
+  --brand-primary: #000000;
+  --brand-secondary: #666666;
+  --brand-accent: #3B82F6;
+  --brand-primary-rgb: 0, 0, 0;
+  --brand-secondary-rgb: 102, 102, 102;
+  --brand-accent-rgb: 59, 130, 246;
 }
 
 .dark {
@@ -329,3 +337,77 @@
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
+
+/* Branded Utility Classes */
+.brand-primary { color: var(--brand-primary) !important; }
+.bg-brand-primary { background-color: var(--brand-primary) !important; }
+.border-brand-primary { border-color: var(--brand-primary) !important; }
+.hover\:bg-brand-primary:hover { background-color: var(--brand-primary) !important; }
+
+.brand-secondary { color: var(--brand-secondary) !important; }
+.bg-brand-secondary { background-color: var(--brand-secondary) !important; }
+.border-brand-secondary { border-color: var(--brand-secondary) !important; }
+.hover\:bg-brand-secondary:hover { background-color: var(--brand-secondary) !important; }
+
+.brand-accent { color: var(--brand-accent) !important; }
+.bg-brand-accent { background-color: var(--brand-accent) !important; }
+.border-brand-accent { border-color: var(--brand-accent) !important; }
+.hover\:bg-brand-accent:hover { background-color: var(--brand-accent) !important; }
+
+/* Branded button styles */
+.btn-brand-primary {
+  background-color: var(--brand-primary);
+  color: white;
+  transition: opacity 0.2s;
+}
+.btn-brand-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-brand-accent {
+  background-color: var(--brand-accent);
+  color: white;
+  transition: opacity 0.2s;
+}
+.btn-brand-accent:hover {
+  opacity: 0.9;
+}
+
+/* Branded button outline styles */
+.btn-brand-outline {
+  border: 1px solid var(--brand-accent);
+  color: var(--brand-accent);
+  background-color: transparent;
+  transition: all 0.2s;
+}
+.btn-brand-outline:hover {
+  background-color: rgba(var(--brand-accent-rgb), 0.1);
+}
+
+/* Branded link styles */
+.link-brand {
+  color: var(--brand-accent);
+  transition: color 0.2s;
+}
+.link-brand:hover {
+  color: var(--brand-primary);
+}
+
+/* Branded badge styles */
+.badge-brand {
+  background-color: rgba(var(--brand-accent-rgb), 0.1);
+  color: var(--brand-accent);
+  border: 1px solid rgba(var(--brand-accent-rgb), 0.3);
+}
+
+/* Branded header styles */
+.header-brand {
+  background-color: var(--brand-primary);
+  border-top: 4px solid var(--brand-accent);
+}
+
+/* PropVortex Footer Styles */
+.propvortex-footer {
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

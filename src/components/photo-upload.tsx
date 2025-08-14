@@ -5,10 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Camera, X, FileImage, CloudUpload, Upload, ZoomIn, Check, Loader2 } from 'lucide-react'
-import { savePhotoToProject, updatePhotoCaption, deletePhoto } from '@/lib/actions/photos'
+import { Textarea } from '@/components/ui/textarea'
+import { Badge } from '@/components/ui/badge'
+import { Camera, X, FileImage, CloudUpload, Upload, ZoomIn, Check, Loader2, Tags } from 'lucide-react'
+import { savePhotoToProject, updatePhotoCaptionAndTags, deletePhoto } from '@/lib/actions/photos'
 import Image from 'next/image'
 import { PhotoLightbox } from '@/components/photo-lightbox'
+import { PhotoTagSelector } from '@/components/photo-tag-selector'
+import { parseTags, getTagBadgeColor } from '@/config/photo-tags'
 
 interface PhotoUploadProps {
   projectId: string
@@ -17,7 +21,8 @@ interface PhotoUploadProps {
     id: string
     url: string
     originalName: string
-    caption?: string
+    caption?: string | null
+    tags?: string | null
   }>
 }
 
@@ -26,6 +31,7 @@ interface UploadedPhoto {
   url: string
   name: string
   caption: string
+  tags: string[]
 }
 
 export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoUploadProps) {
@@ -34,7 +40,8 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
       id: photo.id,
       url: photo.url,
       name: photo.originalName,
-      caption: photo.caption || ''
+      caption: photo.caption || '',
+      tags: parseTags(photo.tags)
     }))
   )
   const [isUploading, setIsUploading] = useState(false)
@@ -93,7 +100,8 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
             result.size,
             file.type,
             '',
-            reportId
+            reportId,
+            [] // Empty tags initially
           )
 
           if (dbResult.success) {
@@ -101,7 +109,8 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
               id: dbResult.photo.id,
               url: result.url,
               name: result.name,
-              caption: ''
+              caption: '',
+              tags: []
             }])
           } else {
             throw new Error(`Failed to save photo to database`)
@@ -185,17 +194,23 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
     ))
   }
 
-  const saveCaptionToDatabase = async (index: number) => {
+  const updateTags = (index: number, tags: string[]) => {
+    setPhotos(prev => prev.map((photo, i) => 
+      i === index ? { ...photo, tags } : photo
+    ))
+  }
+
+  const savePhotoDetailsToDatabase = async (index: number) => {
     const photo = photos[index]
     if (!photo.id) return // Skip if photo doesn't have an ID yet
     
     setSavingCaptions(prev => new Set(prev).add(photo.id!))
     
     try {
-      // Use your existing updatePhotoCaption function (only needs photoId and caption)
-      const result = await updatePhotoCaption(photo.id, photo.caption)
+      // Save both caption and tags
+      const result = await updatePhotoCaptionAndTags(photo.id, photo.caption, photo.tags)
       if (!result.success) {
-        throw new Error('Failed to save caption')
+        throw new Error('Failed to save photo details')
       }
       
       // Add to saved set
@@ -401,48 +416,58 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
                         <FileImage className="w-4 h-4 mr-2 flex-shrink-0 text-blue-500" />
                         <span className="truncate font-medium">{photo.name}</span>
                       </div>
+                      {/* Tags Section */}
+                      <div>
+                        <PhotoTagSelector
+                          selectedTags={photo.tags}
+                          onChange={(tags) => updateTags(index, tags)}
+                          disabled={!photo.id}
+                        />
+                      </div>
+
+                      {/* Caption Section */}
                       <div>
                         <Label htmlFor={`caption-${index}`} className="text-sm font-semibold text-gray-700 mb-2 block">
                           Photo Description
                         </Label>
-                        <div className="flex space-x-2">
-                          <Input
-                            id={`caption-${index}`}
-                            value={photo.caption}
-                            onChange={(e) => updateCaption(index, e.target.value)}
-                            placeholder="Describe what's shown in this photo..."
-                            className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg flex-1"
-                            onKeyDown={(e) => {
-                              if (e.key === 'Enter') {
-                                saveCaptionToDatabase(index)
-                              }
-                            }}
-                          />
-                          {photo.id && (
-                            <Button
-                              type="button"
-                              size="sm"
-                              onClick={() => saveCaptionToDatabase(index)}
-                              disabled={savingCaptions.has(photo.id)}
-                              className={savedPhotos.has(photo.id) ? 'bg-green-600 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700 text-white px-3'}
-                            >
-                              {savingCaptions.has(photo.id) ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : savedPhotos.has(photo.id) ? (
-                                <>
-                                  <Check className="w-4 h-4" />
-                                  <span className="ml-1">Saved!</span>
-                                </>
-                              ) : (
-                                <Check className="w-4 h-4" />
-                              )}
-                            </Button>
-                          )}
-                        </div>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Press Enter or click ✓ to save description
-                        </p>
+                        <Textarea
+                          id={`caption-${index}`}
+                          value={photo.caption}
+                          onChange={(e) => updateCaption(index, e.target.value)}
+                          placeholder="Add a detailed description of this photo..."
+                          className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg resize-none"
+                          rows={2}
+                        />
                       </div>
+
+                      {/* Save Button */}
+                      {photo.id && (
+                        <div className="flex justify-end">
+                          <Button
+                            type="button"
+                            onClick={() => savePhotoDetailsToDatabase(index)}
+                            disabled={savingCaptions.has(photo.id)}
+                            className={savedPhotos.has(photo.id) ? 'bg-green-600 hover:bg-green-600' : 'bg-blue-600 hover:bg-blue-700 text-white'}
+                          >
+                            {savingCaptions.has(photo.id) ? (
+                              <>
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                Saving...
+                              </>
+                            ) : savedPhotos.has(photo.id) ? (
+                              <>
+                                <Check className="w-4 h-4 mr-2" />
+                                Saved!
+                              </>
+                            ) : (
+                              <>
+                                <Check className="w-4 h-4 mr-2" />
+                                Save Details
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}

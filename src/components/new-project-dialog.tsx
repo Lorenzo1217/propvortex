@@ -14,16 +14,27 @@ import { SimpleSelect, SelectItem } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Plus } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Separator } from '@/components/ui/separator'
+import { Plus, UserPlus } from 'lucide-react'
 import { createProject, checkCanCreateProject } from '@/lib/actions/projects'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import { ClientRelationship } from '@prisma/client'
 
 interface NewProjectDialogProps {
   trigger?: React.ReactNode
   buttonText?: string
 }
+
+const relationshipTypes: { value: ClientRelationship; label: string }[] = [
+  { value: 'HOMEOWNER', label: 'Homeowner' },
+  { value: 'ARCHITECT', label: 'Architect' },
+  { value: 'INVESTOR', label: 'Investor' },
+  { value: 'SUBCONTRACTOR', label: 'Subcontractor' },
+  { value: 'OTHER', label: 'Other' },
+]
 
 // US States list
 const states = [
@@ -84,6 +95,7 @@ export function NewProjectDialog({ trigger, buttonText = "New Project" }: NewPro
   const [isLoading, setIsLoading] = useState(false)
   const [showLimitAlert, setShowLimitAlert] = useState(false)
   const [limitMessage, setLimitMessage] = useState('')
+  const [addClient, setAddClient] = useState(false)
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true)
@@ -232,6 +244,94 @@ export function NewProjectDialog({ trigger, buttonText = "New Project" }: NewPro
               rows={3}
               disabled={isLoading}
             />
+          </div>
+          
+          {/* Initial Client Section */}
+          <div className="space-y-4">
+            <Separator />
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="addClient" 
+                checked={addClient}
+                onCheckedChange={(checked: boolean) => setAddClient(checked)}
+                disabled={isLoading}
+              />
+              <Label 
+                htmlFor="addClient" 
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+              >
+                Add initial client to this project
+              </Label>
+            </div>
+            
+            {addClient && (
+              <div className="space-y-4 pl-6 animate-in slide-in-from-top-2">
+                <input type="hidden" name="addClient" value="true" />
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="clientFirstName">First Name *</Label>
+                    <Input
+                      id="clientFirstName"
+                      name="clientFirstName"
+                      placeholder="John"
+                      required={addClient}
+                      disabled={isLoading}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="clientLastName">Last Name *</Label>
+                    <Input
+                      id="clientLastName"
+                      name="clientLastName"
+                      placeholder="Doe"
+                      required={addClient}
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="clientEmail">Email Address *</Label>
+                  <Input
+                    id="clientEmail"
+                    name="clientEmail"
+                    type="email"
+                    placeholder="john.doe@example.com"
+                    required={addClient}
+                    disabled={isLoading}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="clientPhone">Phone Number</Label>
+                  <Input
+                    id="clientPhone"
+                    name="clientPhone"
+                    type="tel"
+                    placeholder="(555) 123-4567"
+                    disabled={isLoading}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="clientRelationshipType">Relationship Type</Label>
+                  <SimpleSelect name="clientRelationshipType" defaultValue="HOMEOWNER" disabled={isLoading}>
+                    {relationshipTypes.map((type) => (
+                      <SelectItem key={type.value} value={type.value}>
+                        {type.label}
+                      </SelectItem>
+                    ))}
+                  </SimpleSelect>
+                </div>
+                
+                <p className="text-sm text-gray-500 flex items-center">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Client will receive project updates when reports are published
+                </p>
+              </div>
+            )}
           </div>
           
           <div className="flex justify-end space-x-2 pt-4">

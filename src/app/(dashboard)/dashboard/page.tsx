@@ -25,6 +25,11 @@ export default async function DashboardPage() {
   // Ensure user exists in our database and check subscription
   const dbUser = await requireSubscription();
   
+  // Check if user has set up their company
+  if (!dbUser.companyId) {
+    redirect("/company/setup");
+  }
+  
   // Get user's projects
   const projects = await getUserProjects(dbUser.id);
 

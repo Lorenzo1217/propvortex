@@ -1,10 +1,16 @@
 import { redirect } from 'next/navigation'
+import { currentUser } from '@clerk/nextjs/server'
 import { ensureUserInDatabase } from '@/lib/user-helpers'
 import { getCurrentUserCompany } from '@/lib/actions/company'
 import { CompanySettingsForm } from './company-settings-form'
 
 export default async function CompanySettingsPage() {
-  const user = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) {
+    redirect('/login')
+  }
+  
+  const user = await ensureUserInDatabase(clerkUser)
   
   // If user doesn't have a company, redirect to setup
   if (!user.companyId) {

@@ -1,9 +1,15 @@
 import { redirect } from 'next/navigation'
+import { currentUser } from '@clerk/nextjs/server'
 import { ensureUserInDatabase } from '@/lib/user-helpers'
 import { CompanySetupForm } from './company-setup-form'
 
 export default async function CompanySetupPage() {
-  const user = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) {
+    redirect('/login')
+  }
+  
+  const user = await ensureUserInDatabase(clerkUser)
   
   // If user already has a company, redirect to dashboard
   if (user.companyId) {

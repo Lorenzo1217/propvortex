@@ -26,12 +26,12 @@ export default function ClientReportView({ report, project, company }: ClientRep
   const primaryColor = company?.primaryColor || '#000000'
 
   // Parse JSON fields
-  const workCompleted = report.workCompleted ? JSON.parse(report.workCompleted) : []
-  const upcomingWork = report.upcomingWork ? JSON.parse(report.upcomingWork) : []
-  const issues = report.issues ? JSON.parse(report.issues) : []
-  const budget = report.budget ? JSON.parse(report.budget) : null
-  const clientActions = report.clientActions ? JSON.parse(report.clientActions) : []
-  const weatherData = report.weatherData ? JSON.parse(report.weatherData) : null
+  const workCompleted = report.workCompleted ? JSON.parse(report.workCompleted as string) : []
+  const upcomingWork = report.upcomingWork ? JSON.parse(report.upcomingWork as string) : []
+  const issues = report.issues ? JSON.parse(report.issues as string) : []
+  const budget = report.budget ? JSON.parse(report.budget as string) : null
+  const clientActions = report.clientActions ? JSON.parse(report.clientActions as string) : []
+  const weatherData = report.weatherData ? JSON.parse(report.weatherData as string) : null
 
   // Group photos by tags
   const photosByArea = report.photos.reduce((acc: any, photo: any) => {

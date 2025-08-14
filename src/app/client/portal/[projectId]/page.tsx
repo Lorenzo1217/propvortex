@@ -88,7 +88,7 @@ export default async function ClientProjectPage({
   let budgetInfo = null
   if (latestReport?.budget) {
     try {
-      budgetInfo = JSON.parse(latestReport.budget)
+      budgetInfo = JSON.parse(latestReport.budget as string)
     } catch (e) {
       console.error('Failed to parse budget:', e)
     }
@@ -98,7 +98,7 @@ export default async function ClientProjectPage({
   let activeIssues = []
   if (latestReport?.issues) {
     try {
-      const issues = JSON.parse(latestReport.issues)
+      const issues = JSON.parse(latestReport.issues as string)
       activeIssues = issues.filter((issue: any) => !issue.resolved)
     } catch (e) {
       console.error('Failed to parse issues:', e)
@@ -109,7 +109,7 @@ export default async function ClientProjectPage({
   let clientActions = []
   if (latestReport?.clientActions) {
     try {
-      clientActions = JSON.parse(latestReport.clientActions)
+      clientActions = JSON.parse(latestReport.clientActions as string)
     } catch (e) {
       console.error('Failed to parse client actions:', e)
     }

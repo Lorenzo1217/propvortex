@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/lib/db'
-import { auth } from '@clerk/nextjs/server'
+import { auth, currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { ensureUserInDatabase } from '@/lib/user-helpers'
@@ -285,7 +285,10 @@ export async function addClientToProject(projectId: string, formData: FormData) 
   const { userId: clerkUserId } = await auth()
   if (!clerkUserId) throw new Error('Not authenticated')
   
-  const dbUser = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) throw new Error('User not found')
+  
+  const dbUser = await ensureUserInDatabase(clerkUser)
   
   // Verify user owns the project
   const project = await db.project.findFirst({
@@ -342,7 +345,10 @@ export async function removeClientFromProject(projectId: string, clientId: strin
   const { userId: clerkUserId } = await auth()
   if (!clerkUserId) throw new Error('Not authenticated')
   
-  const dbUser = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) throw new Error('User not found')
+  
+  const dbUser = await ensureUserInDatabase(clerkUser)
   
   // Verify user owns the project
   const project = await db.project.findFirst({

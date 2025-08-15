@@ -7,7 +7,7 @@ import { useBrand } from '@/components/providers/brand-provider';
 
 export function DashboardNav() {
   const pathname = usePathname();
-  const showBilling = pathname === '/dashboard';
+  const showBilling = true; // Always show billing link in navigation
   const { company } = useBrand();
 
   const linkClass = (isActive: boolean) => {

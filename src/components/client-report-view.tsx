@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { parseTags } from '@/config/photo-tags'
 import Link from 'next/link'
 import { 
   ArrowLeft, Calendar, CheckCircle2, AlertCircle, 
@@ -35,13 +36,16 @@ export default function ClientReportView({ report, project, company }: ClientRep
 
   // Group photos by tags
   const photosByArea = report.photos.reduce((acc: any, photo: any) => {
-    const tags = photo.tags || []
+    const tags = parseTags(photo.tags)
     const area = tags.find((tag: string) => 
       ['Kitchen', 'Master Bedroom', 'Living Room', 'Bathroom', 'Exterior', 'Foundation', 'Roof'].includes(tag)
     ) || 'Other'
     
     if (!acc[area]) acc[area] = []
-    acc[area].push(photo)
+    acc[area].push({
+      ...photo,
+      tags: tags // Store parsed tags for later use
+    })
     return acc
   }, {})
 

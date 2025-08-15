@@ -69,7 +69,7 @@ export async function createClientSession(clientId: string): Promise<string> {
   await db.clientSession.create({
     data: {
       clientId,
-      sessionToken,
+      token: sessionToken,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     }
   })
@@ -107,7 +107,7 @@ export async function getCurrentClient(): Promise<ClientUser | null> {
     // Verify session exists and is valid
     const session = await db.clientSession.findFirst({
       where: {
-        sessionToken: token,
+        token: token,
         expiresAt: {
           gt: new Date()
         }
@@ -190,7 +190,7 @@ export async function clientLogout(): Promise<void> {
   if (token) {
     // Delete session from database
     await db.clientSession.deleteMany({
-      where: { sessionToken: token }
+      where: { token: token }
     })
 
     // Delete cookie

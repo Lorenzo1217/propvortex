@@ -41,7 +41,7 @@ export function PhotoUpload({ projectId, reportId, existingPhotos = [] }: PhotoU
       url: photo.url,
       name: photo.originalName,
       caption: photo.caption || '',
-      tags: parseTags(photo.tags)
+      tags: parseTags(photo.tags || null)
     }))
   )
   const [isUploading, setIsUploading] = useState(false)

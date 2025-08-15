@@ -17,12 +17,12 @@ const isPublicRoute = createRouteMatcher([
   '/api/client/setup-password',
   '/api/client/validate-token',
   '/api/client/forgot-password',
+  '/client/portal(.*)', // Make client portal pages publicly accessible
 ])
 
-// Define client routes
+// Define client routes (for authenticated client areas only)
 const isClientRoute = (pathname: string) => {
-  return pathname.startsWith('/client/portal') || 
-         (pathname.startsWith('/api/client/') && 
+  return (pathname.startsWith('/api/client/') && 
          !pathname.includes('/login') && 
          !pathname.includes('/setup-password') &&
          !pathname.includes('/validate-token') &&

@@ -1,5 +1,4 @@
-import { redirect } from 'next/navigation'
-import { getCurrentClient } from '@/lib/auth/client-auth'
+import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -18,12 +17,8 @@ export default async function ClientProjectPage({
   params: Promise<{ projectId: string }>
 }) {
   const { projectId } = await params
-  const client = await getCurrentClient()
   
-  if (!client || client.projectId !== projectId) {
-    redirect('/client/login')
-  }
-
+  // No authentication required - anyone with the link can view
   // Get project with detailed information
   const project = await db.project.findUnique({
     where: { id: projectId },
@@ -75,7 +70,7 @@ export default async function ClientProjectPage({
   })
 
   if (!project) {
-    return <div>Project not found</div>
+    return notFound()
   }
 
   const company = project.user.companyRelation

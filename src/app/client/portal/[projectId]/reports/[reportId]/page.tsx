@@ -1,5 +1,4 @@
-import { redirect } from 'next/navigation'
-import { getCurrentClient } from '@/lib/auth/client-auth'
+import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import ClientReportView from '@/components/client-report-view'
 
@@ -9,12 +8,8 @@ export default async function ClientReportPage({
   params: Promise<{ projectId: string; reportId: string }>
 }) {
   const { projectId, reportId } = await params
-  const client = await getCurrentClient()
   
-  if (!client || client.projectId !== projectId) {
-    redirect('/client/login')
-  }
-
+  // No authentication required - anyone with the link can view
   // Get report with all related data
   const report = await db.report.findFirst({
     where: {
@@ -39,7 +34,7 @@ export default async function ClientReportPage({
   })
 
   if (!report) {
-    redirect(`/client/portal/${projectId}`)
+    return notFound()
   }
 
   const company = report.project.user.companyRelation

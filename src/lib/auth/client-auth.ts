@@ -277,8 +277,7 @@ export async function requestPasswordReset(email: string): Promise<{ success: bo
     const { generatePasswordResetToken } = await import('@/lib/auth/client-tokens')
     const resetToken = await generatePasswordResetToken(client.id)
 
-    // Send reset email
-    const { sendPasswordResetEmail } = await import('@/lib/services/notifications')
+    // Get project details for future email implementation
     const project = await db.project.findUnique({
       where: { id: client.projectId },
       include: {
@@ -293,11 +292,14 @@ export async function requestPasswordReset(email: string): Promise<{ success: bo
     if (project) {
       const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/client/reset-password?token=${resetToken}`
       
-      // This function would need to be added to notifications.ts
-      // For now, we'll just log it
-      console.log('Password reset URL:', resetUrl)
+      // TODO: Implement password reset email
+      // For now, just log the reset details
+      console.log('Password reset requested for:', client.email)
+      console.log('Reset URL would be:', resetUrl)
+      console.log('Company:', project.user.companyRelation?.name || 'No company')
       
-      // TODO: Implement sendPasswordResetEmail in notifications.ts
+      // Future implementation:
+      // const { sendPasswordResetEmail } = await import('@/lib/services/notifications')
       // await sendPasswordResetEmail({
       //   client,
       //   project,

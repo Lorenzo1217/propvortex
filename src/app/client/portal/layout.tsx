@@ -1,39 +1,36 @@
-import { redirect } from 'next/navigation'
-import { getCurrentClient } from '@/lib/auth/client-auth'
-import { db } from '@/lib/db'
-import ClientHeader from '@/components/client-header'
 import PropVortexFooter from '@/components/propvortex-footer'
 import { BrandProvider } from '@/components/providers/brand-provider'
+import Link from 'next/link'
+import { Home } from 'lucide-react'
 
 export default async function ClientPortalLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const client = await getCurrentClient()
+  // No authentication required - public access for portal pages
+  // Company branding will be loaded per-project in individual pages
   
-  if (!client) {
-    redirect('/client/login')
-  }
-
-  // Get company branding
-  const project = await db.project.findUnique({
-    where: { id: client.projectId },
-    include: {
-      user: {
-        include: {
-          companyRelation: true
-        }
-      }
-    }
-  })
-
-  const company = project?.user.companyRelation
-
   return (
-    <BrandProvider company={company || null} isClient={true}>
+    <BrandProvider company={null} isClient={true}>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        <ClientHeader client={client} company={company} />
+        {/* Simple header for public portal - no client-specific info */}
+        <header className="bg-white border-b">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Home className="h-5 w-5 text-blue-600" />
+                <h1 className="text-xl font-semibold">Project Portal</h1>
+              </div>
+              <Link 
+                href="/client/portal" 
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Portal Home
+              </Link>
+            </div>
+          </div>
+        </header>
         <main className="container mx-auto px-4 py-8 flex-1">
           {children}
         </main>

@@ -143,16 +143,15 @@ export function ClientPhotoGallery({ photos, projectName = "Project" }: ClientPh
               {projectName} Photo Gallery
             </CardTitle>
             <div className="flex items-center gap-2">
-              <Select value={groupBy} onValueChange={(value) => setGroupBy(value as GroupBy)}>
-                <SelectTrigger className="w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Photos</SelectItem>
-                  <SelectItem value="report">By Report</SelectItem>
-                  <SelectItem value="month">By Month</SelectItem>
-                </SelectContent>
-              </Select>
+              <select 
+                value={groupBy} 
+                onChange={(e) => setGroupBy(e.target.value as GroupBy)}
+                className="flex h-10 w-40 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                <option value="all">All Photos</option>
+                <option value="report">By Report</option>
+                <option value="month">By Month</option>
+              </select>
               <div className="flex rounded-md shadow-sm">
                 <Button
                   variant={viewMode === 'grid' ? 'default' : 'outline'}

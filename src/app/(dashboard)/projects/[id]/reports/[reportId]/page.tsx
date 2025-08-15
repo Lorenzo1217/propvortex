@@ -7,12 +7,9 @@ import {
   ArrowLeft, 
   Calendar, 
   MapPin, 
-  FileText, 
-  Share,
-  Download,
+  FileText,
   Send,
   Edit,
-  Eye,
   ZoomIn,
   Camera,
   Cloud
@@ -31,6 +28,7 @@ import {
   ClientActionsDisplay 
 } from '@/components/report-sections/display/luxury-report-display'
 import { ControlEstimate } from '@/components/report-sections/control-estimate'
+import { ReportShareButtons } from '@/components/report-share-buttons'
 
 interface PageProps {
   params: Promise<{
@@ -157,26 +155,18 @@ export default async function ReportViewPage({ params }: PageProps) {
 
           {/* Action Buttons */}
           <div className="flex justify-end space-x-4 mb-8">
-            <Button variant="outline">
-              <Share className="w-4 h-4 mr-2" />
-              Share Link
-            </Button>
-            <Button variant="outline">
-              <Download className="w-4 h-4 mr-2" />
-              Export PDF
-            </Button>
-            {!report.isPublished ? (
+            <ReportShareButtons 
+              projectId={report.projectId} 
+              reportId={report.id} 
+              isPublished={report.isPublished}
+            />
+            {!report.isPublished && (
               <form action={handlePublishReport} className="inline">
                 <Button type="submit">
                   <Send className="w-4 h-4 mr-2" />
                   Publish Report
                 </Button>
               </form>
-            ) : (
-              <Button variant="outline">
-                <Eye className="w-4 h-4 mr-2" />
-                Client View
-              </Button>
             )}
           </div>
 

@@ -15,7 +15,7 @@ import {
   Settings,
   Send,
   Eye,
-  BarChart3 
+  BarChart3
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -26,6 +26,7 @@ import { ProjectSettingsDialog } from "@/components/project-settings-dialog";
 import { getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
 import { ProjectClientsList } from "@/components/project-clients-list";
 import { getProjectClients } from "@/lib/actions/projects";
+import { ClientPortalButtons } from "@/components/client-portal-buttons";
 
 interface PageProps {
   params: Promise<{
@@ -183,10 +184,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
               
               <div className="flex items-center space-x-3">
-                <Button variant="outline" className="text-gray-600">
-                  <Eye className="w-4 h-4 mr-2" />
-                  Client Portal
-                </Button>
+                <ClientPortalButtons projectId={project.id} />
                 <ProjectSettingsDialog project={project} />
               </div>
             </div>

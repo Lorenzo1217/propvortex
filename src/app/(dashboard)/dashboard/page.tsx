@@ -8,6 +8,7 @@ import { NewProjectDialog } from '@/components/new-project-dialog';
 import Link from "next/link";
 import { formatProjectAddress } from '@/lib/utils/address';
 import { requireSubscription } from '@/lib/subscription';
+import { ClientPortalButton } from '@/components/client-portal-button';
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -204,9 +205,7 @@ export default async function DashboardPage() {
                             View Project
                           </Link>
                         </Button>
-                        <Button size="sm" className="flex-1 bg-gray-900 hover:bg-gray-800">
-                          Client Portal
-                        </Button>
+                        <ClientPortalButton projectId={project.id} />
                       </div>
                     </CardContent>
                   </Card>

@@ -1,6 +1,6 @@
 'use server'
 
-import { auth } from '@clerk/nextjs/server'
+import { auth, currentUser } from '@clerk/nextjs/server'
 import { db } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -10,7 +10,10 @@ export async function createCompany(formData: FormData) {
   const { userId: clerkUserId } = await auth()
   if (!clerkUserId) throw new Error('Not authenticated')
   
-  const dbUser = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) throw new Error('User not found')
+  
+  const dbUser = await ensureUserInDatabase(clerkUser)
   if (dbUser.companyId) throw new Error('Company already exists')
   
   const name = formData.get('name') as string
@@ -39,7 +42,10 @@ export async function createCompany(formData: FormData) {
 }
 
 export async function updateCompany(formData: FormData) {
-  const dbUser = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) throw new Error('Not authenticated')
+  
+  const dbUser = await ensureUserInDatabase(clerkUser)
   if (!dbUser.companyId) throw new Error('No company found')
   
   const name = formData.get('name') as string
@@ -84,7 +90,10 @@ export async function getCurrentUserCompany() {
 }
 
 export async function deleteCompanyLogo() {
-  const dbUser = await ensureUserInDatabase()
+  const clerkUser = await currentUser()
+  if (!clerkUser) throw new Error('Not authenticated')
+  
+  const dbUser = await ensureUserInDatabase(clerkUser)
   if (!dbUser.companyId) throw new Error('No company found')
   
   await db.company.update({

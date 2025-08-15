@@ -13,12 +13,16 @@ export function ClientPortalButtons({ projectId }: ClientPortalButtonsProps) {
   const [copied, setCopied] = useState(false)
 
   const handleOpenPortal = () => {
+    console.log('Opening client portal for project:', projectId)
     const clientUrl = getClientPortalUrl(projectId)
+    console.log('Client portal URL:', clientUrl)
     window.open(clientUrl, '_blank')
   }
 
   const handleCopyLink = async () => {
+    console.log('Copying link for project:', projectId)
     const clientUrl = getClientPortalUrl(projectId)
+    console.log('Client portal URL:', clientUrl)
     const success = await copyToClipboard(clientUrl)
     if (success) {
       setCopied(true)

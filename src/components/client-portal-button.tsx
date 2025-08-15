@@ -11,7 +11,9 @@ interface ClientPortalButtonProps {
 
 export function ClientPortalButton({ projectId, className = "flex-1 bg-gray-900 hover:bg-gray-800", size = "sm" }: ClientPortalButtonProps) {
   const handleClick = () => {
+    console.log('Opening client portal for project:', projectId)
     const clientUrl = getClientPortalUrl(projectId)
+    console.log('Client portal URL:', clientUrl)
     window.open(clientUrl, '_blank')
   }
 

@@ -205,7 +205,7 @@ export default async function DashboardPage() {
                             View Project
                           </Link>
                         </Button>
-                        <ClientPortalButton projectId={project.id} />
+                        {project.id && <ClientPortalButton projectId={project.id} />}
                       </div>
                     </CardContent>
                   </Card>

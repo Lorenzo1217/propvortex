@@ -1,10 +1,16 @@
 export function getClientPortalUrl(projectId: string): string {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://propvortex.com'
+  // Use window.location.origin for client-side to ensure correct URL
+  const baseUrl = typeof window !== 'undefined' 
+    ? window.location.origin 
+    : (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')
   return `${baseUrl}/client/portal/${projectId}`
 }
 
 export function getClientReportUrl(projectId: string, reportId: string): string {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://propvortex.com'
+  // Use window.location.origin for client-side to ensure correct URL
+  const baseUrl = typeof window !== 'undefined' 
+    ? window.location.origin 
+    : (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')
   return `${baseUrl}/client/portal/${projectId}/reports/${reportId}`
 }
 

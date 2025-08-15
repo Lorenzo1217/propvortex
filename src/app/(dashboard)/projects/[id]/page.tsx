@@ -184,7 +184,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
               
               <div className="flex items-center space-x-3">
-                <ClientPortalButtons projectId={project.id} />
+                <ClientPortalButtons projectId={id} />
                 <ProjectSettingsDialog project={project} />
               </div>
             </div>

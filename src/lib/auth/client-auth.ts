@@ -203,13 +203,28 @@ export async function setClientPassword(clientId: string, password: string): Pro
   try {
     const hashedPassword = await hashPassword(password)
     
+    // Check if this is the first time setting a password
+    const client = await db.projectClient.findUnique({
+      where: { id: clientId }
+    })
+    
+    const updateData: any = {
+      passwordHash: hashedPassword
+    }
+    
+    // Set firstLoginAt if this is the first password set
+    if (client && !client.firstLoginAt && !client.passwordHash) {
+      updateData.firstLoginAt = new Date()
+    }
+    
     await db.projectClient.update({
       where: { id: clientId },
-      data: {
-        passwordHash: hashedPassword,
-        passwordResetToken: null,
-        passwordResetExpires: null
-      }
+      data: updateData
+    })
+
+    // Clean up any password reset tokens for this client
+    await db.clientSession.deleteMany({
+      where: { clientId }
     })
 
     return { success: true }
@@ -222,16 +237,24 @@ export async function setClientPassword(clientId: string, password: string): Pro
 // Validate password reset token
 export async function validatePasswordResetToken(token: string): Promise<ProjectClient | null> {
   try {
-    const client = await db.projectClient.findFirst({
+    // Find the session with this token
+    const session = await db.clientSession.findFirst({
       where: {
-        passwordResetToken: token,
-        passwordResetExpires: {
+        token,
+        expiresAt: {
           gt: new Date()
         }
+      },
+      include: {
+        client: true
       }
     })
 
-    return client
+    if (!session) {
+      return null
+    }
+
+    return session.client
   } catch (error) {
     console.error('Error validating reset token:', error)
     return null

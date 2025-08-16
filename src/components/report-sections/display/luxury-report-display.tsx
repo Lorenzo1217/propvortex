@@ -208,34 +208,62 @@ const StatusBadge = ({ status }: { status: string }) => {
 }
 
 // Sophisticated priority indicator - EXACTLY matches impact indicator style
-const PriorityIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
+const PriorityIndicator = ({ level, accentColor }: { level: 'high' | 'medium' | 'low', accentColor?: string }) => {
+  const defaultAccent = '#3B82F6'
+  const accent = accentColor || defaultAccent
+  
+  // Function to create lighter version of color for background
+  const getLighterColor = (color: string, opacity: number) => {
+    // Convert hex to RGB and add opacity
+    const hex = color.replace('#', '')
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`
+  }
+  
   const indicators = {
     high: { 
       text: 'Urgent', 
-      className: 'text-blue-700',
-      bgClassName: 'bg-blue-50',
-      dotColor: 'bg-blue-600'
+      style: {
+        color: accent,
+        backgroundColor: getLighterColor(accent, 0.1),
+        dotColor: accent
+      }
     },
     medium: { 
       text: 'Standard', 
-      className: 'text-gray-700',
-      bgClassName: 'bg-gray-50',
-      dotColor: 'bg-gray-600'
+      style: {
+        color: '#374151',
+        backgroundColor: 'rgb(249 250 251)',
+        dotColor: '#6B7280'
+      }
     },
     low: { 
       text: 'Low', 
-      className: 'text-gray-600',
-      bgClassName: 'bg-gray-50',
-      dotColor: 'bg-gray-400'
+      style: {
+        color: '#6B7280',
+        backgroundColor: 'rgb(249 250 251)',
+        dotColor: '#9CA3AF'
+      }
     }
   }
   
-  const { text, className, bgClassName, dotColor } = indicators[level]
+  const { text, style } = indicators[level]
   
   return (
-    <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${bgClassName}`}>
-      <div className={`w-2 h-2 rounded-full ${dotColor}`}></div>
-      <span className={`text-xs font-medium tracking-wide ${className}`}>
+    <div 
+      className="flex items-center gap-2 px-3 py-1 rounded-full"
+      style={{ backgroundColor: style.backgroundColor }}
+    >
+      <div 
+        className="w-2 h-2 rounded-full" 
+        style={{ backgroundColor: style.dotColor }}
+      ></div>
+      <span 
+        className="text-xs font-medium tracking-wide"
+        style={{ color: style.color }}
+      >
         {text}
       </span>
     </div>
@@ -243,7 +271,7 @@ const PriorityIndicator = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
 }
 
 // Premium category display
-const CategoryDisplay = ({ category }: { category: string }) => {
+const CategoryDisplay = ({ category, accentColor }: { category: string, accentColor?: string }) => {
   const categories: Record<string, { text: string; icon: React.ElementType }> = {
     approval: { text: 'Approval Required', icon: CheckCircle2 },
     selection: { text: 'Selection Required', icon: UserCheck },
@@ -252,11 +280,21 @@ const CategoryDisplay = ({ category }: { category: string }) => {
   }
   
   const { text, icon: Icon } = categories[category] || { text: category, icon: AlertCircle }
+  const accent = accentColor || '#3B82F6'
+  
+  // Create lighter version of accent color for background
+  const getLighterColor = (color: string, opacity: number) => {
+    const hex = color.replace('#', '')
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`
+  }
   
   return (
     <div className="flex items-center gap-2 text-gray-600">
-      <div className="p-1 bg-gray-100 rounded">
-        <Icon className="w-3.5 h-3.5" />
+      <div className="p-1 rounded" style={{ backgroundColor: getLighterColor(accent, 0.1) }}>
+        <Icon className="w-3.5 h-3.5" style={{ color: accent }} />
       </div>
       <span className="text-sm font-light">{text}</span>
     </div>
@@ -414,7 +452,19 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
   )
 }
 
-export function ClientActionsDisplay({ items }: { items: ClientActionItem[] }) {
+interface ClientActionsDisplayProps {
+  items: ClientActionItem[]
+  primaryColor?: string
+  secondaryColor?: string
+  accentColor?: string
+}
+
+export function ClientActionsDisplay({ 
+  items, 
+  primaryColor = '#000000',
+  secondaryColor = '#666666',
+  accentColor = '#3B82F6'
+}: ClientActionsDisplayProps) {
   const sortedItems = [...items].sort((a, b) => {
     const priorityOrder = { high: 0, medium: 1, low: 2 }
     return priorityOrder[a.priority] - priorityOrder[b.priority]
@@ -424,11 +474,17 @@ export function ClientActionsDisplay({ items }: { items: ClientActionItem[] }) {
   
   return (
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+      <CardHeader 
+        className="border-b px-8 py-6"
+        style={{
+          background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+          borderBottomColor: secondaryColor
+        }}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-50 rounded-lg">
-              <UserCheck className="w-5 h-5 text-blue-600" />
+            <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}20` }}>
+              <UserCheck className="w-5 h-5" style={{ color: accentColor }} />
             </div>
             <CardTitle className="text-xl font-light tracking-wide text-gray-900">
               Client Actions Required
@@ -464,7 +520,7 @@ export function ClientActionsDisplay({ items }: { items: ClientActionItem[] }) {
                       {item.description}
                     </p>
                     <div className="flex items-center gap-4">
-                      <CategoryDisplay category={item.category} />
+                      <CategoryDisplay category={item.category} accentColor={accentColor} />
                       {item.dueDate && (
                         <div className="flex items-center gap-1.5 text-sm text-gray-600">
                           <Clock className="w-3.5 h-3.5" />
@@ -474,7 +530,7 @@ export function ClientActionsDisplay({ items }: { items: ClientActionItem[] }) {
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <PriorityIndicator level={item.priority} />
+                    <PriorityIndicator level={item.priority} accentColor={accentColor} />
                     {item.status === 'pending' && (
                       <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                     )}

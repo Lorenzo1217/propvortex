@@ -332,7 +332,12 @@ export default async function ClientProjectPage({
                   <p className="text-sm text-gray-500 text-right">
                     From Week {latestReport.weekNumber}, {latestReport.year}
                   </p>
-                  <ClientActionsDisplay items={items} />
+                  <ClientActionsDisplay 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
                 </div>
               );
             } catch {

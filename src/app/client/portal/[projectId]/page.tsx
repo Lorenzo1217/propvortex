@@ -7,10 +7,10 @@ import { Progress } from '@/components/ui/progress'
 import Link from 'next/link'
 import { 
   Building2, Calendar, FileText, MapPin, 
-  Clock, TrendingUp,
-  CheckCircle2, Users, Eye, Camera,
-  ArrowRight, ChevronRight
+  TrendingUp, Users, Eye, Camera,
+  ArrowRight
 } from 'lucide-react'
+import { ClientActionsDisplay } from '@/components/report-sections/display/luxury-report-display'
 
 // Component to safely render HTML content
 function HTMLContent({ content, className = '' }: { content: string; className?: string }) {
@@ -116,8 +116,16 @@ export default async function ClientProjectPage({
     }
   }
 
-  // Get client actions from latest report - it's an HTML string, not JSON
-  const clientActionsHTML = latestReport?.clientActions ? String(latestReport.clientActions) : null
+  // Parse client actions from latest report
+  let clientActions = []
+  if (latestReport?.clientActions) {
+    try {
+      clientActions = JSON.parse(latestReport.clientActions as string)
+    } catch (e) {
+      // If parsing fails, it's HTML content from old reports
+      console.error('Failed to parse client actions as JSON:', e)
+    }
+  }
 
   // Calculate project stats
   const projectDuration = Math.floor((Date.now() - new Date(project.createdAt).getTime()) / (1000 * 60 * 60 * 24))
@@ -313,38 +321,56 @@ export default async function ClientProjectPage({
         )}
 
 
-        {/* Client Actions Required - Display HTML content from latest report */}
-        {clientActionsHTML && (
-          <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-            <CardHeader 
-              className="border-b px-8 py-6"
-              style={{
-                background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
-                borderBottomColor: secondaryColor
-              }}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}20` }}>
-                    <Users className="w-5 h-5" style={{ color: accentColor }} />
-                  </div>
-                  <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                    Client Actions Required
-                  </CardTitle>
+        {/* Client Actions Required - Using exact same component as builder's view */}
+        {latestReport?.clientActions && (
+          (() => {
+            try {
+              const items = JSON.parse(latestReport.clientActions as string);
+              // Add week indicator as a subtle note above the component
+              return (
+                <div className="space-y-2">
+                  <p className="text-sm text-gray-500 text-right">
+                    From Week {latestReport.weekNumber}, {latestReport.year}
+                  </p>
+                  <ClientActionsDisplay items={items} />
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-700">From Week {latestReport?.weekNumber || 'Latest'}</span>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="px-8 py-6">
-              <HTMLContent 
-                content={clientActionsHTML}
-                className="text-gray-700 leading-relaxed prose prose-gray max-w-none"
-              />
-            </CardContent>
-          </Card>
+              );
+            } catch {
+              // Fallback for old HTML format
+              return (
+                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
+                  <CardHeader 
+                    className="border-b px-8 py-6"
+                    style={{
+                      background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                      borderBottomColor: secondaryColor
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}20` }}>
+                          <Users className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Client Actions Required
+                        </CardTitle>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                        <span className="text-sm font-medium text-gray-700">From Week {latestReport?.weekNumber || 'Latest'}</span>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="px-8 py-6">
+                    <HTMLContent 
+                      content={String(latestReport.clientActions)}
+                      className="text-gray-700 leading-relaxed prose prose-gray max-w-none"
+                    />
+                  </CardContent>
+                </Card>
+              );
+            }
+          })()
         )}
 
         {/* Project Team Section - Match dashboard style */}

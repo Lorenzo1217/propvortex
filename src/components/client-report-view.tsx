@@ -11,7 +11,7 @@ import {
   ArrowLeft, Calendar, CheckCircle2, AlertCircle, 
   DollarSign, Briefcase, Users, Cloud, Image,
   FileText, TrendingUp, Clock, MapPin,
-  ChevronRight, Download
+  ChevronRight, Download, Home
 } from 'lucide-react'
 
 interface ClientReportViewProps {
@@ -25,6 +25,7 @@ export default function ClientReportView({ report, project, company }: ClientRep
   
   const accentColor = company?.accentColor || '#3B82F6'
   const primaryColor = company?.primaryColor || '#000000'
+  const secondaryColor = company?.secondaryColor || '#666666'
 
   // Parse JSON fields
   const workCompleted = report.workCompleted ? JSON.parse(report.workCompleted as string) : []
@@ -60,10 +61,23 @@ export default function ClientReportView({ report, project, company }: ClientRep
               Back to Reports
             </Button>
           </Link>
-          <Button variant="outline" size="sm">
-            <Download className="mr-2 h-4 w-4" />
-            Download PDF
-          </Button>
+          <div className="flex items-center gap-2">
+            <Link 
+              href={`/client/portal/${project.id}`}
+              className="p-2 rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm border"
+              style={{ borderColor: secondaryColor }}
+              title="Portal Home"
+            >
+              <Home 
+                className="h-5 w-5" 
+                style={{ color: primaryColor }}
+              />
+            </Link>
+            <Button variant="outline" size="sm">
+              <Download className="mr-2 h-4 w-4" />
+              Download PDF
+            </Button>
+          </div>
         </div>
         
         <div className="flex items-start justify-between">

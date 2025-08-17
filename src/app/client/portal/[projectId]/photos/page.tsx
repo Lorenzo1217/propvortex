@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Building2, Camera, Calendar, MapPin, Image as ImageIcon } from 'lucide-react'
+import { ArrowLeft, Building2, Camera, Calendar, MapPin, Image as ImageIcon, Home } from 'lucide-react'
 import { PhotosClient } from './photos-client'
 import { parseTags } from '@/config/photo-tags'
 
@@ -69,23 +69,38 @@ export default async function ClientPortalPhotosPage({
           >
             {/* Company Branding */}
             <div className="flex items-center justify-between mb-6">
-              {company?.logoUrl ? (
-                <img 
-                  src={company.logoUrl} 
-                  alt={company?.name || 'Builder'}
-                  className="h-12 w-auto max-w-[200px]"
-                />
-              ) : (
-                <div className="flex items-center space-x-2">
-                  <Building2 className="h-10 w-10" style={{ color: primaryColor }} />
-                  <span className="text-xl font-semibold" style={{ color: primaryColor }}>
-                    {company?.name || 'Your Builder'}
-                  </span>
-                </div>
-              )}
-              <Badge variant="secondary">
-                {project._count.photos} Photos
-              </Badge>
+              <div className="flex items-center space-x-3">
+                {company?.logoUrl ? (
+                  <img 
+                    src={company.logoUrl} 
+                    alt={company?.name || 'Builder'}
+                    className="h-12 w-auto max-w-[200px]"
+                  />
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <Building2 className="h-10 w-10" style={{ color: primaryColor }} />
+                    <span className="text-xl font-semibold" style={{ color: primaryColor }}>
+                      {company?.name || 'Your Builder'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center space-x-3">
+                <Link 
+                  href={`/client/portal/${projectId}`}
+                  className="p-2 rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm border"
+                  style={{ borderColor: secondaryColor }}
+                  title="Portal Home"
+                >
+                  <Home 
+                    className="h-5 w-5" 
+                    style={{ color: primaryColor }}
+                  />
+                </Link>
+                <Badge variant="secondary">
+                  {project._count.photos} Photos
+                </Badge>
+              </div>
             </div>
             
             {/* Project Info */}

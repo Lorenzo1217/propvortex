@@ -27,8 +27,8 @@ export default async function DashboardLayout({
   return (
     <BrandProvider company={company || null} isClient={false}>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        {/* Navigation */}
-        <nav className="bg-white border-b header-brand">
+        {/* Navigation - Match landing page style */}
+        <nav className="border-b bg-white sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center space-x-4">
@@ -41,8 +41,8 @@ export default async function DashboardLayout({
                     />
                   ) : (
                     <>
-                      <Building2 className="h-8 w-8 brand-accent" />
-                      <span className="font-bold text-xl hidden sm:block brand-primary">
+                      <Building2 className="h-8 w-8 text-blue-600" />
+                      <span className="font-bold text-xl hidden sm:block text-gray-900">
                         {company?.name || "PropVortex"}
                       </span>
                     </>

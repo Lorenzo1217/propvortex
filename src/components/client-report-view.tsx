@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { 
   ArrowLeft, Calendar, FileText, MapPin,
-  Download, Home, Cloud, Camera, ZoomIn
+  Download, Home, Cloud, Camera, ZoomIn, CheckCircle2, Clock, AlertTriangle, DollarSign, Users, TrendingUp
 } from 'lucide-react'
 import { PhotoViewer } from '@/components/photo-viewer'
 import { WeatherForecast } from '@/components/weather-forecast'
@@ -36,9 +36,10 @@ function HTMLContent({ content, className = '' }: { content: string; className?:
 }
 
 export default function ClientReportView({ report, project, company }: ClientReportViewProps) {
-  // Get brand colors for header/navigation only
+  // Get brand colors for entire report
   const primaryColor = company?.primaryColor || '#000000'
   const secondaryColor = company?.secondaryColor || '#666666'
+  const accentColor = company?.accentColor || '#3B82F6'
 
   return (
     <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -71,7 +72,7 @@ export default function ClientReportView({ report, project, company }: ClientRep
           </div>
         </div>
 
-        {/* Report Header - Exactly like builder's view */}
+        {/* Report Header with brand colors */}
         <div className="mb-8">
           <div className="flex items-start justify-between">
             <div>
@@ -80,18 +81,25 @@ export default function ClientReportView({ report, project, company }: ClientRep
               </h1>
               <div className="flex items-center space-x-4 text-gray-600">
                 <div className="flex items-center">
-                  <FileText className="w-4 h-4 mr-1" />
+                  <FileText className="w-4 h-4 mr-1" style={{ color: accentColor }} />
                   Week {report.weekNumber}, {report.year}
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-1" />
+                  <MapPin className="w-4 h-4 mr-1" style={{ color: accentColor }} />
                   {project.name}
                 </div>
                 <div className="flex items-center">
-                  <Calendar className="w-4 h-4 mr-1" />
+                  <Calendar className="w-4 h-4 mr-1" style={{ color: accentColor }} />
                   {report.publishedAt ? new Date(report.publishedAt).toLocaleDateString() : new Date(report.createdAt).toLocaleDateString()}
                 </div>
-                <Badge variant="default">
+                <Badge 
+                  variant="default"
+                  style={{ 
+                    backgroundColor: primaryColor,
+                    color: 'white',
+                    borderColor: primaryColor 
+                  }}
+                >
                   Published
                 </Badge>
               </div>
@@ -104,13 +112,19 @@ export default function ClientReportView({ report, project, company }: ClientRep
           </div>
         </div>
 
-        {/* Weather Outlook - Exactly like builder's view */}
+        {/* Weather Outlook with brand colors */}
         {report.weatherData && (
           <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+            <CardHeader 
+              className="border-b px-8 py-6"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                borderBottomColor: secondaryColor
+              }}
+            >
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <Cloud className="w-5 h-5 text-blue-600" />
+                <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                  <Cloud className="w-5 h-5" style={{ color: accentColor }} />
                 </div>
                 <div>
                   <CardTitle className="text-xl font-light tracking-wide text-gray-900">
@@ -132,14 +146,20 @@ export default function ClientReportView({ report, project, company }: ClientRep
           </Card>
         )}
 
-        {/* Report Photos - Exactly like builder's view */}
+        {/* Report Photos with brand colors */}
         {report.photos && report.photos.length > 0 && (
           <Card className="mb-8 bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+            <CardHeader 
+              className="border-b px-8 py-6"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                borderBottomColor: secondaryColor
+              }}
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-50 rounded-lg">
-                    <Camera className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                    <Camera className="w-5 h-5" style={{ color: accentColor }} />
                   </div>
                   <div>
                     <CardTitle className="text-xl font-light tracking-wide text-gray-900">
@@ -150,7 +170,14 @@ export default function ClientReportView({ report, project, company }: ClientRep
                     </CardDescription>
                   </div>
                 </div>
-                <Badge variant="secondary" className="flex items-center gap-1.5 bg-gray-100 text-gray-700 border-0">
+                <Badge 
+                  variant="secondary" 
+                  className="flex items-center gap-1.5 border-0"
+                  style={{ 
+                    backgroundColor: `${primaryColor}20`,
+                    color: primaryColor 
+                  }}
+                >
                   <ZoomIn className="w-3.5 h-3.5" />
                   <span className="text-xs font-medium">Click to view</span>
                 </Badge>
@@ -162,15 +189,21 @@ export default function ClientReportView({ report, project, company }: ClientRep
           </Card>
         )}
 
-        {/* Report Content - Exactly like builder's view */}
+        {/* Report Content with brand colors */}
         <div className="space-y-6">
           {/* Executive Summary */}
           {report.executiveSummary && (
             <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+              <CardHeader 
+                className="border-b px-8 py-6"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                  borderBottomColor: secondaryColor
+                }}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-50 rounded-lg">
-                    <FileText className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                    <FileText className="w-5 h-5" style={{ color: accentColor }} />
                   </div>
                   <CardTitle className="text-xl font-light tracking-wide text-gray-900">
                     Executive Summary
@@ -186,21 +219,40 @@ export default function ClientReportView({ report, project, company }: ClientRep
             </Card>
           )}
 
-          {/* Work Completed - With backward compatibility */}
+          {/* Work Completed - With backward compatibility and brand colors */}
           {report.workCompleted && (
             (() => {
               try {
                 // Try to parse as JSON
                 const items = JSON.parse(report.workCompleted as string);
-                return <WorkDisplay title="Work Completed This Week" items={items} />;
+                return (
+                  <WorkDisplay 
+                    title="Work Completed This Week" 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
+                );
               } catch {
                 // If parsing fails, it's HTML content from old reports
                 return (
                   <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Work Completed This Week
-                      </CardTitle>
+                    <CardHeader 
+                      className="border-b px-8 py-6"
+                      style={{
+                        background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                        borderBottomColor: secondaryColor
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                          <CheckCircle2 className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Work Completed This Week
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent className="px-8 py-6">
                       <HTMLContent 
@@ -214,19 +266,38 @@ export default function ClientReportView({ report, project, company }: ClientRep
             })()
           )}
 
-          {/* Upcoming Work - With backward compatibility */}
+          {/* Upcoming Work - With backward compatibility and brand colors */}
           {report.upcomingWork && (
             (() => {
               try {
                 const items = JSON.parse(report.upcomingWork as string);
-                return <WorkDisplay title="Upcoming Work" items={items} />;
+                return (
+                  <WorkDisplay 
+                    title="Upcoming Work" 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
+                );
               } catch {
                 return (
                   <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Upcoming Work
-                      </CardTitle>
+                    <CardHeader 
+                      className="border-b px-8 py-6"
+                      style={{
+                        background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                        borderBottomColor: secondaryColor
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                          <Clock className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Upcoming Work
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent className="px-8 py-6">
                       <HTMLContent 
@@ -240,19 +311,37 @@ export default function ClientReportView({ report, project, company }: ClientRep
             })()
           )}
 
-          {/* Issues & Delays - With backward compatibility */}
+          {/* Issues & Delays - With backward compatibility and brand colors */}
           {report.issues && (
             (() => {
               try {
                 const items = JSON.parse(report.issues as string);
-                return <IssuesDisplay items={items} />;
+                return (
+                  <IssuesDisplay 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
+                );
               } catch {
                 return (
                   <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Issues & Delays
-                      </CardTitle>
+                    <CardHeader 
+                      className="border-b px-8 py-6"
+                      style={{
+                        background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                        borderBottomColor: secondaryColor
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                          <AlertTriangle className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Issues & Delays
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent className="px-8 py-6">
                       <HTMLContent 
@@ -266,19 +355,37 @@ export default function ClientReportView({ report, project, company }: ClientRep
             })()
           )}
 
-          {/* Budget Updates - With backward compatibility */}
+          {/* Budget Updates - With backward compatibility and brand colors */}
           {report.budget && (
             (() => {
               try {
                 const items = JSON.parse(report.budget as string);
-                return <BudgetDisplay items={items} />;
+                return (
+                  <BudgetDisplay 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
+                );
               } catch {
                 return (
                   <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Budget & Change Orders
-                      </CardTitle>
+                    <CardHeader 
+                      className="border-b px-8 py-6"
+                      style={{
+                        background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                        borderBottomColor: secondaryColor
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                          <DollarSign className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Budget & Change Orders
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent className="px-8 py-6">
                       <HTMLContent 
@@ -292,7 +399,7 @@ export default function ClientReportView({ report, project, company }: ClientRep
             })()
           )}
 
-          {/* Control Estimate Update */}
+          {/* Control Estimate Update with brand colors */}
           {(report?.ceProfessionalFees || report?.ceConstructionCosts || report?.ceOffsiteUtilities || 
             report?.ceFFE || report?.ceInsuranceFinancing || report?.ceTotal || report?.ceContingency) && (
             <ControlEstimate 
@@ -307,22 +414,43 @@ export default function ClientReportView({ report, project, company }: ClientRep
                 contingency: report?.ceContingency || undefined,
                 contingencyUsed: report?.ceContingencyUsed || undefined
               }}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              accentColor={accentColor}
             />
           )}
 
-          {/* Client Actions - With backward compatibility */}
+          {/* Client Actions - With backward compatibility and brand colors */}
           {report.clientActions && (
             (() => {
               try {
                 const items = JSON.parse(report.clientActions as string);
-                return <ClientActionsDisplay items={items} />;
+                return (
+                  <ClientActionsDisplay 
+                    items={items}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    accentColor={accentColor}
+                  />
+                );
               } catch {
                 return (
                   <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
-                      <CardTitle className="text-xl font-light tracking-wide text-gray-900">
-                        Client Actions Needed
-                      </CardTitle>
+                    <CardHeader 
+                      className="border-b px-8 py-6"
+                      style={{
+                        background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+                        borderBottomColor: secondaryColor
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+                          <Users className="w-5 h-5" style={{ color: accentColor }} />
+                        </div>
+                        <CardTitle className="text-xl font-light tracking-wide text-gray-900">
+                          Client Actions Needed
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent className="px-8 py-6">
                       <HTMLContent 

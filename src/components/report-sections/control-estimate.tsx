@@ -17,6 +17,9 @@ interface ControlEstimateProps {
     contingencyUsed?: string;
   };
   isEditing?: boolean;
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
 }
 
 // Format currency with proper $ and commas
@@ -69,7 +72,13 @@ const getContingencyBarColor = (percentage: number): string => {
   return 'bg-red-500';
 };
 
-export function ControlEstimate({ initialData, isEditing = true }: ControlEstimateProps) {
+export function ControlEstimate({ 
+  initialData, 
+  isEditing = true,
+  primaryColor = '#000000',
+  secondaryColor = '#666666',
+  accentColor = '#3B82F6'
+}: ControlEstimateProps) {
   if (!isEditing) {
     // Display mode for published reports - sophisticated like Budget section
     const percentage = calculateContingencyPercentage(initialData?.contingencyUsed, initialData?.contingency);
@@ -77,10 +86,16 @@ export function ControlEstimate({ initialData, isEditing = true }: ControlEstima
     
     return (
       <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+        <CardHeader 
+          className="border-b px-8 py-6"
+          style={{
+            background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+            borderBottomColor: secondaryColor
+          }}
+        >
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-50 rounded-lg">
-              <DollarSign className="w-5 h-5 text-blue-600" />
+            <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+              <DollarSign className="w-5 h-5" style={{ color: accentColor }} />
             </div>
             <CardTitle className="text-xl font-light tracking-wide text-gray-900">
               Control Estimate Update
@@ -216,10 +231,16 @@ export function ControlEstimate({ initialData, isEditing = true }: ControlEstima
   // Edit mode - simple form inputs with auto-formatting
   return (
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+      <CardHeader 
+        className="border-b px-8 py-6"
+        style={{
+          background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+          borderBottomColor: secondaryColor
+        }}
+      >
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-50 rounded-lg">
-            <TrendingUp className="w-5 h-5 text-blue-600" />
+          <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+            <TrendingUp className="w-5 h-5" style={{ color: accentColor }} />
           </div>
           <CardTitle className="text-xl font-light tracking-wide text-gray-900">
             Control Estimate Update

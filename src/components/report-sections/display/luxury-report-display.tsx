@@ -301,13 +301,33 @@ const CategoryDisplay = ({ category, accentColor }: { category: string, accentCo
   )
 }
 
-export function WorkDisplay({ title, items }: { title: string; items: WorkItem[] }) {
+interface WorkDisplayProps {
+  title: string;
+  items: WorkItem[];
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+}
+
+export function WorkDisplay({ 
+  title, 
+  items,
+  primaryColor = '#000000',
+  secondaryColor = '#666666',
+  accentColor = '#3B82F6'
+}: WorkDisplayProps) {
   return (
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+      <CardHeader 
+        className="border-b px-8 py-6"
+        style={{
+          background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+          borderBottomColor: secondaryColor
+        }}
+      >
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-50 rounded-lg">
-            <Hammer className="w-5 h-5 text-blue-600" />
+          <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+            <Hammer className="w-5 h-5" style={{ color: accentColor }} />
           </div>
           <CardTitle className="text-xl font-light tracking-wide text-gray-900">
             {title}
@@ -336,15 +356,33 @@ export function WorkDisplay({ title, items }: { title: string; items: WorkItem[]
   )
 }
 
-export function IssuesDisplay({ items }: { items: IssueItem[] }) {
+interface IssuesDisplayProps {
+  items: IssueItem[];
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+}
+
+export function IssuesDisplay({ 
+  items,
+  primaryColor = '#000000',
+  secondaryColor = '#666666',
+  accentColor = '#3B82F6'
+}: IssuesDisplayProps) {
   if (items.length === 0) return null
   
   return (
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+      <CardHeader 
+        className="border-b px-8 py-6"
+        style={{
+          background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+          borderBottomColor: secondaryColor
+        }}
+      >
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-50 rounded-lg">
-            <AlertTriangle className="w-5 h-5 text-blue-600" />
+          <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+            <AlertTriangle className="w-5 h-5" style={{ color: accentColor }} />
           </div>
           <CardTitle className="text-xl font-light tracking-wide text-gray-900">
             Issues & Delays
@@ -381,7 +419,19 @@ export function IssuesDisplay({ items }: { items: IssueItem[] }) {
   )
 }
 
-export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
+interface BudgetDisplayProps {
+  items: BudgetItem[];
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+}
+
+export function BudgetDisplay({ 
+  items,
+  primaryColor = '#000000',
+  secondaryColor = '#666666',
+  accentColor = '#3B82F6'
+}: BudgetDisplayProps) {
   // Match Control Estimate's formatCurrency exactly
   const formatCurrency = (value: string | number | null | undefined): string => {
     if (!value) return '$0';
@@ -407,11 +457,17 @@ export function BudgetDisplay({ items }: { items: BudgetItem[] }) {
   
   return (
     <Card className="bg-white border-0 shadow-lg shadow-gray-100/50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 px-8 py-6">
+      <CardHeader 
+        className="border-b px-8 py-6"
+        style={{
+          background: `linear-gradient(to right, ${primaryColor}10, ${primaryColor}05)`,
+          borderBottomColor: secondaryColor
+        }}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-50 rounded-lg">
-              <DollarSign className="w-5 h-5 text-blue-600" />
+            <div className="p-2 rounded-lg" style={{ backgroundColor: `${accentColor}15` }}>
+              <DollarSign className="w-5 h-5" style={{ color: accentColor }} />
             </div>
             <CardTitle className="text-xl font-light tracking-wide text-gray-900">
               Budget & Change Orders

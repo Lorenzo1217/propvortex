@@ -15,7 +15,8 @@ import {
   Settings,
   Send,
   Eye,
-  BarChart3
+  BarChart3,
+  Link as LinkIcon
 } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -27,6 +28,7 @@ import { getAddressLine1, getAddressLine2 } from '@/lib/utils/address';
 import { ProjectClientsList } from "@/components/project-clients-list";
 import { getProjectClients } from "@/lib/actions/projects";
 import { ClientPortalButtons } from "@/components/client-portal-buttons";
+import { DocumentUploadModal } from "@/components/document-upload-modal";
 
 interface PageProps {
   params: Promise<{
@@ -48,11 +50,15 @@ async function getProject(projectId: string, userId: string) {
         }
       },
       clients: true,
+      documents: {
+        orderBy: { uploadedAt: 'desc' }
+      },
       // Removed the old photos query - we'll get them from published reports instead
       _count: {
         select: {
           reports: true,
           photos: true,
+          documents: true,
         }
       }
     }
@@ -184,6 +190,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
               
               <div className="flex items-center space-x-3">
+                <DocumentUploadModal projectId={id} />
                 <ClientPortalButtons projectId={id} />
                 <ProjectSettingsDialog project={project} />
               </div>
@@ -275,6 +282,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <TabsList>
               <TabsTrigger value="reports">Reports</TabsTrigger>
               <TabsTrigger value="photos">Photos</TabsTrigger>
+              <TabsTrigger value="documents">Documents</TabsTrigger>
               <TabsTrigger value="clients">Clients</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
@@ -417,6 +425,75 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   )}
                 </CardContent>
               </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="documents" className="space-y-6">
+              <div className="mb-8">
+                <Card className="bg-white border-0 shadow-lg shadow-gray-100/50">
+                  <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-blue-50 rounded-lg">
+                          <FileText className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-xl font-light text-gray-900">Client Portal Documents</CardTitle>
+                          <CardDescription className="mt-1">
+                            Documents and links accessible to clients through the portal
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <DocumentUploadModal projectId={id} />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    {project.documents && project.documents.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {project.documents.map((doc) => (
+                          <div key={doc.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex items-center">
+                                {doc.type === 'file' ? (
+                                  <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                                ) : (
+                                  <LinkIcon className="w-5 h-5 mr-2 text-blue-600" />
+                                )}
+                                <div className="flex-1">
+                                  <h4 className="font-medium text-sm">{doc.name}</h4>
+                                  {doc.description && (
+                                    <p className="text-xs text-gray-500 mt-1">{doc.description}</p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between mt-3">
+                              <span className="text-xs text-gray-500">
+                                {new Date(doc.uploadedAt).toLocaleDateString()}
+                              </span>
+                              <a
+                                href={doc.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+                              >
+                                {doc.type === 'file' ? 'Download' : 'Open Link'}
+                              </a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-12">
+                        <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                        <p className="text-gray-500">No documents uploaded yet</p>
+                        <p className="text-sm text-gray-400 mt-1">
+                          Upload documents or add links for clients to access
+                        </p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 

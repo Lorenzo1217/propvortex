@@ -211,10 +211,12 @@ export default async function ClientProjectPage({
                   Photos
                 </Button>
               </Link>
-              <Button variant="outline">
-                <FileText className="w-4 h-4 mr-2" />
-                Documents
-              </Button>
+              <Link href={`/client/portal/${projectId}/documents`}>
+                <Button variant="outline">
+                  <FileText className="w-4 h-4 mr-2" />
+                  Documents
+                </Button>
+              </Link>
             </div>
           </CardContent>
         </Card>

@@ -62,6 +62,7 @@ model Project {
   clients     ProjectClient[]
   user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   reports     Report[]
+  documents   Document[]
 
   @@map("projects")
 }
@@ -164,4 +165,21 @@ enum ProjectStatus {
   COMPLETED
   ON_HOLD
   CANCELLED
+}
+
+model Document {
+  id           String    @id @default(cuid())
+  name         String    // Display name
+  description  String?   // Optional description
+  type         String    // 'file' or 'link'
+  url          String    // File URL (Cloudinary) or hyperlink
+  mimeType     String?   // For files: application/pdf, etc.
+  size         Int?      // File size in bytes
+  uploadedAt   DateTime  @default(now())
+  
+  projectId    String
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@index([projectId])
+  @@map("documents")
 }

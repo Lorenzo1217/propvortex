@@ -15,7 +15,7 @@ export default async function ClientPortalPhotosPage({
 }) {
   const { projectId } = await params
   
-  // Fetch project with photos and company data
+  // Fetch project with photos from published reports only and company data
   const project = await db.project.findUnique({
     where: { id: projectId },
     include: {
@@ -25,11 +25,25 @@ export default async function ClientPortalPhotosPage({
         }
       },
       photos: {
-        orderBy: { uploadedAt: 'desc' }
+        where: {
+          report: {
+            isPublished: true  // Only photos from published reports
+          }
+        },
+        orderBy: { uploadedAt: 'desc' },
+        include: {
+          report: {
+            select: {
+              weekNumber: true,
+              year: true,
+              title: true,
+              isPublished: true
+            }
+          }
+        }
       },
       _count: {
         select: {
-          photos: true,
           reports: {
             where: { isPublished: true }
           }
@@ -98,7 +112,7 @@ export default async function ClientPortalPhotosPage({
                   />
                 </Link>
                 <Badge variant="secondary">
-                  {project._count.photos} Photos
+                  {project.photos.length} Photos
                 </Badge>
               </div>
             </div>
@@ -116,7 +130,7 @@ export default async function ClientPortalPhotosPage({
                 </div>
                 <div className="flex items-center">
                   <Camera className="w-4 h-4 mr-1" />
-                  {project._count.photos} Total Photos
+                  {project.photos.length} Total Photos
                 </div>
               </div>
             </div>

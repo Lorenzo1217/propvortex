@@ -29,10 +29,10 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
       return
     }
 
-    // Check file size (10MB limit)
-    const maxSize = 10 * 1024 * 1024 // 10MB in bytes
+    // Increase limit to 50MB for construction documents
+    const maxSize = 50 * 1024 * 1024 // 50MB in bytes
     if (selectedFile.size > maxSize) {
-      alert('File is too large. Maximum file size is 10MB.')
+      alert('File is too large. Maximum file size is 50MB. For larger files, please contact support.')
       return
     }
 
@@ -51,21 +51,21 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
       
       const response = await fetch('/api/upload-document', {
         method: 'POST',
-        body: uploadData
+        body: uploadData,
+        // No Content-Type header - let browser set it with boundary
       })
       
       if (response.ok) {
         setOpen(false)
         setSelectedFile(null)
         router.refresh()
-      } else if (response.status === 413) {
-        alert('File is too large. Maximum file size is 10MB.')
       } else {
-        alert('Upload failed. Please try again.')
+        const error = await response.json()
+        alert(error.error || 'Upload failed. Please try again.')
       }
     } catch (error) {
       console.error('Upload failed:', error)
-      alert('Upload failed. Please try again.')
+      alert('Upload failed. If the file is very large, try a smaller file or contact support.')
     } finally {
       setIsUploading(false)
     }
@@ -122,18 +122,18 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
         {mode === 'file' ? (
           <form onSubmit={handleFileSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="file">Select File (Max 10MB)</Label>
+              <Label htmlFor="file">Select File (Max 50MB)</Label>
               <Input
                 id="file"
                 type="file"
-                accept=".pdf,.xlsx,.xls,.doc,.docx,.csv,.txt"
+                accept=".pdf,.xlsx,.xls,.doc,.docx,.csv,.txt,.jpg,.jpeg,.png,.dwg"
                 onChange={(e) => {
                   const file = e.target.files?.[0]
                   if (file) {
                     // Check file size immediately
-                    const maxSize = 10 * 1024 * 1024 // 10MB
+                    const maxSize = 50 * 1024 * 1024 // 50MB
                     if (file.size > maxSize) {
-                      alert('File is too large. Maximum file size is 10MB.')
+                      alert('File is too large. Maximum file size is 50MB.')
                       e.target.value = '' // Clear the input
                       return
                     }

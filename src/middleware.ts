@@ -40,6 +40,13 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { userId } = await auth()
   const pathname = req.nextUrl.pathname
 
+  // Allow large payloads for document upload
+  if (pathname === '/api/upload-document') {
+    const response = NextResponse.next()
+    response.headers.set('x-middleware-request-size', '52428800') // 50MB
+    return response
+  }
+
   // Allow public routes
   if (isPublicRoute(req)) {
     return NextResponse.next()

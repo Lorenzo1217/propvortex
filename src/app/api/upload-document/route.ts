@@ -9,11 +9,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
+// Configure route for larger file uploads
+export const maxDuration = 30 // 30 seconds timeout
+export const runtime = 'nodejs' // Use Node.js runtime
+
 export async function POST(request: NextRequest) {
   try {
     const { userId } = await auth()
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Check file size from headers
+    const contentLength = request.headers.get('content-length')
+    if (contentLength && parseInt(contentLength) > 10 * 1024 * 1024) {
+      return NextResponse.json(
+        { error: 'File too large. Maximum size is 10MB' },
+        { status: 413 }
+      )
     }
 
     const formData = await request.formData()

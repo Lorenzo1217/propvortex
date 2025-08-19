@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -29,6 +29,13 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
       return
     }
 
+    // Check file size (10MB limit)
+    const maxSize = 10 * 1024 * 1024 // 10MB in bytes
+    if (selectedFile.size > maxSize) {
+      alert('File is too large. Maximum file size is 10MB.')
+      return
+    }
+
     setIsUploading(true)
     
     const formData = new FormData(e.currentTarget)
@@ -51,6 +58,8 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
         setOpen(false)
         setSelectedFile(null)
         router.refresh()
+      } else if (response.status === 413) {
+        alert('File is too large. Maximum file size is 10MB.')
       } else {
         alert('Upload failed. Please try again.')
       }
@@ -84,6 +93,9 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Add Document to Client Portal</DialogTitle>
+          <DialogDescription>
+            Upload files or add links for your client to access in their portal.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="flex gap-2 mb-4">
@@ -110,17 +122,31 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
         {mode === 'file' ? (
           <form onSubmit={handleFileSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="file">Select File</Label>
+              <Label htmlFor="file">Select File (Max 10MB)</Label>
               <Input
                 id="file"
                 type="file"
                 accept=".pdf,.xlsx,.xls,.doc,.docx,.csv,.txt"
-                onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) {
+                    // Check file size immediately
+                    const maxSize = 10 * 1024 * 1024 // 10MB
+                    if (file.size > maxSize) {
+                      alert('File is too large. Maximum file size is 10MB.')
+                      e.target.value = '' // Clear the input
+                      return
+                    }
+                    setSelectedFile(file)
+                  } else {
+                    setSelectedFile(null)
+                  }
+                }}
                 required
               />
               {selectedFile && (
                 <p className="text-sm text-gray-600 mt-1">
-                  Selected: {selectedFile.name}
+                  Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
                 </p>
               )}
             </div>

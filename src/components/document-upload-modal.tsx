@@ -18,29 +18,45 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
   const [open, setOpen] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [mode, setMode] = useState<'file' | 'link'>('file')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const router = useRouter()
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
+  const handleFileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    if (!selectedFile) {
+      alert('Please select a file')
+      return
+    }
 
     setIsUploading(true)
+    
+    const formData = new FormData(e.currentTarget)
+    const title = formData.get('title') as string
+    const description = formData.get('description') as string
+    
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('projectId', projectId)
+      const uploadData = new FormData()
+      uploadData.append('file', selectedFile)
+      uploadData.append('projectId', projectId)
+      uploadData.append('title', title || selectedFile.name)
+      uploadData.append('description', description || '')
       
       const response = await fetch('/api/upload-document', {
         method: 'POST',
-        body: formData
+        body: uploadData
       })
       
       if (response.ok) {
         setOpen(false)
+        setSelectedFile(null)
         router.refresh()
+      } else {
+        alert('Upload failed. Please try again.')
       }
     } catch (error) {
       console.error('Upload failed:', error)
+      alert('Upload failed. Please try again.')
     } finally {
       setIsUploading(false)
     }
@@ -53,7 +69,12 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(newOpen) => {
+      setOpen(newOpen)
+      if (!newOpen) {
+        setSelectedFile(null)
+      }
+    }}>
       <DialogTrigger asChild>
         <Button className="bg-blue-600 hover:bg-blue-700 text-white">
           <Upload className="w-4 h-4 mr-2" />
@@ -67,6 +88,7 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
         
         <div className="flex gap-2 mb-4">
           <Button
+            type="button"
             variant={mode === 'file' ? 'default' : 'outline'}
             onClick={() => setMode('file')}
             className={mode === 'file' ? 'bg-blue-600' : ''}
@@ -75,6 +97,7 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
             Upload File
           </Button>
           <Button
+            type="button"
             variant={mode === 'link' ? 'default' : 'outline'}
             onClick={() => setMode('link')}
             className={mode === 'link' ? 'bg-blue-600' : ''}
@@ -85,63 +108,104 @@ export function DocumentUploadModal({ projectId }: DocumentUploadModalProps) {
         </div>
 
         {mode === 'file' ? (
-          <div className="space-y-4">
+          <form onSubmit={handleFileSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="file">Select File (PDF, Excel, Word)</Label>
+              <Label htmlFor="file">Select File</Label>
               <Input
                 id="file"
                 type="file"
                 accept=".pdf,.xlsx,.xls,.doc,.docx,.csv,.txt"
-                onChange={handleFileUpload}
-                disabled={isUploading}
-                className="cursor-pointer"
+                onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                required
               />
-              <p className="text-sm text-gray-500 mt-1">
-                Max file size: 10MB
+              {selectedFile && (
+                <p className="text-sm text-gray-600 mt-1">
+                  Selected: {selectedFile.name}
+                </p>
+              )}
+            </div>
+            
+            <div>
+              <Label htmlFor="title">Document Title *</Label>
+              <Input 
+                id="title"
+                name="title" 
+                required 
+                placeholder="e.g., Building Permit" 
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                This is the name that will be displayed to the client
               </p>
             </div>
-            {isUploading && (
-              <div className="flex items-center justify-center py-4">
-                <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
-                <span className="ml-2">Uploading document...</span>
-              </div>
-            )}
-          </div>
-        ) : (
-          <form action={handleLinkSubmit}>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="name">Link Name</Label>
-                <Input 
-                  name="name" 
-                  id="name"
-                  required 
-                  placeholder="e.g., Permit Application" 
-                />
-              </div>
-              <div>
-                <Label htmlFor="url">URL</Label>
-                <Input 
-                  name="url" 
-                  id="url"
-                  type="url" 
-                  required 
-                  placeholder="https://..." 
-                />
-              </div>
-              <div>
-                <Label htmlFor="description">Description (Optional)</Label>
-                <Textarea 
-                  name="description" 
-                  id="description"
-                  placeholder="Brief description of this document or link..." 
-                  rows={3}
-                />
-              </div>
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                Add Link
-              </Button>
+            
+            <div>
+              <Label htmlFor="description">Description (Optional)</Label>
+              <Textarea 
+                id="description"
+                name="description" 
+                placeholder="Brief description of the document..." 
+                rows={3}
+              />
             </div>
+            
+            <Button 
+              type="submit" 
+              className="w-full bg-blue-600 hover:bg-blue-700"
+              disabled={isUploading || !selectedFile}
+            >
+              {isUploading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Uploading...
+                </>
+              ) : (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Upload Document
+                </>
+              )}
+            </Button>
+          </form>
+        ) : (
+          <form action={handleLinkSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Link Title *</Label>
+              <Input 
+                id="name"
+                name="name" 
+                required 
+                placeholder="e.g., Permit Application Website" 
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="url">URL *</Label>
+              <Input 
+                id="url"
+                name="url" 
+                type="url" 
+                required 
+                placeholder="https://..." 
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="description">Description (Optional)</Label>
+              <Textarea 
+                id="description"
+                name="description" 
+                placeholder="Brief description..." 
+                rows={3}
+              />
+            </div>
+            
+            <Button 
+              type="submit" 
+              className="w-full bg-blue-600 hover:bg-blue-700"
+            >
+              <Link className="w-4 h-4 mr-2" />
+              Add Link
+            </Button>
           </form>
         )}
       </DialogContent>

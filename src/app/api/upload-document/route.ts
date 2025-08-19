@@ -19,8 +19,10 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const file = formData.get('file') as File
     const projectId = formData.get('projectId') as string
+    const title = formData.get('title') as string
+    const description = formData.get('description') as string
 
-    if (!file || !projectId) {
+    if (!file || !projectId || !title) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -60,10 +62,11 @@ export async function POST(request: NextRequest) {
 
     const result = uploadResponse as any
 
-    // Save to database
+    // Save to database with custom title
     const document = await db.document.create({
       data: {
-        name: file.name,
+        name: title,  // Use the custom title, not filename
+        description: description || null,
         type: 'file',
         url: result.secure_url,
         mimeType: file.type,
